@@ -1,0 +1,61 @@
+using Unity.VisualScripting;
+using UnityEngine;
+
+public abstract class PlantBase : MonoBehaviour
+{
+    public PlantData Data { get; private set; }
+    public PlantType PlantType => Data.plantType;
+    public int CurrentHP { get; private set; }
+    public int IsActivated { get; private set; }
+    public Cell OccupiedCell { get; private set; }
+    public FieldType OccupiedFieldType { get; private set; }
+    public bool IsGhost { get; private set; }
+
+    public void Init(PlantData data)
+    {
+        Data = data;
+        CurrentHP = data.maxHP;
+    }
+
+    public void SetupAsGhost()
+    {
+        IsGhost = true;
+        enabled = false;
+        GetComponent<SpriteRenderer>().sortingOrder = 10;
+        SetAlpha(0.5f);
+    }
+
+    public void SetupAsReal(Cell cell, FieldType fieldType)
+    {
+        IsGhost = false;
+        enabled = true;
+        SetAlpha(1f);
+        OccupiedCell = cell;
+        OccupiedFieldType = fieldType;
+        int sorttingOder = fieldType == FieldType.Normal ? 7 : 8;
+        GetComponent<SpriteRenderer>().sortingOrder = sorttingOder;
+        Vector3 pos;
+        float offsetY = fieldType == FieldType.Normal ? 0.2f : -0.2f;
+        pos = transform.position;
+        pos.y += offsetY;
+        transform.position = pos;
+        OnPlaced();
+    }
+
+    //TODO: Do something when just set down.
+    protected virtual void OnPlaced() { }
+
+    public virtual void TakeDamage(int amount)
+    {
+        CurrentHP -= amount;
+        if (CurrentHP <= 0) Die();
+    }
+
+    protected virtual void Die()
+    {
+        OccupiedCell?.ClearPlant(OccupiedFieldType);
+        Destroy(gameObject);
+    }
+
+    protected void SetAlpha(float alpha) { }
+}
