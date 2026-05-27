@@ -34,6 +34,7 @@ public class FusionDatabase
             { new FusionKey(PlantType.Peashooter, PlantType.Splitpea),   PlantType.GatlingPea    },
             { new FusionKey(PlantType.Pumpkin,    PlantType.Peashooter), PlantType.GreenGourd    },
             { new FusionKey(PlantType.GreenGourd, PlantType.Peashooter), PlantType.PeaVine       },
+            { new FusionKey(PlantType.GreenGourd, PlantType.GreenGourd), PlantType.XVine         },
         };
     }
 

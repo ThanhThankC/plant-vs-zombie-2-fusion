@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
 
 public enum FieldType { Normal, Support }
 
@@ -12,7 +13,9 @@ public class Zone : MonoBehaviour
     public Cell Cell => cell;
 
     private Cell cell;
+    private DragController dragController;
     private PlantManager plantManager;
+    private ToolManager toolManager;
 
     private void Awake()
     {
@@ -23,59 +26,75 @@ public class Zone : MonoBehaviour
 
     private void Start()
     {
+        dragController = DragController.Instance;
         plantManager = PlantManager.Instance;
-        if (plantManager == null)
-            Debug.LogWarning($"[Zone] Not found PlantManager!");
+        toolManager = ToolManager.Instance;
     }
 
     public void OnZoneInteract()
     {
-        if (plantManager.CurrentTool == ToolType.Glove)
+        if (plantManager.IsDraggingFromCell(cell)) return;
+        if (!dragController.IsDragging) return;
+        if (dragController.CurrentToolType == ToolType.Glove)
         {
-            var instance = cell.GetPlantInstance(fieldType);
-            if (instance == null)
+            if (!toolManager.MovingPlant)
             {
-                var otherField = fieldType == FieldType.Normal ? FieldType.Support : FieldType.Normal;
-                instance = cell.GetPlantInstance(otherField);
+                var instance = GetPlantInCell();
+                if (instance == null) return;
+                toolManager.SelectPlantWithGlove(instance, cell);
             }
-
-            if (instance == null) return;
-
-            plantManager.OnCellClicked(instance, cell, fieldType);
         }
-        else if (plantManager.CurrentTool == ToolType.None)
+        else if (dragController.CurrentToolType == ToolType.None )
         {
-            cell.ToggleHighlight(false);
             var result = GetFusionResult();
             bool canPlace = result.HasValue;
 
             if (!canPlace) return;
 
-            var targetFieldType = result.Value.GetFieldType();
-            plantManager.PlacePlant(cell, targetFieldType, result.Value);
+            plantManager.PlacePlant(cell, result.Value);
+            if (toolManager.MovingPlant) toolManager.EndDrag();
+        }
+        else if (dragController.CurrentToolType == ToolType.Shovel)
+        {
+            var instance = GetPlantInCell();
+            if (instance == null) return;
+            toolManager.RemovePlantWithShovel(instance, cell);
         }
     }
 
     public void OnDragHoverEnter()
     {
-        if (PlantManager.Instance.IsDraggingFromCell(cell)) return;
-        if (!PlantManager.Instance.IsDragging) return;
+        if (plantManager.IsDraggingFromCell(cell)) return;
+        if (!dragController.IsDragging) return;
 
+        if (dragController.CurrentToolType == ToolType.Shovel || dragController.CurrentToolType == ToolType.Glove)
+        {
+            cell.ToggleHighlight(true); return;
+        }
         bool canPlace = GetFusionResult().HasValue;
         cell.ToggleHighlight(canPlace);
     }
 
     public void OnDragHoverExit()
     {
-        if (!PlantManager.Instance.IsDragging) return;
+        if (!dragController.IsDragging) return;
         cell.ToggleHighlight(false);
+    }
+
+    private PlantBase GetPlantInCell()
+    {
+        var other = fieldType == FieldType.Normal ? FieldType.Support : FieldType.Normal;
+        return cell.GetPlantInstance(fieldType) ?? cell.GetPlantInstance(other);
     }
 
     private PlantType? GetFusionResult()
     {
         if (!plantManager.CurrentPlantType.HasValue) return null;
+        return GetFusionResult(plantManager.CurrentPlantType.Value);
+    }
 
-        var incoming = plantManager.CurrentPlantType.Value;
+    public PlantType? GetFusionResult(PlantType incoming)
+    {
         var primaryExisting = fieldType == FieldType.Normal ? cell.NormalPlant : cell.SupportPlant;
         var otherExisting = fieldType == FieldType.Normal ? cell.SupportPlant : cell.NormalPlant;
         return FusionDatabaseMono.DB.GetPlantResult(incoming, primaryExisting, otherExisting);

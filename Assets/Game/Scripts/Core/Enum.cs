@@ -12,7 +12,8 @@ public enum PlantType
     [PlantField(FieldType.Normal)] GatlingPea,
     [PlantField(FieldType.Support)] PeaVine,
     [PlantField(FieldType.Support)] Pumpkin,
-    [PlantField(FieldType.Support)] GreenGourd
+    [PlantField(FieldType.Support)] GreenGourd,
+    [PlantField(FieldType.Support)] XVine,
 }
 
 [AttributeUsage(AttributeTargets.Field)]
@@ -47,9 +48,6 @@ public enum CellType
     ZombieSpawn,
 }
 
-public enum ToolType
-{
-    None,
-    Glove,
-    Shovel
-}
+public enum ToolType { None, Glove, Shovel }
+
+public enum GloveState { Idle, PlantSelected }

@@ -5,6 +5,6 @@ public class DragContext
     public PlantBase Plant { get; set; }
     public DragSource DragSource { get; set; }
     public Cell SourceCell { get; set; }
-    public FieldType SourceFieldType { get; set; }
+    public FieldType SourceFieldType => PlantType.GetFieldType();
     public PlantType PlantType { get; set; }
 }

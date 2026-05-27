@@ -4,52 +4,54 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragHandler : Singleton<DragHandler>, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class CanvasInputReceiver : Singleton<CanvasInputReceiver>, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private TextMeshProUGUI DebugText;
     [SerializeField] private LayerMask interactiveLayer;
 
     private Camera mainCamera;
-    private PlantManager plantManager;
+    private DragController dragController;
     private Zone zoneHover;
     private bool isHovering;
 
     private void Start()
     {
         mainCamera = Camera.main;
-        plantManager = PlantManager.Instance;
+        dragController = DragController.Instance;
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        dragController.ShowToolAt(GetMouseWorldPos(eventData));
+        dragController.FlashThenEndDrag();
+        dragController.NotifyBeginDrag();
+        OnEndDrag(eventData);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!plantManager.IsDragging) return;
+        if (!dragController.IsDragging) return;
 
-        plantManager.ToggleGhostPlantVisual(true);
-        if (plantManager.GhostPlant != null)
-            plantManager.GhostPlant.transform.position = GetMouseWorldPos(eventData);
+        dragController.ShowToolAt(GetMouseWorldPos(eventData));
+        dragController.NotifyBeginDrag();
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!plantManager.IsDragging) return;
-        if (plantManager.GhostPlant != null)
-            plantManager.GhostPlant.transform.position = GetMouseWorldPos(eventData);
-
+        if (!dragController.IsDragging) return;
+        dragController.ShowToolAt(GetMouseWorldPos(eventData));
         HandleHover(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!plantManager.IsDragging) return;
+        if (!dragController.IsDragging) return;
         Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), interactiveLayer);
         Zone zone = hit?.GetComponent<Zone>();
 
-        DebugText.text = "EndDrag --- zone: " + zone;
         zone?.OnZoneInteract();
-        plantManager.EndDrag();
+        CancelHover();
+        dragController.TryEndDrag();
     }
-
-    public void OnPointerClick(PointerEventData eventData) => OnEndDrag(eventData);
 
     private void HandleHover(PointerEventData eventData)
     {
@@ -65,7 +67,7 @@ public class DragHandler : Singleton<DragHandler>, IPointerClickHandler, IBeginD
                 zoneHover = null;
             }
         }
-        else if (zone != null)
+        else if (zone != null && dragController.CanHover(zone))
         {
             if (!isHovering)
             {
@@ -75,6 +77,15 @@ public class DragHandler : Singleton<DragHandler>, IPointerClickHandler, IBeginD
             }
         }
     }
+
+    private void CancelHover()
+    {
+        if (!isHovering || zoneHover == null) return;
+        isHovering = false;
+        zoneHover.OnDragHoverExit();
+        zoneHover = null;
+    }
+
 
     private Vector3 GetMouseWorldPos(PointerEventData eventData)
     {

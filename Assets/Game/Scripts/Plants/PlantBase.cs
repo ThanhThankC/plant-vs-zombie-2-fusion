@@ -17,12 +17,17 @@ public abstract class PlantBase : MonoBehaviour
         CurrentHP = data.maxHP;
     }
 
-    public void SetupAsGhost()
+    public void SetupAsGhost(Cell cell, FieldType fieldType)
     {
         IsGhost = true;
         enabled = false;
         GetComponent<SpriteRenderer>().sortingOrder = 10;
         SetAlpha(0.5f);
+        if (cell == null) return;
+        transform.position = cell.transform.position;
+        transform.position += fieldType == FieldType.Normal 
+            ? new Vector3(-0.2f, 0.5f, 0f) 
+            : new Vector3(-0.2f, 0f, 0f);
     }
 
     public void SetupAsReal(Cell cell, FieldType fieldType)
@@ -39,7 +44,9 @@ public abstract class PlantBase : MonoBehaviour
         pos = transform.position;
         pos.y += offsetY;
         transform.position = pos;
+        transform.SetParent(cell.transform);
         OnPlaced();
+        transform.name = "Hello";
     }
 
     //TODO: Do something when just set down.

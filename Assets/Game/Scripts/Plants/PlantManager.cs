@@ -14,18 +14,13 @@ public class PlantManager : Singleton<PlantManager>
     }
 
     [SerializeField] private List<PlantEntry> plantEntries;
-
-    public event Action OnDragEnd;
-
-    public bool IsDragging { get; private set; } = false;
-    public PlantBase GhostPlant { get; private set; }
+    public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
-    public ToolType CurrentTool => ToolType.None;
 
     private Dictionary<PlantType, PlantBase> prefabLookup = new();
     private Dictionary<PlantType, PlantData> dataLookup = new();
     private DragContext dragContext;
-
+    private PlantBase ghostPlant;
 
     protected override void Awake()
     {
@@ -39,9 +34,6 @@ public class PlantManager : Singleton<PlantManager>
 
     public void OnCardClicked(PlantType plantType)
     {
-        if (IsDragging) return;
-        IsDragging = true;
-
         dragContext = new DragContext
         {
             DragSource = DragSource.Deck,
@@ -50,23 +42,19 @@ public class PlantManager : Singleton<PlantManager>
         SpawnGhost(plantType);
     }
 
-    public void OnCellClicked(PlantBase plant, Cell cell, FieldType fieldType)
+    public void OnCellClicked(PlantBase plant, Cell cell)
     {
-        if (IsDragging) return;
-        IsDragging = true;
-
         dragContext = new DragContext
         {
             Plant = plant,
             DragSource = DragSource.Cell,
             SourceCell = cell,
-            SourceFieldType = fieldType,
             PlantType = plant.PlantType
         };
-        SpawnGhost(plant.PlantType);
+        SpawnGhost(plant.PlantType, cell);
     }
 
-    public void PlacePlant(Cell cell, FieldType fieldType, PlantType result)
+    public void PlacePlant(Cell cell, PlantType result)
     {
         DragContext ctx = dragContext;
         bool isFusion = ctx.PlantType != result;
@@ -77,7 +65,7 @@ public class PlantManager : Singleton<PlantManager>
             ctx.SourceCell.ClearPlant(ctx.SourceFieldType);
         }
 
-        if (isFusion) DestroyPlantAt(cell, fieldType);
+        if (isFusion) DestroyPlantAt(cell, result.GetFieldType());
 
         PlantBase plantToPlace;
         if (!isFusion && ctx.DragSource == DragSource.Cell)
@@ -91,39 +79,36 @@ public class PlantManager : Singleton<PlantManager>
         }
 
         plantToPlace.transform.position = cell.transform.position;
-        plantToPlace.SetupAsReal(cell, fieldType);
-        cell.SetPlant(fieldType, result, plantToPlace);
+        plantToPlace.SetupAsReal(cell, result.GetFieldType());
+        cell.SetPlant(result.GetFieldType(), result, plantToPlace);
 
         EndDrag();
     }
 
     public void EndDrag()
     {
-        IsDragging = false;
-        if (GhostPlant != null) { Destroy(GhostPlant.gameObject); GhostPlant = null; }
+        if (ghostPlant != null) { Destroy(ghostPlant.gameObject); ghostPlant = null; }
         dragContext = null;
-        OnDragEnd?.Invoke();
     }
 
     public bool IsDraggingFromCell(Cell cell) => dragContext?.DragSource == DragSource.Cell && dragContext?.SourceCell == cell;
 
-    private void SpawnGhost(PlantType plantType)
-    {
-        if (!prefabLookup.TryGetValue(plantType, out var prefab)) return;
-        GhostPlant = Instantiate(prefab);
-        GhostPlant.transform.SetParent(transform);
-        GhostPlant.SetupAsGhost();
-    }
-
-    private void DestroyPlantAt(Cell cell, FieldType fieldType)
+    public void DestroyPlantAt(Cell cell, FieldType fieldType)
     {
         var oldPlant = cell.GetPlantInstance(fieldType);
-        Destroy(oldPlant?.gameObject);
+        Destroy(oldPlant.gameObject);
         cell.ClearPlant(fieldType);
     }
 
     public void ToggleGhostPlantVisual(bool show)
     {
-        GhostPlant?.gameObject.SetActive(show);
+        ghostPlant?.gameObject.SetActive(show);
+    }
+
+    private void SpawnGhost(PlantType plantType, Cell cell = null)
+    {
+        if (!prefabLookup.TryGetValue(plantType, out var prefab)) return;
+        ghostPlant = Instantiate(prefab, transform);
+        ghostPlant.SetupAsGhost(cell, plantType.GetFieldType());
     }
 }
