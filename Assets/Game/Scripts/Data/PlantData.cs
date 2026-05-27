@@ -14,6 +14,7 @@ public class PlantData : ScriptableObject
     [Header("Stats")]
     public int maxHP = 300;
     public int sunCost;
+    public float firstcooldown;
     public float cooldown;
 
     [Header("Behavior")]
