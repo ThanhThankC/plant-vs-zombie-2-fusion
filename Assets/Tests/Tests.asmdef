@@ -4,7 +4,9 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "PVZ2_Fusion_Runtime"
+        "PVZ2_Fusion_Runtime",
+        "spine-unity",
+        "spine-unity-editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlantManager : Singleton<PlantManager>
 {
-    [System.Serializable]
+    [Serializable]
     private struct PlantEntry
     {
         public PlantData data;

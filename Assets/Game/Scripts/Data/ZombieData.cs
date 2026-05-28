@@ -6,6 +6,7 @@ public class ZombieData : ScriptableObject
     [Header("Identity")]
     public string zombieName;
     public int zombieID;
+    public ZombieType zombieType;
 
     [Header("Stats")]
     public int maxHP;

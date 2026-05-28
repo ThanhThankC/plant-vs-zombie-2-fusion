@@ -51,3 +51,16 @@ public enum CellType
 public enum ToolType { None, Glove, Shovel }
 
 public enum GloveState { Idle, PlantSelected }
+
+public enum DamageSource { Normal, Burn, Shock }
+
+public enum ZombieType 
+{
+    Basic,
+    Conehead,
+    Bucket,
+    Newspaper,
+    Gargantuar,
+    Imp
+}
+
