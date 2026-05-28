@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GridManager : Singleton<GridManager>
+{
+    [SerializeField] private Cell cellPrefab;
+    [SerializeField] private Vector2 cellSize = Vector2.one;
+
+    private Cell[,] grid = new Cell[maxRow, maxCol];
+
+    private const int maxCol = 12;
+    private const int maxRow = 5;
+
+    private void Start()
+    {
+        BuildGrid();
+    }
+
+    private void BuildGrid()
+    {
+        for (int row = 0; row < maxRow; row++)
+        {
+            for (int col = 0; col < maxCol; col++)
+            {
+                Vector3 pos = new Vector3(
+                    transform.position.x + col * cellSize.x,
+                    transform.position.y + row * cellSize.y,
+                    0f
+                );
+                Cell cell = Instantiate(cellPrefab, pos, Quaternion.identity, transform);
+
+                cell.Init(row, col, GetCellType(col));
+                grid[row, col] = cell;
+            }
+        }
+    }
+
+    private CellType GetCellType(int col)
+    {
+        return col switch
+        {
+            0 => CellType.MowerZone,
+            11 => CellType.ZombieSpawn,
+            10 => CellType.BorderZone,
+            _ => CellType.Plantable,
+        };
+    }
+
+    public Cell GetCell(int row, int col)
+    {
+        if (row < 0 || row >= maxRow || col < 0 || col >= maxCol) return null;
+        return grid[row, col];
+    }
+
+    public IEnumerable<Cell> GetRowFrom(int row, int fromCol)
+    {
+        for (int col = fromCol; col < maxCol; col++)
+            yield return grid[row, col];
+    }
+
+    public List<Cell> GetCellsInRadius(int centerRow, int centerCol, int radius)
+    {
+        var result = new List<Cell>();
+        for (int r = centerRow - radius; r <= centerRow + radius; r++)
+        {
+            for (int c = centerCol - radius; c <= centerRow + radius; c++)
+            {
+                var cell = GetCell(r, c);
+                if (cell != null) result.Add(cell);
+            }
+        }
+        return result;
+    }
+}
