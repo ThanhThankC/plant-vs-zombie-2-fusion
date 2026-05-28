@@ -71,5 +71,10 @@ public abstract class ZombieBase : MonoBehaviour
         Destroy(gameObject,0.5f);
     }
 
+    public void SetBodyColor()
+    {
+
+    }
+
     //public void ApplyFreeze() => EffectController.ApplyEffect(new FreezeEffect());
 }
