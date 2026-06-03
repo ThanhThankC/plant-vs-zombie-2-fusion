@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(SkeletonAnimation))]
 public class ZombieMovement : MonoBehaviour
 {
-    [SerializeField] private float baseSpeedMultiplier = 1f;
+    [SerializeField] private float baseSpeedMultiplier = 3f;
 
     private SkeletonAnimation skeletonAmin;
     private bool canMove = true;
@@ -28,11 +28,27 @@ public class ZombieMovement : MonoBehaviour
         skeletonAmin.AnimationState.Event -= OnSpineEvent;
     }
 
+
+    private Vector3 targetPosition;
+    private bool isMoving = false;
+
+    private void Update()
+    {
+        if (!isMoving) return;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
+            isMoving = false;
+    }
+
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
         if (e.Data.Name != "move_step") return;
         if (!canMove) return;
-        transform.Translate(Vector3.left * e.Float * baseSpeedMultiplier * speedMultiplier);
+
+        float stepDistance = e.Float * baseSpeedMultiplier * speedMultiplier;
+        targetPosition = transform.position + Vector3.left * stepDistance;
+        isMoving = true;
     }
 
     public void OnStun()

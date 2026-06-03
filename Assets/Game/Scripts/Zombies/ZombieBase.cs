@@ -5,6 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(ZombieMovement))]
 [RequireComponent(typeof(ZombieEffectController))]
+[RequireComponent(typeof(ZombieSpineController))]
 public abstract class ZombieBase : MonoBehaviour
 {
     public ZombieData Data { get; private set; }
