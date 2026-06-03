@@ -1,3 +1,4 @@
+using Spine;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ZombieData", menuName = "PVZF/Zombie Data")]
@@ -22,3 +23,5 @@ public class ZombieData : ScriptableObject
     public GameObject prefab;
     public Sprite cardSprite;
 }
+
+

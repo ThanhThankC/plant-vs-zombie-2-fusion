@@ -7,8 +7,9 @@ namespace SpineTools.Editor
 {
     public class SpineStraightAlphaAutoSetup : AssetPostprocessor
     {
-        const string WATCH_FOLDER = "Assets/Art";
+        const string WATCH_FOLDER = "Assets/SpineAssets";
         const float DEFAULT_MIX_DURATION = 0.0f;
+        const string TARGET_SHADER_NAME = "Custom/Spine_Skeleton_Glow";
 
         const string STRAIGHT_ALPHA_PROP = "_StraightAlphaInput";
         const string STRAIGHT_ALPHA_KEYWORD = "_STRAIGHT_ALPHA_INPUT";
@@ -74,8 +75,9 @@ namespace SpineTools.Editor
                 Material mat = AssetDatabase.LoadAssetAtPath<Material>(path);
                 if (mat == null) continue;
 
-                if (SetStraightAlpha(mat, path))
-                    dirty = true;
+                // Change shader first, then set straight alpha
+                if (SetShader(mat, path)) dirty = true;
+                if (SetStraightAlpha(mat, path)) dirty = true;
             }
 
             string[] dataGuids = AssetDatabase.FindAssets("t:SkeletonDataAsset", new[] { WATCH_FOLDER });
@@ -110,12 +112,30 @@ namespace SpineTools.Editor
             return false;
         }
 
+        static bool SetShader(Material mat, string matPath)
+        {
+            Shader target = Shader.Find(TARGET_SHADER_NAME);
+            if (target == null)
+            {
+                Debug.LogWarning(
+                    $"[SpineSetup] Shader '{TARGET_SHADER_NAME}' not found → {matPath}", mat);
+                return false;
+            }
+
+            if (mat.shader == target) return false;
+
+            mat.shader = target;
+            EditorUtility.SetDirty(mat);
+            Debug.Log($"[SpineSetup] ✓ Shader → {TARGET_SHADER_NAME} → {matPath}");
+            return true;
+        }
+
         static bool SetStraightAlpha(Material mat, string matPath)
         {
             if (!mat.HasProperty(STRAIGHT_ALPHA_PROP))
             {
                 Debug.LogWarning(
-                    $"[SpineSetup] Shader khong co '{STRAIGHT_ALPHA_PROP}' → {matPath}", mat);
+                    $"[SpineSetup] Shader does not have '{STRAIGHT_ALPHA_PROP}' → {matPath}", mat);
                 return false;
             }
 
@@ -141,7 +161,7 @@ namespace SpineTools.Editor
         [MenuItem("Spine/Tools/Fix Straight Alpha + sRGB + Default Mix")]
         static void FixAll()
         {
-            int matFixed = 0, texFixed = 0, dataFixed = 0;
+            int matFixed = 0, shaderFixed = 0, texFixed = 0, dataFixed = 0;
 
             string[] matGuids = AssetDatabase.FindAssets("t:Material", new[] { WATCH_FOLDER });
             foreach (string guid in matGuids)
@@ -152,7 +172,10 @@ namespace SpineTools.Editor
                     continue;
 
                 Material mat = AssetDatabase.LoadAssetAtPath<Material>(path);
-                if (mat != null && SetStraightAlpha(mat, path)) matFixed++;
+                if (mat == null) continue;
+
+                if (SetShader(mat, path)) shaderFixed++;
+                if (SetStraightAlpha(mat, path)) matFixed++;
             }
 
             string[] texGuids = AssetDatabase.FindAssets("t:Texture2D", new[] { WATCH_FOLDER });
@@ -184,6 +207,7 @@ namespace SpineTools.Editor
             AssetDatabase.SaveAssets();
             EditorUtility.DisplayDialog(
                 "Spine Setup",
+                $"✓ {shaderFixed} Material → Shader = {TARGET_SHADER_NAME}\n" +
                 $"✓ {matFixed} Material → Straight Alpha = true\n" +
                 $"✓ {texFixed} Texture → sRGB = true\n" +
                 $"✓ {dataFixed} SkeletonData → Default Mix = {DEFAULT_MIX_DURATION}s",
