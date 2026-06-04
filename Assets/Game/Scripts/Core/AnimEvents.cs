@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public static class AnimEvents
 {
     public const string ANIM_IDLE = "idle";

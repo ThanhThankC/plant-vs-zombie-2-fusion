@@ -7,6 +7,8 @@ public class GridManager : Singleton<GridManager>
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Vector2 cellSize = Vector2.one;
 
+    public Vector2 CellSize => cellSize;
+
     private Cell[,] grid = new Cell[maxRow, maxCol];
 
     private const int maxCol = 12;
@@ -31,6 +33,8 @@ public class GridManager : Singleton<GridManager>
                 Cell cell = Instantiate(cellPrefab, pos, Quaternion.identity, transform);
 
                 cell.Init(row, col, GetCellType(col));
+                cell.transform.localScale = cellSize;
+                cell.name = $"Cell[{row},{row}]";
                 grid[row, col] = cell;
             }
         }

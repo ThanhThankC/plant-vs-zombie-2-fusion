@@ -6,11 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieMovement))]
 [RequireComponent(typeof(ZombieEffectController))]
 [RequireComponent(typeof(ZombieSpineController))]
+[RequireComponent(typeof(CellTracker))]
 public abstract class ZombieBase : MonoBehaviour
 {
     public ZombieData Data { get; private set; }
     public ZombieMovement Movement { get; private set; }
     public ZombieEffectController EffectController { get; private set; }
+    public CellTracker CellTracker { get; private set; }
 
     public int CurrentHP { get; private set; }
     public int ArmorHP { get; private set; }
@@ -21,12 +23,12 @@ public abstract class ZombieBase : MonoBehaviour
     {
         Movement = GetComponent<ZombieMovement>();
         EffectController = GetComponent<ZombieEffectController>();
+        CellTracker = GetComponent<CellTracker>();
     }
 
-    public void Init(ZombieData data, int row)
+    public void Init(ZombieData data)
     {
         Data = data;
-        Row = row;
         CurrentHP = data.maxHP;
         ArmorHP = data.armorHP;
         OnInit();
