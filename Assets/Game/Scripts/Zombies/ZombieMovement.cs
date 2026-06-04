@@ -75,5 +75,9 @@ public class ZombieMovement : MonoBehaviour
         SetAnimationSpeed(1f);
     }
 
-    private void SetAnimationSpeed(float speed) => skeletonAnim.AnimationState.GetCurrent(0).TimeScale = speed;
+    private void SetAnimationSpeed(float speed)
+    {
+        var current = skeletonAnim.AnimationState.GetCurrent(0);
+        if (current != null) current.TimeScale = speed;
+    }
 }

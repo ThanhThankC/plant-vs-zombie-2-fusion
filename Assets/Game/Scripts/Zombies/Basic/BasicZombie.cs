@@ -37,7 +37,7 @@ public class BasicZombie : ZombieBase
             OnAttackFrame();
     }
 
-    private void SetAniamtion(string animName, bool loop)
+    private void SetAnimation(string animName, bool loop)
     {
         skeletonAnim.AnimationState.SetAnimation(0, animName, loop);
         if (animName == AnimEvents.ANIM_WALK)
@@ -46,9 +46,9 @@ public class BasicZombie : ZombieBase
             Movement.DisallowMove();
     }
 
-    public void PlayWalk() => SetAniamtion(AnimEvents.ANIM_WALK, true);
-    public void PlayEat() => SetAniamtion(AnimEvents.ANIM_EAT, true);
-    public void PlayDie() => SetAniamtion(AnimEvents.ANIM_WALK, true);
+    public void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
+    public void PlayEat() => SetAnimation(AnimEvents.ANIM_EAT, true);
+    public void PlayDie() => SetAnimation(AnimEvents.ANIM_DIE, true);
 
     private void OnAttackFrame()
     {

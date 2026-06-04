@@ -10,11 +10,6 @@ public class CellTracker : MonoBehaviour
     private float nextColBoundaryX = float.MaxValue;
     private bool isLeft = true;
 
-    private void Start()
-    {
-        Init(4, 12);
-    }
-
     public void Init(int row, int col)
     {
         Row = row;

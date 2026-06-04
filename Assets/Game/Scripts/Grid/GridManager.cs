@@ -7,6 +7,7 @@ public class GridManager : Singleton<GridManager>
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Vector2 cellSize = Vector2.one;
 
+    public const int ZombieSpawnCol = 11;
     public Vector2 CellSize => cellSize;
 
     private Cell[,] grid = new Cell[maxRow, maxCol];
