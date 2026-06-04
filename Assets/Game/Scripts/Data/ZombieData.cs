@@ -19,8 +19,7 @@ public class ZombieData : ScriptableObject
     public bool immuneToFreeze;
     public bool weakToElectric;
 
-    [Header("Prefab & UI")]
-    public GameObject prefab;
+    [Header("UI")]
     public Sprite cardSprite;
 }
 
