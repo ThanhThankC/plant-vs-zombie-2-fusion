@@ -9,28 +9,20 @@ public class ZombieMovement : MonoBehaviour
 {
     [SerializeField] private float baseSpeedMultiplier = 3f;
 
-    private SkeletonAnimation skeletonAmin;
+    private SkeletonAnimation skeletonAnim;
     private bool canMove = true;
     private float speedMultiplier = 1f;
+    private Vector3 targetPosition;
+    private bool isMoving = false;
 
     private void Awake()
     {
-        skeletonAmin = GetComponent<SkeletonAnimation>();
+        skeletonAnim = GetComponent<SkeletonAnimation>();
     }
 
-    private void OnEnable()
-    {
-        skeletonAmin.AnimationState.Event += OnSpineEvent;
-    }
+    private void OnEnable() => skeletonAnim.AnimationState.Event += OnSpineEvent;
 
-    private void OnDisable()
-    {
-        skeletonAmin.AnimationState.Event -= OnSpineEvent;
-    }
-
-
-    private Vector3 targetPosition;
-    private bool isMoving = false;
+    private void OnDisable() => skeletonAnim.AnimationState.Event -= OnSpineEvent;
 
     private void Update()
     {
@@ -43,7 +35,7 @@ public class ZombieMovement : MonoBehaviour
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
-        if (e.Data.Name != "move_step") return;
+        if (e.Data.Name != AnimEvents.EVENT_MOVE) return;
         if (!canMove) return;
 
         float stepDistance = e.Float * baseSpeedMultiplier * speedMultiplier;
@@ -51,9 +43,21 @@ public class ZombieMovement : MonoBehaviour
         isMoving = true;
     }
 
-    public void OnStun()
+    public void AllowMove()
+    {
+        canMove = true;
+    }
+
+    public void DisallowMove()
     {
         canMove = false;
+        isMoving = false;
+        targetPosition = transform.position;
+    }
+
+    public void OnStun()
+    {
+        DisallowMove();
         SetAnimationSpeed(0f);
     }
 
@@ -71,5 +75,5 @@ public class ZombieMovement : MonoBehaviour
         SetAnimationSpeed(1f);
     }
 
-    private void SetAnimationSpeed(float speed) => skeletonAmin.AnimationState.GetCurrent(0).TimeScale = speed;
+    private void SetAnimationSpeed(float speed) => skeletonAnim.AnimationState.GetCurrent(0).TimeScale = speed;
 }
