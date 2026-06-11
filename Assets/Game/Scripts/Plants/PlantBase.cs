@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class PlantBase : MonoBehaviour
@@ -20,7 +21,8 @@ public abstract class PlantBase : MonoBehaviour
     {
         IsGhost = true;
         enabled = false;
-        GetComponent<SpriteRenderer>().sortingOrder = 10;
+        var render = GetComponent<SpriteRenderer>();
+        if (render != null) render.sortingOrder = 10;
         SetAlpha(0.5f);
         if (cell == null) return;
         transform.position = cell.transform.position;
@@ -37,7 +39,8 @@ public abstract class PlantBase : MonoBehaviour
         OccupiedCell = cell;
         OccupiedFieldType = fieldType;
         int sorttingOder = fieldType == FieldType.Normal ? 7 : 8;
-        GetComponent<SpriteRenderer>().sortingOrder = sorttingOder;
+        var render = GetComponent<SpriteRenderer>();
+        if (render != null) render.sortingOrder = sorttingOder;
         Vector3 pos;
         float offsetY = fieldType == FieldType.Normal ? 0.2f : -0.2f;
         pos = transform.position;
@@ -45,7 +48,7 @@ public abstract class PlantBase : MonoBehaviour
         transform.position = pos;
         transform.SetParent(cell.transform);
         OnPlaced();
-        transform.name = "Hello";
+        transform.name = Data.name;
     }
 
     //TODO: Do something when just set down.
@@ -54,6 +57,7 @@ public abstract class PlantBase : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         CurrentHP -= amount;
+        transform.position += new Vector3(0f, 0.1f, 0f);
         if (CurrentHP <= 0) Die();
     }
 

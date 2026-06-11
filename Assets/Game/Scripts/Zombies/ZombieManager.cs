@@ -14,11 +14,11 @@ public class ZombieManager : Singleton<ZombieManager>
 
     [SerializeField] private List<ZombieEntry> zombieEntries;
 
+    public IReadOnlyList<ZombieBase> ActiveZombies => activeZombies;
+
     private Dictionary<ZombieType, ZombieBase> prefabLookup = new();
     private Dictionary<ZombieType, ZombieData> dataLookup = new();
     private readonly List<ZombieBase> activeZombies = new();
-
-    public IReadOnlyList<ZombieBase> ActiveZombies => activeZombies;
 
     protected override void Awake()
     {
@@ -57,7 +57,6 @@ public class ZombieManager : Singleton<ZombieManager>
 
         var zombie = Instantiate(prefabLookup[zombieType], spawnCell.transform.position, Quaternion.identity, transform);
         zombie.Init(dataLookup[zombieType]);
-        zombie.CellTracker.Init(row, GridManager.ZombieSpawnCol);
 
         RegisterZombie(zombie);
         return zombie;
@@ -72,5 +71,22 @@ public class ZombieManager : Singleton<ZombieManager>
     public void OnZombieDied(ZombieBase zombie)
     {
         activeZombies.Remove(zombie);
+    }
+
+    public bool HasZombieInRow(int row, float fromPosX)
+    {
+        if (activeZombies.Count == 0) return false;
+
+        var activeZ = activeZombies;
+        foreach (var zombie in activeZ)
+        {
+            if (zombie == null) continue;
+            var cellTracker = zombie.GetComponentInChildren<CellTracker>();
+            if (cellTracker.Row == row && fromPosX <= zombie.transform.position.x)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -6,24 +6,23 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieMovement))]
 [RequireComponent(typeof(ZombieEffectController))]
 [RequireComponent(typeof(ZombieSpineController))]
-[RequireComponent(typeof(CellTracker))]
+[RequireComponent(typeof(ZombieAnimationController))]
 public abstract class ZombieBase : MonoBehaviour
 {
     public ZombieData Data { get; private set; }
     public ZombieMovement Movement { get; private set; }
     public ZombieEffectController EffectController { get; private set; }
-    public CellTracker CellTracker { get; private set; }
+    public ZombieAnimationController AnimController { get; private set; }
 
     public int CurrentHP { get; private set; }
     public int ArmorHP { get; private set; }
     public bool IsDead { get; private set; }
-    public int Row { get; private set; }
 
     protected virtual void Awake()
     {
         Movement = GetComponent<ZombieMovement>();
         EffectController = GetComponent<ZombieEffectController>();
-        CellTracker = GetComponent<CellTracker>();
+        AnimController = GetComponent<ZombieAnimationController>();
     }
 
     public void Init(ZombieData data)
@@ -66,12 +65,13 @@ public abstract class ZombieBase : MonoBehaviour
         if (IsDead) return;
         IsDead = true;
         //TODO: Notify to ZombieManager
+        AnimController.PlayDie();
         OnDie(source);
     }
 
     protected virtual void OnDie(DamageSource source)
     {
-        Destroy(gameObject,0.5f);
+        Destroy(gameObject,2f);
     }
 
     public void SetBodyColor()

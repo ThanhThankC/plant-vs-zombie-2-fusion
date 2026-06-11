@@ -3,6 +3,7 @@ public static class AnimEvents
     public const string ANIM_IDLE = "idle";
     public const string ANIM_WALK = "walk";
     public const string ANIM_EAT = "eat";
+    public const string ANIM_ATTACK = "attack";
     public const string ANIM_DIE = "die";
 
     public const string EVENT_ATTACK = "on_attack";

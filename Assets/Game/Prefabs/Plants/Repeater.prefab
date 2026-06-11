@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6359945925146104900}
   - component: {fileID: 2113098392687701907}
-  - component: {fileID: 2238947171076085188}
+  - component: {fileID: 3264339355956091252}
   m_Layer: 0
   m_Name: Repeater
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2238947171076085188
+--- !u!114 &3264339355956091252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2300001413120737196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 30b330f71c5a01f4caf0505c3499bf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
