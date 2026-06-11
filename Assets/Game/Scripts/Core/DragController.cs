@@ -68,9 +68,7 @@ public class DragController : Singleton<DragController>
     {
         if (CurrentToolType == ToolType.Shovel || CurrentToolType == ToolType.Glove)
         {
-            var fieldType = zone.FieldType;
-            var other = fieldType == FieldType.Normal ? FieldType.Support : FieldType.Normal;
-            var instance = zone.Cell.GetPlantInstance(fieldType) ?? zone.Cell.GetPlantInstance(other);
+            var instance = zone.Cell.GetPlantInstance(zone.FieldType);
             return instance != null;
         }
         var plantType = PlantManager.Instance.CurrentPlantType;

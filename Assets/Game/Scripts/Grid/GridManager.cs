@@ -35,7 +35,7 @@ public class GridManager : Singleton<GridManager>
 
                 cell.Init(row, col, GetCellType(col));
                 cell.transform.localScale = cellSize;
-                cell.name = $"Cell[{row},{row}]";
+                cell.name = $"Cell[{row},{col}]";
                 grid[row, col] = cell;
             }
         }

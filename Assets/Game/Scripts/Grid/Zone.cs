@@ -80,11 +80,7 @@ public class Zone : MonoBehaviour
         cell.ToggleHighlight(false);
     }
 
-    private PlantBase GetPlantInCell()
-    {
-        var other = fieldType == FieldType.Normal ? FieldType.Support : FieldType.Normal;
-        return cell.GetPlantInstance(fieldType) ?? cell.GetPlantInstance(other);
-    }
+    private PlantBase GetPlantInCell() => cell.GetPlantInstance(fieldType);
 
     private PlantType? GetFusionResult()
     {

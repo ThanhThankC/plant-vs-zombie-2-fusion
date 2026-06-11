@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Cell : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class Cell : MonoBehaviour
 
     public Zone NormalZone => normalZone;
     public Zone SupportZone => supportZone;
+
+    public event Action OnPlantChanged;
 
     public void Init(int row, int col, CellType cellType)
     {
@@ -43,6 +46,7 @@ public class Cell : MonoBehaviour
             SupportPlant = plantType;
             SupportPlantInstance = instance;
         }
+        OnPlantChanged?.Invoke();
     }
 
     public void ClearPlant(FieldType fieldType)
@@ -57,10 +61,13 @@ public class Cell : MonoBehaviour
             SupportPlant = null;
             SupportPlantInstance = null;
         }
+        OnPlantChanged?.Invoke();
     }
 
-    public PlantType? GetPlantType(FieldType fieldType) => fieldType == FieldType.Normal ? NormalPlant : SupportPlant;
-    public PlantBase GetPlantInstance(FieldType fieldType) => fieldType == FieldType.Normal ? NormalPlantInstance : SupportPlantInstance;
+    public PlantBase GetPlantInstance(FieldType prioritiedFiled) 
+            => prioritiedFiled == FieldType.Normal                                   
+            ? NormalPlantInstance ?? SupportPlantInstance 
+            : SupportPlantInstance ?? NormalPlantInstance;
 
     public void ToggleHighlight(bool show)
     {
