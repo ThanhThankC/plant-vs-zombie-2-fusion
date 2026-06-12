@@ -8,19 +8,21 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private List<WaveData> waveDatas;
     //TODO: Variable Conventions
     [SerializeField] private int recentRowMemorySize = 3;
+    [SerializeField] private float progressSize = 1.1f;
 
-    public float WaveProgress => CaculateProgress();
+    public int BigWaveCount { get; private set; }
+    public float WaveProgress => CalculateProgress();
 
-    public event System.Action<float> OnWaveChanged;
+    public event System.Action<int> OnBigWaveChanged;
+    public event System.Action<float> OnSmallWaveChanged;
 
     private List<ZombieBase> lastSmallWaveZombies = new();
     private Queue<int> rowQueue = new();
     private WaveData currentWaveData;
-    private int currentLevel;
-    private int currentBigWaveCount;
-    private int currentSamllWaveCount;
+    private int smallWaveCount;
     private int bigWaveIndex;
     private int smallWaveIndex;
+    private int currentLevel;
 
     protected override void Awake()
     {
@@ -29,7 +31,12 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Start()
     {
-        currentWaveData = waveDatas[currentLevel];
+        StartLevel(currentLevel);
+    }
+
+    private void StartLevel(int level)
+    {
+        currentWaveData = waveDatas[level];
         if (currentWaveData == null) return;
         StartCoroutine(RunWave());
     }
@@ -38,24 +45,26 @@ public class WaveManager : Singleton<WaveManager>
     {
         yield return new WaitForSeconds(currentWaveData.prepareTime);
 
-        currentBigWaveCount = currentWaveData.bigWaves.Count;
-        for (int i = 0; i < currentBigWaveCount; i++)
+        BigWaveCount = currentWaveData.bigWaves.Count;
+        for (int i = 0; i < BigWaveCount; i++)
         {
+            OnBigWaveChanged?.Invoke(bigWaveIndex);
             var bigwave = currentWaveData.bigWaves[i];
             yield return RunBigWave(bigwave.smallWaves);
+            smallWaveIndex = 0;
             bigWaveIndex++;
         }
     }
 
     IEnumerator RunBigWave(List<SmallWave> smallWaves)
     {
-        currentSamllWaveCount = smallWaves.Count;
+        smallWaveCount = smallWaves.Count;
         for (int i = 0; i < smallWaves.Count; i++)
         {
+            OnSmallWaveChanged?.Invoke(CalculateProgress());
             yield return RunSmallWave(smallWaves[i]);
             yield return WaitingForNextSmallWave(smallWaves[i]);
             smallWaveIndex++;
-            OnWaveChanged?.Invoke(CaculateProgress());
         }
     }
 
@@ -73,8 +82,13 @@ public class WaveManager : Singleton<WaveManager>
 
     IEnumerator WaitingForNextSmallWave(SmallWave smallWave)
     {
-        if (AnyZombieDied(lastSmallWaveZombies)) yield break;
-        yield return new WaitForSeconds(smallWave.maxWaveDuration);
+        float elapsed = 0;
+        while (elapsed < smallWave.maxWaveDuration)
+        {
+            if (AnyZombieDied(lastSmallWaveZombies)) yield break;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     private ZombieType PickZombieType(List<ZombieSpawnEntry> entries)
@@ -120,10 +134,14 @@ public class WaveManager : Singleton<WaveManager>
         return false;
     }
 
-    private float CaculateProgress()
+    private float CalculateProgress()
     {
-        float progress = ( smallWaveIndex / (float) currentSamllWaveCount) 
-                       * ( bigWaveIndex + 1 / (float) currentBigWaveCount);
+        if (bigWaveIndex + 1 >= BigWaveCount) return 1f;
+
+        float perBigProgress = progressSize / (BigWaveCount - 1);
+
+        float progress = smallWaveIndex * perBigProgress / smallWaveCount
+                        + bigWaveIndex * perBigProgress;
         return progress;
     }
 }

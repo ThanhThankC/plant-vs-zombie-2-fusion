@@ -194,7 +194,7 @@ TextureImporter:
         width: 83
         height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,7 +215,7 @@ TextureImporter:
         width: 83
         height: 84
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,7 +236,7 @@ TextureImporter:
         width: 146
         height: 75
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -244,6 +244,90 @@ TextureImporter:
       bones: []
       spriteID: 348985651fd11024f9b02a0e429f093c
       internalID: 1093986857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress_Blank
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1060
+        width: 333
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70924615c7823834aa1e5681d6f5bd2d
+      internalID: 1529014000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress_Fill
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 1385
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed7c09c8fea985f4d945fda3e5318651
+      internalID: -2056419658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Progress_Flag
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 1098
+        width: 35
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec541d19575b283479146263a9d24880
+      internalID: -178830358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: progress_icon
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 249
+        width: 45
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7d99811f92fcb747893f98bfb29b07a
+      internalID: -958703164
       vertices: []
       indices: 
       edges: []
@@ -262,9 +346,13 @@ TextureImporter:
       Glove_Drag: -74283588
       Glove_Normal: 1584069838
       Glove_Pressed: -2040143286
+      Progress_Blank: 1529014000
+      Progress_Fill: -2056419658
+      Progress_Flag: -178830358
       Shovel_Drag: 1093986857
       Shovel_Normal: -1705859378
       Shovel_Pressed: -1954550789
+      progress_icon: -958703164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

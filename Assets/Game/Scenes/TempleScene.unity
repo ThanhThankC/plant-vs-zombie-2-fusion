@@ -314,10 +314,10 @@ RectTransform:
   - {fileID: 1561948519}
   m_Father: {fileID: 783798223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1121, y: 406}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 127.72998, y: 26.75299}
+  m_SizeDelta: {x: 85.45996, y: -241.51001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &159123528
 MonoBehaviour:
@@ -938,7 +938,7 @@ RectTransform:
   m_GameObject: {fileID: 411121807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1005897876}
@@ -1751,7 +1751,7 @@ RectTransform:
   m_GameObject: {fileID: 557598047}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2100144403}
@@ -2070,7 +2070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -59.595, y: -5.21}
+  m_AnchoredPosition: {x: -129.895, y: 0.4899807}
   m_SizeDelta: {x: 109.48, y: -0.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &671259700
@@ -2256,7 +2256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -54.28, y: -5.1000004}
+  m_AnchoredPosition: {x: -124.58, y: 0.59998083}
   m_SizeDelta: {x: 98.85, y: -0.20002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &680341316
@@ -2287,7 +2287,7 @@ RectTransform:
   m_GameObject: {fileID: 680341316}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1221572682}
@@ -3229,7 +3229,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -4
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &783798223
 RectTransform:
@@ -3248,7 +3248,7 @@ RectTransform:
   - {fileID: 1426832627}
   - {fileID: 1237334680}
   - {fileID: 1558149214}
-  - {fileID: 1681513478}
+  - {fileID: 1783959126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3302,7 +3302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.40392157}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3680,7 +3680,7 @@ RectTransform:
   m_GameObject: {fileID: 857610491}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 188521994}
@@ -3775,7 +3775,7 @@ RectTransform:
   m_GameObject: {fileID: 894530915}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1788421760}
@@ -4020,7 +4020,7 @@ RectTransform:
   m_GameObject: {fileID: 999670059}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 456066538}
@@ -4969,7 +4969,7 @@ Transform:
   m_GameObject: {fileID: 1228210618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.59, y: -3.44, z: -0.004175531}
+  m_LocalPosition: {x: -3.73, y: -3.09, z: -0.004175531}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4988,7 +4988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 434065048099068234, guid: 986550c50ef3f3f46a2a40d783865a7b, type: 3}
-  cellSize: {x: 1, y: 1.5}
+  cellSize: {x: 1.2, y: 1.6}
 --- !u!1 &1237334679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5018,14 +5018,14 @@ RectTransform:
   m_GameObject: {fileID: 1237334679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 783798223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 864, y: -598.15}
+  m_AnchoredPosition: {x: 775, y: -437}
   m_SizeDelta: {x: 84.00001, y: 83.01184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1237334682
@@ -5836,14 +5836,14 @@ RectTransform:
   m_GameObject: {fileID: 1426832626}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.55, y: 1.55, z: 1.55}
+  m_LocalScale: {x: 1.64, y: 1.64, z: 1.64}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 783798223}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 647.66, y: -598.15}
+  m_AnchoredPosition: {x: 595, y: -436}
   m_SizeDelta: {x: 84.00001, y: 83.01184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1426832629
@@ -6325,7 +6325,7 @@ RectTransform:
   m_GameObject: {fileID: 1561948518}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 713940096}
@@ -6568,6 +6568,7 @@ MonoBehaviour:
   waveDatas:
   - {fileID: 11400000, guid: bb6969d69db89414d9f5987743d00d66, type: 2}
   recentRowMemorySize: 3
+  progressSize: 1.1
 --- !u!4 &1668378041
 Transform:
   m_ObjectHideFlags: 0
@@ -6593,9 +6594,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1681513478}
   - component: {fileID: 1681513480}
-  - component: {fileID: 1681513479}
   m_Layer: 5
-  m_Name: ProgressBar
+  m_Name: progressSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6608,34 +6608,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681513477}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1772378899}
   - {fileID: 678785402}
   - {fileID: 663048890}
-  m_Father: {fileID: 783798223}
+  m_Father: {fileID: 1783959126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17, y: 660}
+  m_AnchoredPosition: {x: -6, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1681513479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681513477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1845db16388c15448802ec3f464d9127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fillSpeed: 3
 --- !u!114 &1681513480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6715,7 +6702,7 @@ RectTransform:
   m_GameObject: {fileID: 1702230116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1845036910}
@@ -6885,7 +6872,7 @@ RectTransform:
   m_GameObject: {fileID: 1761492824}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1419897541}
@@ -6986,7 +6973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 0, y: 0.25}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -70.3, y: 5.7}
   m_SizeDelta: {x: 333, y: 38.00542}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1772378900
@@ -7027,6 +7014,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772378898}
   m_CullTransparentMesh: 1
+--- !u!1 &1783959125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1783959126}
+  - component: {fileID: 1783959127}
+  m_Layer: 5
+  m_Name: ProgressBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1783959126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783959125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1681513478}
+  m_Father: {fileID: 783798223}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 1227, y: 479}
+  m_SizeDelta: {x: 320, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1783959127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783959125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1845db16388c15448802ec3f464d9127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressSlider: {fileID: 1681513480}
+  flagPrefab: {fileID: 965456722665102449, guid: 10679abd675c15449b27aeb56df9c5db, type: 3}
+  barWidth: 250
+  fillSpeed: 3
 --- !u!1 &1788421759
 GameObject:
   m_ObjectHideFlags: 0

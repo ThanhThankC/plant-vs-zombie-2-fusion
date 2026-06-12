@@ -15,28 +15,41 @@ MonoBehaviour:
   prepareTime: 2
   bigWaves:
   - smallWaves:
-    - spawnCount: 1
-      maxWaveDuration: 3
+    - spawnCount: 2
+      maxWaveDuration: 30
       spawnInterval: 1
       entries:
       - zombieType: 0
         weight: 61
     - spawnCount: 2
-      maxWaveDuration: 3
+      maxWaveDuration: 16
       spawnInterval: 2
       entries:
       - zombieType: 0
         weight: 43
     - spawnCount: 2
-      maxWaveDuration: 0.65
+      maxWaveDuration: 5
       spawnInterval: 0.18
       entries:
       - zombieType: 0
         weight: 78
   - smallWaves:
-    - spawnCount: 1
-      maxWaveDuration: 2
-      spawnInterval: 0
+    - spawnCount: 4
+      maxWaveDuration: 5
+      spawnInterval: 2
       entries:
       - zombieType: 0
         weight: 67
+    - spawnCount: 5
+      maxWaveDuration: 3
+      spawnInterval: 4
+      entries:
+      - zombieType: 0
+        weight: 67
+  - smallWaves:
+    - spawnCount: 17
+      maxWaveDuration: 2.12
+      spawnInterval: 0.5
+      entries:
+      - zombieType: 0
+        weight: 80
