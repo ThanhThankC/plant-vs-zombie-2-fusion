@@ -64,7 +64,7 @@ public abstract class ZombieBase : MonoBehaviour
     {
         if (IsDead) return;
         IsDead = true;
-        //TODO: Notify to ZombieManager
+        ZombieManager.Instance.OnZombieDied(this);
         AnimController.PlayDie();
         OnDie(source);
     }

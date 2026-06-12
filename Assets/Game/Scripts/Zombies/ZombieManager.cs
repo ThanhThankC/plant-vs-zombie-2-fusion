@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class ZombieManager : Singleton<ZombieManager>
 {
@@ -77,8 +78,7 @@ public class ZombieManager : Singleton<ZombieManager>
     {
         if (activeZombies.Count == 0) return false;
 
-        var activeZ = activeZombies;
-        foreach (var zombie in activeZ)
+        foreach (var zombie in activeZombies.ToList())
         {
             if (zombie == null) continue;
             var cellTracker = zombie.GetComponentInChildren<CellTracker>();

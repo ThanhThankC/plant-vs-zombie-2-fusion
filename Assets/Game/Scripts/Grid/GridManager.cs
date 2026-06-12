@@ -12,6 +12,7 @@ public class GridManager : Singleton<GridManager>
 
     private Cell[,] grid = new Cell[maxRow, maxCol];
 
+    //TODO: Variable Conventions
     private const int maxCol = 12;
     private const int maxRow = 5;
 

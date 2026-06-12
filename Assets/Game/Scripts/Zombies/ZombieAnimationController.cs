@@ -21,7 +21,7 @@ public class ZombieAnimationController : MonoBehaviour
 
     private void OnDisable() => skeletonAnim.AnimationState.Event -= OnSpineEvent;
 
-    public void ChangeToEatAndWalk()
+    public void RefreshAnimation()
     {
         var currentAnim = skeletonAnim.AnimationState.GetCurrent(0).Animation.Name;
         if (cellTracker.TargetPlant != null && currentAnim != AnimEvents.ANIM_EAT)

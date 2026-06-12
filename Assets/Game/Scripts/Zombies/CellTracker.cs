@@ -54,7 +54,7 @@ public class CellTracker : MonoBehaviour
     {
         TargetPlant = previousCell?.GetPlantInstance(FieldType.Support)
                     ?? currentCell?.GetPlantInstance(FieldType.Support);
-        animationController.ChangeToEatAndWalk();
+        animationController.RefreshAnimation();
     }
 
     public Cell GetCurrentCell() => GridManager.Instance.GetCell(Row, Col);
