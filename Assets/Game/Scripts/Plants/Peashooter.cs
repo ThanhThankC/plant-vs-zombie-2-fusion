@@ -1,7 +1,5 @@
 using Spine;
 using Spine.Unity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Peashooter : PlantBase
@@ -10,6 +8,7 @@ public class Peashooter : PlantBase
     [SerializeField] private Transform attackTransform;
 
     private SkeletonAnimation skeletonAnim;
+    private bool wasAttacking = false;
 
     private void Awake()
     {
@@ -22,13 +21,17 @@ public class Peashooter : PlantBase
 
     private void Update()
     {
-        if (skeletonAnim == null) return;
         bool hasZombie = ZombieManager.Instance.HasZombieInRow(OccupiedCell.Row, transform.position.x);
-        var currentAnim = skeletonAnim.AnimationState.GetCurrent(0).Animation.Name;
-        if (hasZombie && currentAnim != AnimEvents.ANIM_ATTACK)
+        if (hasZombie && !wasAttacking)
+        {
+            wasAttacking = true;
             PlayAttack();
-        else if (!hasZombie && currentAnim != AnimEvents.ANIM_IDLE)
+        }
+        else if (!hasZombie && wasAttacking)
+        {
+            wasAttacking = false;
             PlayIdle();
+        }
     }
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
@@ -39,11 +42,18 @@ public class Peashooter : PlantBase
 
     private void PlayAttack()
     {
-        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_ATTACK, true);
+        var current = skeletonAnim.AnimationState.GetCurrent(0);
+        if (current != null && current.Animation.Name == AnimEvents.ANIM_ATTACK) return;
+
+        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_ATTACK, false); 
+        skeletonAnim.AnimationState.AddAnimation(0, AnimEvents.ANIM_ATTACK, true, 0);
     }
 
     private void PlayIdle()
     {
-        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
+        var current = skeletonAnim.AnimationState.GetCurrent(0);
+        if (current != null && current.Animation.Name == AnimEvents.ANIM_IDLE) return;
+
+        skeletonAnim.AnimationState.AddAnimation(0, AnimEvents.ANIM_IDLE, true, 0);
     }
 }
