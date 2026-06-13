@@ -11,10 +11,8 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private float progressSize = 1.1f;
 
     public int BigWaveCount { get; private set; }
-    public float WaveProgress => CalculateProgress();
 
-    public event System.Action<int> OnBigWaveChanged;
-    public event System.Action<float> OnSmallWaveChanged;
+    public event System.Action<float, int> OnWaveChanged;
 
     private List<ZombieBase> lastSmallWaveZombies = new();
     private Queue<int> rowQueue = new();
@@ -48,7 +46,6 @@ public class WaveManager : Singleton<WaveManager>
         BigWaveCount = currentWaveData.bigWaves.Count;
         for (int i = 0; i < BigWaveCount; i++)
         {
-            OnBigWaveChanged?.Invoke(bigWaveIndex);
             var bigwave = currentWaveData.bigWaves[i];
             yield return RunBigWave(bigwave.smallWaves);
             smallWaveIndex = 0;
@@ -61,7 +58,7 @@ public class WaveManager : Singleton<WaveManager>
         smallWaveCount = smallWaves.Count;
         for (int i = 0; i < smallWaves.Count; i++)
         {
-            OnSmallWaveChanged?.Invoke(CalculateProgress());
+            OnWaveChanged?.Invoke(CalculateProgress(), bigWaveIndex);
             yield return RunSmallWave(smallWaves[i]);
             yield return WaitingForNextSmallWave(smallWaves[i]);
             smallWaveIndex++;

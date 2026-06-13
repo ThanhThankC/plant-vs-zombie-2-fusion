@@ -12,34 +12,37 @@ public class ProgressBar : MonoBehaviour
 
     private List<GameObject> flags = new();
     private WaveManager waveManager;
+    private int bigWaveIndex = -1;
 
     private void Start()
     {
         waveManager = WaveManager.Instance;
         progressSlider.gameObject.SetActive(false);
-        waveManager.OnBigWaveChanged += UpdateFlag;
-        waveManager.OnSmallWaveChanged += UpdateProgressBar;
+        waveManager.OnWaveChanged += UpdateProgressBar;
     }
 
     private void OnDestroy()
     {
         if (waveManager != null)
-        {
-            waveManager.OnBigWaveChanged -= UpdateFlag;
-            waveManager.OnSmallWaveChanged -= UpdateProgressBar;
-        }
+            waveManager.OnWaveChanged -= UpdateProgressBar;
     }
 
-    private void UpdateFlag(int bigwave)
+    private void UpdateProgressBar(float targetProgress, int bigWave)
     {
-        if (bigwave == 0)
+        StopAllCoroutines();
+        StartCoroutine(RunProgress(progressSlider, targetProgress));
+
+        if (bigWaveIndex == bigWave) return;
+        bigWaveIndex = bigWave;
+
+        if (bigWave == 0)
         {
             progressSlider.gameObject.SetActive(true);
-            SetUpFlag(); 
+            SetUpFlag();
             return;
         }
 
-        GameObject flag = flags[bigwave - 1];
+        GameObject flag = flags[bigWaveIndex - 1];
         if (flag == null) return;
         flag.transform.localPosition += new Vector3(0, 20f, 0);
     }
@@ -58,12 +61,6 @@ public class ProgressBar : MonoBehaviour
             go.transform.SetSiblingIndex(2);
             flags.Add(go);
         }
-    }
-
-    private void UpdateProgressBar(float targetProgress)
-    {
-        StopAllCoroutines();
-        StartCoroutine(RunProgress(progressSlider, targetProgress));
     }
 
     IEnumerator RunProgress(Slider bar, float targetProgress)
