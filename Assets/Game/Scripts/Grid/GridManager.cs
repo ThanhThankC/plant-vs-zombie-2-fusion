@@ -16,8 +16,9 @@ public class GridManager : Singleton<GridManager>
     private const int maxCol = 12;
     private const int maxRow = 5;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         BuildGrid();
     }
 
