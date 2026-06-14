@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CanvasInputReceiver : Singleton<CanvasInputReceiver>, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private TextMeshProUGUI DebugText;
-    [SerializeField] private LayerMask interactiveLayer;
+    [SerializeField] private LayerMask zoneLayer;
 
     private Camera mainCamera;
     private DragController dragController;
@@ -45,7 +41,7 @@ public class CanvasInputReceiver : Singleton<CanvasInputReceiver>, IPointerClick
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!dragController.IsDragging) return;
-        Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), interactiveLayer);
+        Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), zoneLayer);
         Zone zone = hit?.GetComponent<Zone>();
 
         zone?.OnZoneInteract();
@@ -55,7 +51,7 @@ public class CanvasInputReceiver : Singleton<CanvasInputReceiver>, IPointerClick
 
     private void HandleHover(PointerEventData eventData)
     {
-        Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), interactiveLayer);
+        Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), zoneLayer);
         Zone zone = hit?.GetComponent<Zone>();
 
         if (zoneHover != null && (zone != null && zone.Cell != zoneHover.Cell || zone == null))

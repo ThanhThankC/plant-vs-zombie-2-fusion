@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBar : MonoBehaviour
+public class WaveProgressBar : MonoBehaviour
 {
     [SerializeField] private Slider progressSlider;
     [SerializeField] private GameObject flagPrefab;
