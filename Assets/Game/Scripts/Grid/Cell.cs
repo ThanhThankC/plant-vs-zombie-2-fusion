@@ -23,13 +23,16 @@ public class Cell : MonoBehaviour
     public Zone NormalZone => normalZone;
     public Zone SupportZone => supportZone;
 
+    public Vector2 Position { get; private set; }
+
     public event Action OnPlantChanged;
 
-    public void Init(int row, int col, CellType cellType)
+    public void Init(int row, int col, CellType cellType, Vector2 pos)
     {
         Row = row;
         Col = col;
         CellType = cellType;
+        Position = pos;
     }
 
     public bool CanPlant() => CellType == CellType.Plantable;

@@ -144,6 +144,8 @@ MonoBehaviour:
   sunPrefab: {fileID: 4635766910397076991, guid: 3dbb787a352cc294fa8c7cc4030b5199, type: 3}
   specialTransform: {fileID: 8535506146181713612}
   loopCount: 3
+  landingOffsetXRange: {x: -1, y: 1}
+  landingOffsetYRange: {x: -1, y: -0.5}
 --- !u!1 &6935062076176475805
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ Transform:
   m_GameObject: {fileID: 6935062076176475805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.051, y: 0.451, z: 0}
+  m_LocalPosition: {x: -0.051, y: 0.562, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

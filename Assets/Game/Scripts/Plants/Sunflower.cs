@@ -7,6 +7,8 @@ public class Sunflower : PlantBase
     [SerializeField] private Sun sunPrefab;
     [SerializeField] private Transform specialTransform;
     [SerializeField] private int loopCount = 3;
+    [SerializeField] private Vector2 landingOffsetXRange = new Vector2(-1f, 1f);
+    [SerializeField] private Vector2 landingOffsetYRange = new Vector2(-1f, -0.5f);
 
     private SkeletonAnimation skeletonAnim;
     private int currentLoop;
@@ -87,9 +89,15 @@ public class Sunflower : PlantBase
         if (e.Data.Name == AnimEvents.EVENT_SPECIAL)
         {
             var sun = Instantiate(sunPrefab, specialTransform.position, Quaternion.identity);
-            sun.InitFromPlant();
+            sun.InitCurved(GetLandPosition());
         }
     }
 
-
+    private Vector3 GetLandPosition()
+    {
+        Vector3 landPos = OccupiedCell.transform.position;
+        float offsetX = Random.Range(landingOffsetXRange.x, landingOffsetXRange.y);
+        float offsetY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
+        return landPos + new Vector3(offsetX, offsetY, 0f);
+    }
 }

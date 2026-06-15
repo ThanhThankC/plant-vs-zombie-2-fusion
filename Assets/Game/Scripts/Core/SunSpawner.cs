@@ -11,10 +11,8 @@ public class SunSpawner : MonoBehaviour
     
     private float firstDuration;
     private float interval;
-    private float topEdge;
-    private float rightEdge;
-    private float leftEdge;
-    private float bottomEdge;
+    private Vector2 landingOffsetXRange;
+    private Vector2 landingOffsetYRange;
     private bool autoSpawn = true;
 
     //TODO: Game State Manager Conventions
@@ -51,10 +49,8 @@ public class SunSpawner : MonoBehaviour
         Cell rightTopCell = GridManager.Instance.GetCell(5 - 1, 12 - 1);
 
         if (leftBottomCell == null || rightTopCell == null) return;
-        topEdge = rightTopCell.transform.position.y;
-        rightEdge = rightTopCell.transform.position.x;
-        leftEdge = leftBottomCell.transform.position.x;
-        bottomEdge = leftBottomCell.transform.position.y;
+        landingOffsetXRange = new Vector2(leftBottomCell.Position.x, rightTopCell.Position.x);
+        landingOffsetYRange = new Vector2(leftBottomCell.Position.y, rightTopCell.Position.y);
     }
 
     IEnumerator SpawnSun()
@@ -69,12 +65,12 @@ public class SunSpawner : MonoBehaviour
 
     private void CreateSun()
     {
-        float offsetX = Random.Range(leftEdge, rightEdge);
-        float offsetY = topEdge + spawnHeight;
+        float offsetX = Random.Range(landingOffsetXRange.x, landingOffsetXRange.y);
+        float offsetY = landingOffsetYRange.y + spawnHeight;
         Vector3 pos = new Vector3(offsetX, offsetY, 0);
-        float targetPosY = Random.Range(bottomEdge, topEdge);
+        float targetPosY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
 
         Sun sun = Instantiate(sunPrefab, pos, Quaternion.identity, transform);
-        sun.Init(targetPosY);
+        sun.InitStraight(targetPosY);
     }
 }

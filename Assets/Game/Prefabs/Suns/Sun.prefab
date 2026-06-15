@@ -102,6 +102,8 @@ MonoBehaviour:
   fallSpeed: 3
   collectSpeed: 10
   collectionDuration: 4
+  jumpPower: 3
+  jumpDuration: 1
 --- !u!58 &6335286282201941888
 CircleCollider2D:
   m_ObjectHideFlags: 0

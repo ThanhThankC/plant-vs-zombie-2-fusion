@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Sun : MonoBehaviour
@@ -14,17 +15,27 @@ public class Sun : MonoBehaviour
     [SerializeField] private float fallSpeed = 3f;
     [SerializeField] private float collectSpeed = 10f;
     [SerializeField] private float collectionDuration = 3f;
+    [SerializeField] private float jumpPower = 2f;
+    [SerializeField] private float jumpDuration = 1.2f;
 
     public int Cost => cost;
 
     private SunState sunState = SunState.None;
+    private Tween jumpTween;
     private Vector3 landPos;
     private Vector3 uiPos;
 
-    public void Init(float landPosY)
+    public void InitStraight(float landPosY)
     {
         landPos = new Vector3(transform.position.x, landPosY, 0f);
         sunState = SunState.StraightFall;
+        uiPos = SunManager.Instance.SunCounterPos;
+    }
+
+    public void InitCurved(Vector3 landPos)
+    {
+        this.landPos = landPos;
+        sunState = SunState.CurvedFall;
         uiPos = SunManager.Instance.SunCounterPos;
     }
 
@@ -46,8 +57,11 @@ public class Sun : MonoBehaviour
 
     public void OnTap()
     {
-        if (sunState != SunState.Collecting)
-            sunState = SunState.Collecting;
+        if (sunState == SunState.Collecting) return;
+
+        if (sunState == SunState.None)
+            jumpTween?.Kill();
+        sunState = SunState.Collecting;
     }
 
     private void FallingFollowStraight()
@@ -75,6 +89,9 @@ public class Sun : MonoBehaviour
 
     private void FallingFollowCurved()
     {
-        // Move follow principal of sunflower
+        sunState = SunState.None;
+        jumpTween = transform.DOJump(landPos, jumpPower, 1, jumpDuration)
+            .SetEase(Ease.Linear)
+            .OnComplete(() => Invoke(nameof(OnTap), collectionDuration));
     }
 }

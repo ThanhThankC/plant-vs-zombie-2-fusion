@@ -35,7 +35,7 @@ public class GridManager : Singleton<GridManager>
                 );
                 Cell cell = Instantiate(cellPrefab, pos, Quaternion.identity, transform);
 
-                cell.Init(row, col, GetCellType(col));
+                cell.Init(row, col, GetCellType(col), pos);
                 cell.transform.localScale = cellSize;
                 cell.name = $"Cell[{row},{col}]";
                 grid[row, col] = cell;
