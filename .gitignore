@@ -104,3 +104,13 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Exclude all SpineAssets
+Assets/SpineAssets/Plants/
+Assets/SpineAssets/Zombies/
+
+# Whitelist peashooter and zombies templates
+!Assets/SpineAssets/Plants/a1_peashooter/
+!Assets/SpineAssets/Plants/a1_peashooter/**
+!Assets/SpineAssets/Zombies/b1_basiczombie/
+!Assets/SpineAssets/Zombies/b1_basiczombie/**
