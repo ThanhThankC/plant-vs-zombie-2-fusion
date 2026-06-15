@@ -63,8 +63,8 @@ public class SunCounterUI : MonoBehaviour
         for (int i = 0; i < parts; i++)
         {
             int u = baseUnit;
-            if (i == 1) u -= 1;
-            if (i == 3) u += 1;
+            if (i == 1) u --;
+            if (i == 3) u ++;
             results[i] = u * unit;
         }
         return results;

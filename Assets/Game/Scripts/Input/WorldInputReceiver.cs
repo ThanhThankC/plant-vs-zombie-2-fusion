@@ -7,7 +7,7 @@ public class WorldInputReceiver : MonoBehaviour
     private readonly Collider2D[] sunHits = new Collider2D[5];
 
     private Camera mainCamera;
-    private bool isGameStart;
+    private bool isGameStart = true;
 
     private void Start()
     {

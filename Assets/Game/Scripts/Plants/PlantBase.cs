@@ -6,7 +6,7 @@ public abstract class PlantBase : MonoBehaviour
     public PlantData Data { get; private set; }
     public PlantType PlantType => Data.plantType;
     public int CurrentHP { get; private set; }
-    public int IsActivated { get; private set; }
+    public bool IsActivated { get; private set; }
     public Cell OccupiedCell { get; private set; }
     public FieldType OccupiedFieldType { get; private set; }
     public bool IsGhost { get; private set; }
@@ -47,8 +47,9 @@ public abstract class PlantBase : MonoBehaviour
         pos.y += offsetY;
         transform.position = pos;
         transform.SetParent(cell.transform);
-        OnPlaced();
         transform.name = Data.name;
+        OnPlaced();
+        IsActivated = true;
     }
 
     //TODO: Do something when just set down.
@@ -57,13 +58,15 @@ public abstract class PlantBase : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         CurrentHP -= amount;
-        transform.position += new Vector3(0f, 0.1f, 0f);
+        transform.position += new Vector3(0f, 0.05f, 0f);
         if (CurrentHP <= 0) Die();
     }
 
     protected virtual void Die()
     {
         OccupiedCell?.ClearPlant(OccupiedFieldType);
+        OccupiedCell = null;
+        IsActivated = false;
         Destroy(gameObject);
     }
 
