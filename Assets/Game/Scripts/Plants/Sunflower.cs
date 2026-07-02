@@ -89,15 +89,15 @@ public class Sunflower : PlantBase
         if (e.Data.Name == AnimEvents.EVENT_SPECIAL)
         {
             var sun = Instantiate(sunPrefab, specialTransform.position, Quaternion.identity);
-            sun.InitCurved(GetLandPosition());
+            sun.InitCurved(GetGroundPosition());
         }
     }
 
-    private Vector3 GetLandPosition()
+    private Vector3 GetGroundPosition()
     {
-        Vector3 landPos = OccupiedCell.transform.position;
+        Vector3 groundPosY = OccupiedCell.transform.position;
         float offsetX = Random.Range(landingOffsetXRange.x, landingOffsetXRange.y);
         float offsetY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
-        return landPos + new Vector3(offsetX, offsetY, 0f);
+        return groundPosY + new Vector3(offsetX, offsetY, 0f);
     }
 }

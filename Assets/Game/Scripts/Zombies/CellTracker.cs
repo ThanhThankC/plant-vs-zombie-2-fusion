@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CellTracker : MonoBehaviour
 {
     public int Row { get; private set; }
     public int Col { get; private set; }
+    public Cell CurrentCell { get; private set; }
+    public Cell PreviousCell { get; private set; }
 
     public PlantBase TargetPlant { get; private set; }
 
     private ZombieAnimationController animationController;
-    private Cell currentCell;
-    private Cell previousCell;
 
     private void Awake()
     {
@@ -25,8 +23,8 @@ public class CellTracker : MonoBehaviour
             var zone = other.GetComponent<Zone>();
             if (zone == null) return;
 
-            if (currentCell != null) previousCell = currentCell;
-            currentCell = zone.Cell;
+            if (CurrentCell != null) PreviousCell = CurrentCell;
+            CurrentCell = zone.Cell;
 
             Row = zone.Cell.Row;
             Col = zone.Cell.Col;
@@ -43,8 +41,8 @@ public class CellTracker : MonoBehaviour
             var zone = other.GetComponent<Zone>();
             if (zone == null) return;
 
-            if (previousCell == zone.Cell) previousCell = null;
-            if (currentCell == zone.Cell) currentCell = null;
+            if (PreviousCell == zone.Cell) PreviousCell = null;
+            if (CurrentCell == zone.Cell) CurrentCell = null;
 
             zone.Cell.OnPlantChanged -= HandleWithCellHasPlant;
         }
@@ -52,8 +50,8 @@ public class CellTracker : MonoBehaviour
 
     private void HandleWithCellHasPlant()
     {
-        TargetPlant = previousCell?.GetPlantInstance(FieldType.Support)
-                    ?? currentCell?.GetPlantInstance(FieldType.Support);
+        TargetPlant = PreviousCell?.GetPlantInstance(FieldType.Support)
+                    ?? CurrentCell?.GetPlantInstance(FieldType.Support);
         animationController.RefreshAnimation();
     }
 

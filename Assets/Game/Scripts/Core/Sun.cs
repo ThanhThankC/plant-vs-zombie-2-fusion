@@ -22,19 +22,19 @@ public class Sun : MonoBehaviour
 
     private SunState sunState = SunState.None;
     private Tween jumpTween;
-    private Vector3 landPos;
+    private Vector3 groundPos;
     private Vector3 uiPos;
 
-    public void InitStraight(float landPosY)
+    public void InitStraight(float groundPosY)
     {
-        landPos = new Vector3(transform.position.x, landPosY, 0f);
+        groundPos = new Vector3(transform.position.x, groundPosY, 0f);
         sunState = SunState.StraightFall;
         uiPos = SunManager.Instance.SunCounterPos;
     }
 
-    public void InitCurved(Vector3 landPos)
+    public void InitCurved(Vector3 groundPosY)
     {
-        this.landPos = landPos;
+        this.groundPos = groundPosY;
         sunState = SunState.CurvedFall;
         uiPos = SunManager.Instance.SunCounterPos;
     }
@@ -66,9 +66,9 @@ public class Sun : MonoBehaviour
 
     private void FallingFollowStraight()
     {
-        transform.position = Vector3.MoveTowards(transform.position, landPos, fallSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, groundPos, fallSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, landPos) <= 0.01f)
+        if (Vector3.Distance(transform.position, groundPos) <= 0.01f)
         {
             sunState = SunState.None;
             Invoke(nameof(OnTap), collectionDuration);
@@ -90,7 +90,7 @@ public class Sun : MonoBehaviour
     private void FallingFollowCurved()
     {
         sunState = SunState.None;
-        jumpTween = transform.DOJump(landPos, jumpPower, 1, jumpDuration)
+        jumpTween = transform.DOJump(groundPos, jumpPower, 1, jumpDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() => Invoke(nameof(OnTap), collectionDuration));
     }

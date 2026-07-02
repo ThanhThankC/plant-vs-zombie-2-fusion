@@ -28,7 +28,7 @@ namespace SpineTools.Editor
             ti.alphaSource = TextureImporterAlphaSource.FromInput;
             ti.mipmapEnabled = false;
             ti.textureCompression = TextureImporterCompression.Uncompressed;
-            ti.spriteImportMode = SpriteImportMode.None;
+            ti.spriteImportMode = SpriteImportMode.Multiple;
 
             Debug.Log($"[SpineSetup] ✓ sRGB = true → {assetPath}");
         }

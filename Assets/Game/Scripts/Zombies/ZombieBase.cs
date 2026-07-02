@@ -9,9 +9,12 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieAnimationController))]
 public abstract class ZombieBase : MonoBehaviour
 {
+    [SerializeField] protected CellTracker cellTracker;
+
     public ZombieData Data { get; private set; }
     public ZombieMovement Movement { get; private set; }
     public ZombieEffectController EffectController { get; private set; }
+    public ZombieSpineController SpineController { get; private set; }
     public ZombieAnimationController AnimController { get; private set; }
 
     public int CurrentHP { get; private set; }
@@ -23,6 +26,7 @@ public abstract class ZombieBase : MonoBehaviour
         Movement = GetComponent<ZombieMovement>();
         EffectController = GetComponent<ZombieEffectController>();
         AnimController = GetComponent<ZombieAnimationController>();
+        SpineController = GetComponent<ZombieSpineController>();
     }
 
     public void Init(ZombieData data)
