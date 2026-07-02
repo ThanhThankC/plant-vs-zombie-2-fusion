@@ -1,0 +1,51 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ArmoredHeadZombie : BasicZombie
+{
+    [Header("Armor Skin")]
+    [SerializeField] private string[] armorSkins;
+
+    [Header("Armor Settings")]
+    [SerializeField] private BodyPart armorPartPrefab;
+
+    private int totalSkins;
+    private int currentStageIndex;
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        totalSkins = armorSkins.Length;
+        currentStageIndex = totalSkins - 1;
+        SpineController.SetSkinActive(armorSkins[currentStageIndex], true);
+    }
+
+    public override void TakeDamage(int amount, DamageSource source = DamageSource.Normal)
+    {
+        base.TakeDamage(amount, source);
+        if (ArmorHP <= 0) return;
+
+        int newStageIndex = GetStageIndex();
+        if(currentStageIndex == newStageIndex) return;
+
+        SpineController.SetSkinActive(armorSkins[newStageIndex], true);
+        SpineController.SetSkinActive(armorSkins[currentStageIndex], false);
+        currentStageIndex = newStageIndex;
+    }
+
+    protected override void OnArmorBroken()
+    {
+        SpineController.SetSkinActive(armorSkins[currentStageIndex], false);
+
+        var armorObj = Instantiate(armorPartPrefab, headSpawnPoint.position, Quaternion.identity);
+        armorObj.Init(GetGroundY(), 12, currentStageIndex);
+    }
+
+    private int GetStageIndex()
+    {
+        float ratio = (float)ArmorHP / Data.armorHP;
+        int stage = Mathf.FloorToInt(ratio * totalSkins);
+        return Mathf.Clamp(stage, 0, totalSkins - 1);
+    }
+}

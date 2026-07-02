@@ -14,14 +14,17 @@ public class TimeManager : MonoBehaviour
         normalBtn.onClick.AddListener(NormalSpeed);
     }
 
-    private void SpeedDown() => Time.timeScale = 0.2f;
-    private void NormalSpeed() => Time.timeScale = 1f;
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
             SpeedDown();
         if (Input.GetKeyDown(KeyCode.W))
             NormalSpeed();
+        if (Input.GetKeyDown(KeyCode.W))
+            FlashSpeed();
     }
+
+    private void SpeedDown() => Time.timeScale = 0.2f;
+    private void NormalSpeed() => Time.timeScale = 1f;
+    private void FlashSpeed() => Time.timeScale = 2f;
 }

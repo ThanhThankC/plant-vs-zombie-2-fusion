@@ -45,13 +45,19 @@ public abstract class ZombieBase : MonoBehaviour
 
         if (ArmorHP > 0)
         {
+            int remaining = amount - ArmorHP;
             ArmorHP -= amount;
             if (ArmorHP <= 0)
             {
                 ArmorHP = 0;
                 OnArmorBroken();
+                if (remaining > 0)
+                    amount = remaining;
+                else
+                    return;
             }
-            return;
+            else
+                return;
         }
 
         CurrentHP -= amount;

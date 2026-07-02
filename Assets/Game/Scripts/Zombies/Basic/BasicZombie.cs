@@ -5,7 +5,7 @@ public class BasicZombie : ZombieBase
     [SerializeField] private BodyPart armPartPrefab;
     [SerializeField] private BodyPart headPartPrefab;
     [SerializeField] private Transform armSpawnPoint;
-    [SerializeField] private Transform headSpawnPoint;
+    [SerializeField] protected Transform headSpawnPoint;
 
     private bool armLost;
 
@@ -24,7 +24,7 @@ public class BasicZombie : ZombieBase
     }
 
     protected override void OnDie(DamageSource source)
-    {
+    {   
         base.OnDie(source);
         if (source == DamageSource.Normal)
             LostHead();
@@ -36,7 +36,7 @@ public class BasicZombie : ZombieBase
         SpineController.SetSkinActive(SKIN_ARM_TORN, true);
 
         var armObj = Instantiate(armPartPrefab, armSpawnPoint.position, Quaternion.identity);
-        armObj.Init(getGroundY(), 10);
+        armObj.Init(GetGroundY(), 10);
     }
 
     private void LostHead()
@@ -44,8 +44,8 @@ public class BasicZombie : ZombieBase
         SpineController.SetSkinActive(SKIN_HEAD_PART, false);
 
         var headObj = Instantiate(headPartPrefab, headSpawnPoint.position, Quaternion.identity);
-        headObj.Init(getGroundY(), 11);
+        headObj.Init(GetGroundY(), 11);
     }
 
-    private float getGroundY() => cellTracker.CurrentCell.SupportZone.transform.position.y;
+    protected float GetGroundY() => cellTracker.CurrentCell.SupportZone.transform.position.y;
 }
