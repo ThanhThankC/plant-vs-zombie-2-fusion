@@ -42,7 +42,7 @@ public abstract class PlantBase : MonoBehaviour
         var render = GetComponent<SpriteRenderer>();
         if (render != null) render.sortingOrder = sorttingOder;
         Vector3 pos;
-        float offsetY = fieldType == FieldType.Normal ? 0.2f : -0.2f;
+        float offsetY = fieldType == FieldType.Normal ? 0f : -0.2f;
         pos = transform.position;
         pos.y += offsetY;
         transform.position = pos;
@@ -58,7 +58,7 @@ public abstract class PlantBase : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         CurrentHP -= amount;
-        transform.position += new Vector3(0f, 0.05f, 0f);
+        transform.position += new Vector3(0f, 0.01f, 0f);
         if (CurrentHP <= 0) Die();
     }
 

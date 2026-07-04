@@ -232,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 243
-        y: 1292
+        y: 1293
         width: 91
         height: 75
       alignment: 0
@@ -374,6 +374,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Wallnut
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 941
+        width: 83
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 070bec84561f61c46b12d8c947290ad7
+      internalID: 1601123151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tallnut
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 1112
+        width: 76
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 743794c81932cb749b9fba8f3ad143b6
+      internalID: 982640476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -395,8 +437,10 @@ TextureImporter:
       Seleted_Frame: -1756095485
       Splitpea: 831178527
       Sunflower: -1364172355
+      Tallnut: 982640476
       Twinflower: -1570155005
       VinePea: -2030008682
+      Wallnut: 1601123151
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

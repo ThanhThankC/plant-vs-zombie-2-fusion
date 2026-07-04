@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
 {
-    [SerializeField] private PlantData data;
+    //[SerializeField] private PlantData data;
+    [SerializeField] private PlantType plantType;
     [SerializeField] private Image cardImage;
     [SerializeField] private Image selectedFrame;
 
-    public PlantType PlantType => data.plantType;
+    //public PlantType PlantType => data.plantType;
 
     private PlantManager plantManager;
     private DragController dragController;
@@ -18,7 +19,8 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
         plantManager = PlantManager.Instance;
         dragController = DragController.Instance;
 
-        if (cardImage != null)
+        var data = plantManager.GetPlantData(plantType);
+        if (cardImage != null && data != null)
             cardImage.sprite = data.cardSprite;
 
         dragController.OnDragEnd += Deselect;
@@ -32,7 +34,7 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     public void OnPointerClick(PointerEventData eventData)
     {
         dragController.RefreshTool();
-        plantManager.OnCardClicked(PlantType);
+        plantManager.OnCardClicked(plantType);
         dragController.BeginDrag(ToolType.None);
         Select();
         plantManager.ToggleGhostPlantVisual(false);
@@ -41,7 +43,7 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragController.RefreshTool();
-        plantManager.OnCardClicked(PlantType);
+        plantManager.OnCardClicked(plantType);
         dragController.BeginDrag(ToolType.None);
         Select();
         plantManager.ToggleGhostPlantVisual(true);

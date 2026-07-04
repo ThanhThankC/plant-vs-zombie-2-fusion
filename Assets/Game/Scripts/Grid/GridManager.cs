@@ -6,6 +6,7 @@ public class GridManager : Singleton<GridManager>
 {
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Vector2 cellSize = Vector2.one;
+    [SerializeField] private float houseDistance = 3f;
 
     public const int ZombieSpawnCol = 11;
     public Vector2 CellSize => cellSize;
@@ -79,4 +80,6 @@ public class GridManager : Singleton<GridManager>
         }
         return result;
     }
+
+    public float GetHousePositionX() => GetCell(0, 0).transform.position.x - houseDistance;
 }

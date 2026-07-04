@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Peashooter : PlantBase
 {
-    [SerializeField] private PeaProjectile projectilePrefab;
-    [SerializeField] private Transform attackTransform;
+    [SerializeField] protected PeaProjectile projectilePrefab;
+    [SerializeField] private Transform attackPoint;
     [SerializeField] private int loopCount = 1;
 
     private SkeletonAnimation skeletonAnim;
@@ -86,9 +86,12 @@ public class Peashooter : PlantBase
         pendingAnim = null;
     }
 
-    private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
+    protected virtual void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
-            Instantiate(projectilePrefab, attackTransform.position, Quaternion.identity);
+        {
+            PeaProjectile peaProjectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
+            peaProjectile.Init(Vector3.right);
+        }
     }
 }

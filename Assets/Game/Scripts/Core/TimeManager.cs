@@ -20,7 +20,7 @@ public class TimeManager : MonoBehaviour
             SpeedDown();
         if (Input.GetKeyDown(KeyCode.W))
             NormalSpeed();
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.E))
             FlashSpeed();
     }
 

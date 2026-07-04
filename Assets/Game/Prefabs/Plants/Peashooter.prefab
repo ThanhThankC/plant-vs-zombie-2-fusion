@@ -61,7 +61,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.78, y: 1.31, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2345285706881989377}
@@ -173,5 +173,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 820268684595203259, guid: fef3b8ec0c9b7114095d2815d0666a40, type: 3}
-  attackTransform: {fileID: 2345285706881989377}
+  attackPoint: {fileID: 2345285706881989377}
   loopCount: 1

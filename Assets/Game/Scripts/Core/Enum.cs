@@ -14,6 +14,8 @@ public enum PlantType
     [PlantField(FieldType.Support)] Pumpkin,
     [PlantField(FieldType.Support)] GreenGourd,
     [PlantField(FieldType.Support)] XVine,
+    [PlantField(FieldType.Normal)] Wallnut,
+    [PlantField(FieldType.Normal)] Tallnut,
 }
 
 [AttributeUsage(AttributeTargets.Field)]

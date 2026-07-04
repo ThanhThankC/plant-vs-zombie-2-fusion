@@ -111,4 +111,6 @@ public class PlantManager : Singleton<PlantManager>
         ghostPlant = Instantiate(prefab, transform);
         ghostPlant.SetupAsGhost(cell, plantType.GetFieldType());
     }
+
+    public PlantData GetPlantData(PlantType plantType) => dataLookup[plantType];
 }

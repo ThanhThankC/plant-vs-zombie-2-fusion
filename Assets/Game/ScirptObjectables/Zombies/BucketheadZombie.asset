@@ -15,8 +15,8 @@ MonoBehaviour:
   zombieName: Buckethead Zombie
   zombieID: 1
   zombieType: 2
-  maxHP: 100
-  armorHP: 100
+  maxHP: 300
+  armorHP: 300
   attackDamage: 30
   baseSpeedMultiplier: 1
   immuneToFreeze: 0

@@ -7,9 +7,21 @@ public class PeaProjectile : MonoBehaviour
     [SerializeField] private float speed = 10;
     [SerializeField] private int damage = 20;
 
+    private Vector3 direction = Vector3.right;
+
+    public void Init(Vector3 direction)
+    {
+        this.direction = direction;
+    }
+
     void Update()
     {
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        if (direction == Vector3.left && transform.position.x < GridManager.Instance.GetHousePositionX())
+        {
+            direction = Vector3.right;
+        }
+
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

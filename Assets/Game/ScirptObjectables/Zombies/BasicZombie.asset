@@ -15,8 +15,8 @@ MonoBehaviour:
   zombieName: Basic Zombie
   zombieID: 0
   zombieType: 0
-  maxHP: 100
-  armorHP: 100
+  maxHP: 300
+  armorHP: 0
   attackDamage: 30
   baseSpeedMultiplier: 1
   immuneToFreeze: 0

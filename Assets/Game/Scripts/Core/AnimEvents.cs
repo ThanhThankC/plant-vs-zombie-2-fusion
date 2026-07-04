@@ -8,6 +8,7 @@ public static class AnimEvents
     public const string ANIM_DIE = "die";
 
     public const string EVENT_ATTACK = "on_attack";
+    public const string EVENT_BACK_ATTACK = "on_back_attack";
     public const string EVENT_SPECIAL = "on_special";
     public const string EVENT_MOVE = "move_step";
 
