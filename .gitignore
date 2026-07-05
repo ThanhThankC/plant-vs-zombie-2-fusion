@@ -108,9 +108,9 @@ InitTestScene*.unity*
 # Exclude all SpineAssets
 Assets/SpineAssets/Plants/
 Assets/SpineAssets/Zombies/
+Assets/SpineAssets/Effects/c*
 
 # Whitelist peashooter and zombies templates
-!Assets/SpineAssets/Plants/a1_peashooter/
-!Assets/SpineAssets/Plants/a1_peashooter/**
-!Assets/SpineAssets/Zombies/b1_basiczombie/
-!Assets/SpineAssets/Zombies/b1_basiczombie/**
+!Assets/SpineAssets/Plants/a1_peashooter_export/**
+!Assets/SpineAssets/Zombies/b1_basiczombie_export/**
+!Assets/SpineAssets/Effects/c5_stormfreeze_export
