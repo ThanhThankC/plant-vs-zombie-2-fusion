@@ -1,0 +1,68 @@
+c5_stormfreeze_atlas.png
+size: 739, 210
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+iceburg_161x161
+  rotate: false
+  xy: 2, 2
+  size: 206, 206
+  orig: 206, 206
+  offset: 0, 0
+  index: -1
+iceburg_144x143
+  rotate: false
+  xy: 210, 2
+  size: 185, 183
+  orig: 185, 183
+  offset: 0, 0
+  index: -1
+iceburg_120x120
+  rotate: false
+  xy: 397, 2
+  size: 154, 154
+  orig: 154, 154
+  offset: 0, 0
+  index: -1
+iceburg_108x94
+  rotate: false
+  xy: 553, 2
+  size: 138, 121
+  orig: 138, 121
+  offset: 0, 0
+  index: -1
+iceburg_14x14
+  rotate: false
+  xy: 693, 2
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: -1
+iceburg_5x5
+  rotate: false
+  xy: 713, 2
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: -1
+iceburg_5x5_2
+  rotate: false
+  xy: 722, 2
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: -1
+iceburg_1x1
+  rotate: false
+  xy: 731, 2
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+iceburg_1x1_2
+  rotate: false
+  xy: 735, 2
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1

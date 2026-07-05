@@ -22,6 +22,10 @@ public class PlantData : ScriptableObject
 
     [Header("UI")]
     public Sprite cardSprite;
+
+    [Header("Other Stats")]
+    public int rangeRow;
+    public int explosionDamage;
 }
 
 

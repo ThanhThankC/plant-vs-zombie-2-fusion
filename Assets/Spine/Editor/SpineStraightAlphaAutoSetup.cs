@@ -24,7 +24,7 @@ namespace SpineTools.Editor
 
             TextureImporter ti = (TextureImporter)assetImporter;
             ti.sRGBTexture = true;
-            ti.alphaIsTransparency = false;
+            ti.alphaIsTransparency = true;
             ti.alphaSource = TextureImporterAlphaSource.FromInput;
             ti.mipmapEnabled = false;
             ti.textureCompression = TextureImporterCompression.Uncompressed;
