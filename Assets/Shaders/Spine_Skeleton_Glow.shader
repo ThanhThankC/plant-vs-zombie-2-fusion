@@ -52,12 +52,14 @@ Shader "Custom/Spine_Skeleton_Glow" {
                 #if defined(_STRAIGHT_ALPHA_INPUT)
                 texColor.rgb *= texColor.a;
                 #endif
-                float4 result = texColor * i.vertexColor;
 
                 float luminance = dot(texColor.rgb, float3(0.299, 0.587, 0.114));
                 float glowMask = pow(luminance, _GlowContrast);
+                texColor.rgb += _GlowColor.rgb * _GlowIntensity * texColor.a * glowMask;
 
-                result.rgb += _GlowColor.rgb * _GlowIntensity * texColor.a * glowMask;
+                float4 result;
+                result.rgb = texColor.rgb * i.vertexColor.rgb * i.vertexColor.a;
+                result.a   = texColor.a   * i.vertexColor.a;
                 return result;
             }
             ENDCG
