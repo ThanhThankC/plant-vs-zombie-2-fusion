@@ -78,7 +78,7 @@ public class ZombieManager : Singleton<ZombieManager>
     {
         if (activeZombies.Count == 0) return false;
 
-        foreach (var zombie in activeZombies.ToList())
+        foreach (var zombie in activeZombies)
         {
             if (zombie == null) continue;
             var cellTracker = zombie.GetComponentInChildren<CellTracker>();

@@ -404,7 +404,7 @@ TextureImporter:
         width: 76
         height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -412,6 +412,111 @@ TextureImporter:
       bones: []
       spriteID: 743794c81932cb749b9fba8f3ad143b6
       internalID: 982640476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iceberg
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 1115
+        width: 89
+        height: 83
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d33b21b51546a2a45b7bed11f83dbbaf
+      internalID: 1328780534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CherryBomb
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 1201
+        width: 103
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 678167eb85b3a6447a41a23284b49b6b
+      internalID: -1162440963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceStorm
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 759
+        width: 88
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24240bd65c5fec141b700e79d9f6b641
+      internalID: 1288420135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PotatoMine
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 760
+        width: 98
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97034f012c7f2f4bba36ebc800863fd
+      internalID: 941226673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jalapeno
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1201
+        width: 94
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b87e877a63401094da2a277e3144376e
+      internalID: 1162293691
       vertices: []
       indices: 
       edges: []
@@ -428,10 +533,15 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Card_Background: 1101828405
+      CherryBomb: -1162440963
       Fontground: -1509954271
       GatlingPea: 1872561972
       GourdGreen: 2075844966
+      IceStorm: 1288420135
+      Iceberg: 1328780534
+      Jalapeno: 1162293691
       Peashooter: -817331872
+      PotatoMine: 941226673
       Pumpkin: -1817063263
       Reapeater: -563748630
       Seleted_Frame: -1756095485

@@ -33,7 +33,8 @@ public class FusionDatabase
             { new FusionKey(PlantType.Repeater,   PlantType.Repeater),   PlantType.GatlingPea    },
             { new FusionKey(PlantType.Peashooter, PlantType.Splitpea),   PlantType.GatlingPea    },
             { new FusionKey(PlantType.Pumpkin,    PlantType.Peashooter), PlantType.GreenGourd    },
-            { new FusionKey(PlantType.GreenGourd, PlantType.Peashooter), PlantType.PeaVine       },
+            { new FusionKey(PlantType.Peashooter, PlantType.IceStorm), PlantType.Repeater       },
+            { new FusionKey(PlantType.Peashooter, PlantType.Jalapeno), PlantType.Repeater       },
             { new FusionKey(PlantType.GreenGourd, PlantType.GreenGourd), PlantType.XVine         },
         };
     }

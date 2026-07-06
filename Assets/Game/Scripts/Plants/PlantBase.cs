@@ -62,6 +62,8 @@ public abstract class PlantBase : MonoBehaviour
         if (CurrentHP <= 0) Die();
     }
 
+    public virtual void Activate() { }
+
     protected virtual void Die()
     {
         OccupiedCell?.ClearPlant(OccupiedFieldType);

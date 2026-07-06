@@ -16,6 +16,11 @@ public enum PlantType
     [PlantField(FieldType.Support)] XVine,
     [PlantField(FieldType.Normal)] Wallnut,
     [PlantField(FieldType.Normal)] Tallnut,
+    [PlantField(FieldType.Normal)] Iceberg,
+    [PlantField(FieldType.Normal)] CherryBomb,
+    [PlantField(FieldType.Normal)] IceStorm,
+    [PlantField(FieldType.Normal)] PotatoMine,
+    [PlantField(FieldType.Normal)] Jalapeno,
 }
 
 [AttributeUsage(AttributeTargets.Field)]

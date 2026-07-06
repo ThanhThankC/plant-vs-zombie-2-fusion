@@ -10,6 +10,8 @@ public class GridManager : Singleton<GridManager>
 
     public const int ZombieSpawnCol = 11;
     public Vector2 CellSize => cellSize;
+    public int Col => maxCol;
+    public int Row => maxRow;
 
     private Cell[,] grid = new Cell[maxRow, maxCol];
 

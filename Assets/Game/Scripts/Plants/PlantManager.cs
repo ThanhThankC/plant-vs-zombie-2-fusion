@@ -61,11 +61,19 @@ public class PlantManager : Singleton<PlantManager>
 
         if (ctx.DragSource == DragSource.Cell)
         {
-            if (isFusion) Destroy(ctx.Plant.gameObject);
+            if (isFusion)
+            {
+                PlantActivator.Instance.Activate(ctx.PlantType, cell, 10);
+                Destroy(ctx.Plant.gameObject);
+            }
             ctx.SourceCell.ClearPlant(ctx.SourceFieldType);
         }
 
-        if (isFusion) DestroyPlantAt(cell, result.GetFieldType());
+        if (isFusion)
+        {
+            PlantActivator.Instance.Activate(ctx.PlantType, cell, 10);
+            DestroyPlantAt(cell, result.GetFieldType());
+        }
 
         PlantBase plantToPlace;
         if (!isFusion && ctx.DragSource == DragSource.Cell)

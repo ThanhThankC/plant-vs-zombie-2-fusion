@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,3 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b330f71c5a01f4caf0505c3499bf13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sunPrefab: {fileID: 0}
+  specialTransform: {fileID: 0}
+  loopCount: 3
+  landingOffsetXRange: {x: -1, y: 1}
+  landingOffsetYRange: {x: -1, y: -0.5}

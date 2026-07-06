@@ -47,5 +47,5 @@ public class BasicZombie : ZombieBase
         headObj.Init(GetGroundY(), 11);
     }
 
-    protected float GetGroundY() => cellTracker.CurrentCell.SupportZone.transform.position.y;
+    protected float GetGroundY() => CellTracker.CurrentCell.SupportZone.transform.position.y;
 }
