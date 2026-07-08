@@ -39,7 +39,7 @@ public class ArmoredHeadZombie : BasicZombie
         SpineController.SetSkinActive(armorSkins[currentStageIndex], false);
 
         var armorObj = Instantiate(armorPartPrefab, headSpawnPoint.position, Quaternion.identity);
-        armorObj.Init(GetGroundY(), 12, currentStageIndex);
+        armorObj.Init(GetGroundY(), 12);
     }
 
     private int GetStageIndex()

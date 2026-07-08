@@ -1,19 +1,23 @@
 using Spine;
 using Spine.Unity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieAnimationController : MonoBehaviour
 {
     private SkeletonAnimation skeletonAnim;
+    private ZombieBase zombie;
     private ZombieMovement movement;
+    private ZombieEffectController effect;
     private CellTracker cellTracker;
+    private enum WantToStates { Walk, Attack, But}
+    private WantToStates state = WantToStates.Walk;
 
     private void Awake()
     {
         skeletonAnim = GetComponent<SkeletonAnimation>();
+        zombie = GetComponent<ZombieBase>();
         movement = GetComponent<ZombieMovement>();
+        effect = GetComponent<ZombieEffectController>();
         cellTracker = GetComponentInChildren<CellTracker>();
     }
 
@@ -21,19 +25,41 @@ public class ZombieAnimationController : MonoBehaviour
 
     private void OnDisable() => skeletonAnim.AnimationState.Event -= OnSpineEvent;
 
-    public void RefreshAnimation()
+    public void RefreshState()
     {
+        if (zombie.IsDead) return;
         var currentAnim = skeletonAnim.AnimationState.GetCurrent(0).Animation.Name;
-        if (cellTracker.TargetPlant != null && currentAnim != AnimEvents.ANIM_EAT)
-            PlayEat();
-        else if (cellTracker.TargetPlant == null && currentAnim != AnimEvents.ANIM_WALK)
-            PlayWalk();
+        if (cellTracker.TargetPlant != null)
+            state = WantToStates.Attack;
+        else
+            state = WantToStates.Walk;
+        ApplyPendingState();
+    }
+
+    public void ApplyPendingState()
+    {
+        if (zombie.IsDead || effect.IsStun) return;
+        var currentAnim = skeletonAnim.AnimationState.GetCurrent(0).Animation.Name;
+        switch (state)
+        {
+            case WantToStates.Walk:
+                if (currentAnim != AnimEvents.ANIM_WALK)
+                    PlayWalk();
+                break;
+            case WantToStates.Attack:
+                if (currentAnim != AnimEvents.ANIM_EAT)
+                    PlayAttack();
+                break;
+        }
     }
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
-            OnAttackFrame();
+            zombie.OnAttackAnimFinished(cellTracker.TargetPlant);
+
+        if (e.Data.Name == AnimEvents.EVENT_DIE)
+            zombie.OnDieAnimFinished();
     }
 
     private void SetAnimation(string animName, bool loop)
@@ -45,12 +71,7 @@ public class ZombieAnimationController : MonoBehaviour
             movement.DisallowMove();
     }
 
-    public void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
-    public void PlayEat() => SetAnimation(AnimEvents.ANIM_EAT, true);
+    private void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
+    private void PlayAttack() => SetAnimation(AnimEvents.ANIM_EAT, true);
     public void PlayDie() => SetAnimation(AnimEvents.ANIM_DIE, false);
-
-    private void OnAttackFrame()
-    {
-        cellTracker.TargetPlant?.TakeDamage(10);
-    }
 }

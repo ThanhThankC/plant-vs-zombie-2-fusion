@@ -89,4 +89,32 @@ public class ZombieManager : Singleton<ZombieManager>
         }
         return false;
     }
+
+    public ZombieBase GetNearestZombieInRow(int row, float fromPosX)
+    {
+        if (activeZombies.Count == 0) return null;
+
+        ZombieBase nearestZombie = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (var zombie in activeZombies)
+        {
+            if (zombie == null) continue;
+
+            var cellTracker = zombie.GetComponentInChildren<CellTracker>();
+            if (cellTracker == null) continue;
+
+            if (cellTracker.Row == row && fromPosX <= zombie.transform.position.x)
+            {
+                float distance = zombie.transform.position.x - fromPosX;
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestZombie = zombie;
+                }
+            }
+        }
+
+        return nearestZombie;
+    }
 }

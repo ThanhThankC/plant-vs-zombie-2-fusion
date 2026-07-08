@@ -1,7 +1,5 @@
 using Spine.Unity;
 using Spine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SkeletonAnimation))]
@@ -58,21 +56,22 @@ public class ZombieMovement : MonoBehaviour
     public void OnStun()
     {
         DisallowMove();
-        SetAnimationSpeed(0f);
+        speedMultiplier = 0f;
+        SetAnimationSpeed(speedMultiplier);
     }
 
     public void OnSlow(float multiplier)
     {
         canMove = true;
         speedMultiplier = multiplier;
-        SetAnimationSpeed(multiplier);
+        SetAnimationSpeed(speedMultiplier);
     }
 
     public void ResetSpeed()
     {
         canMove = true;
         speedMultiplier = 1f;
-        SetAnimationSpeed(1f);
+        SetAnimationSpeed(speedMultiplier);
     }
 
     private void SetAnimationSpeed(float speed)

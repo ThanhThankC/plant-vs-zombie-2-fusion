@@ -21,7 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _GlowColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -33,7 +33,7 @@ Material:
     m_Floats:
     - _Cutoff: 0.1
     - _Fill: 0
-    - _GlowContrast: 1
+    - _GlowContrast: 2
     - _GlowIntensity: 0
     - _OutlineMipLevel: 0
     - _OutlineOpaqueAlpha: 1
@@ -47,6 +47,6 @@ Material:
     - _Use8Neighbourhood: 1
     - _UseScreenSpaceOutlineWidth: 0
     m_Colors:
-    - _GlowColor: {r: 0, g: 0.5, b: 1, a: 1}
+    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []

@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Spine.Unity;
 using UnityEngine;
 
 [RequireComponent(typeof(ZombieMovement))]
 [RequireComponent(typeof(ZombieEffectController))]
 [RequireComponent(typeof(ZombieSpineController))]
 [RequireComponent(typeof(ZombieAnimationController))]
+[RequireComponent(typeof(ZombieVisualHandler))]
 public abstract class ZombieBase : MonoBehaviour
 {
     [SerializeField] private CellTracker cellTracker;
@@ -16,6 +14,7 @@ public abstract class ZombieBase : MonoBehaviour
     public ZombieEffectController EffectController { get; private set; }
     public ZombieSpineController SpineController { get; private set; }
     public ZombieAnimationController AnimController { get; private set; }
+    public ZombieVisualHandler VisualHandler { get; private set; }
     public CellTracker CellTracker => cellTracker;
 
     public int CurrentHP { get; private set; }
@@ -28,6 +27,7 @@ public abstract class ZombieBase : MonoBehaviour
         EffectController = GetComponent<ZombieEffectController>();
         AnimController = GetComponent<ZombieAnimationController>();
         SpineController = GetComponent<ZombieSpineController>();
+        VisualHandler = GetComponent<ZombieVisualHandler>();
     }
 
     public void Init(ZombieData data)
@@ -35,6 +35,8 @@ public abstract class ZombieBase : MonoBehaviour
         Data = data;
         CurrentHP = data.maxHP;
         ArmorHP = data.armorHP;
+        VisualHandler.Shadow.SetActive(true);
+        VisualHandler.FreezeEffect.SetActive(false);
         OnInit();
     }
 
@@ -43,6 +45,8 @@ public abstract class ZombieBase : MonoBehaviour
     public virtual void TakeDamage(int amount, DamageSource source = DamageSource.Normal)
     {
         if (IsDead) return;
+
+        VisualHandler.FlashHit();
 
         if (ArmorHP > 0)
         {
@@ -54,11 +58,9 @@ public abstract class ZombieBase : MonoBehaviour
                 OnArmorBroken();
                 if (remaining > 0)
                     amount = remaining;
-                else
-                    return;
+                else return;
             }
-            else
-                return;
+            else return;
         }
 
         CurrentHP -= amount;
@@ -76,19 +78,34 @@ public abstract class ZombieBase : MonoBehaviour
         if (IsDead) return;
         IsDead = true;
         ZombieManager.Instance.OnZombieDied(this);
-        AnimController.PlayDie();
-        OnDie(source);
+        VisualHandler.FreezeEffect.SetActive(false);
+
+        if (source == DamageSource.Normal)
+        {
+            LostHead();
+            VisualHandler.ResetGlowPreset();
+            AnimController.PlayDie();
+        }
+        else if (source == DamageSource.Burn)
+        {
+            Ash();
+            OnDieAnimFinished();
+        }
     }
 
-    protected virtual void OnDie(DamageSource source)
+    protected virtual void LostHead() { }
+
+    protected virtual void Ash() { }
+
+    public void OnAttackAnimFinished(PlantBase targetPlant)
     {
-        Destroy(gameObject,2f);
+        if (targetPlant == null) return;
+        targetPlant.TakeDamage(this, Data.attackDamage);
     }
 
-    public void SetBodyColor()
+    public void OnDieAnimFinished()
     {
-
+        VisualHandler.Shadow.SetActive(false);
+        Destroy(gameObject);
     }
-
-    //public void ApplyFreeze() => EffectController.ApplyEffect(new FreezeEffect());
 }
