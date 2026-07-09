@@ -9,7 +9,7 @@ public class StinkyEffect : ILaneSwitchEffect
 
     public void OnLaneReached(ZombieContext ctx)
     {
-        //ctx.Zombie.EffectController.RemoveEffect(typeof(StinkyEffect));
+        ctx.Zombie.EffectController.RemoveEffect(typeof(StinkyEffect));
     }
 
     public void OnExpire(ZombieContext ctx)

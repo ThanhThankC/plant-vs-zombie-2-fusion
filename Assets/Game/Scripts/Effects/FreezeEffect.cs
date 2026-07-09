@@ -1,16 +1,23 @@
 public class FreezeEffect : IEffect
 {
-    public float Duration => 3f;
+    public float Duration { get; private set; }
+    public float ChillDuration { get; private set; }
+
+    public FreezeEffect(float freezeDuration, float chillDuration)
+    {
+        Duration = freezeDuration;
+        ChillDuration = chillDuration;
+    }
 
     public void OnApply(ZombieContext ctx)
     {
-        //ctx.Zombie.Body.color = ctx.Zombie.IceColor;
-        //ctx.Zombie.IceEffect.SetActive(true);
+        ctx.Zombie.VisualHandler.ApplyGlowPreset(GlowType.Freeze);
+        ctx.Zombie.VisualHandler.FreezeEffect.SetActive(true);
     }
 
     public void OnExpire(ZombieContext ctx)
     {
-        //ctx.Zombie.Body.color = ctx.Zombie.DefaultColor;
-        //ctx.Zombie.IceEffect.SetActive(false);
+        ctx.Zombie.VisualHandler.ResetGlowPreset();
+        ctx.Zombie.VisualHandler.FreezeEffect.SetActive(false);
     }
 }

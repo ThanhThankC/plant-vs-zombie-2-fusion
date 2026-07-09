@@ -1,14 +1,19 @@
 public class ButterEffect : IEffect
 {
-    public float Duration => 4f;
+    public float Duration { get; private set; }
+
+    public ButterEffect(float duration)
+    {
+        Duration = duration;
+    }
 
     public void OnApply(ZombieContext ctx)
     {
-        //ctx.Zombie.ButterEffect.SetActive(true);
+        ctx.Zombie.SpineController.SetSkinActive(AnimEvents.EFFECT_BUTTER, true);
     }
 
     public void OnExpire(ZombieContext ctx)
     {
-        //ctx.Zombie.ButterEffect.SetActive(false);
+        ctx.Zombie.SpineController.SetSkinActive(AnimEvents.EFFECT_BUTTER, false);
     }
 }

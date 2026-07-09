@@ -61,10 +61,10 @@ public static class EffectInteractionTable
 
     public static ExpireResult OnExpired(Dictionary<System.Type, IEffect> current, IEffect expired)
     {
-        if (expired is FreezeEffect)
+        if (expired is FreezeEffect freeze)
         {
             if (!current.ContainsKey(typeof(BurnInstantEffect)))
-                return new ExpireResult { TriggerNext = new ChillEffect() };
+                return new ExpireResult { TriggerNext = new ChillEffect(freeze.ChillDuration) };
         }
 
         return new ExpireResult();

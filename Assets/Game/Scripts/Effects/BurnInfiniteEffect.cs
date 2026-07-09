@@ -4,7 +4,15 @@ public class BurnInfiniteEffect : ITickableEffect
 
     public float FirstTickDelay => 1f;
 
-    public float TickInterval => 2f;
+    public float TickInterval { get; private set; }
+
+    private int damage;
+
+    public BurnInfiniteEffect(int damageDurn, float tickInterval)
+    {
+        damage = damageDurn;
+        TickInterval = tickInterval;
+    }
 
     public void OnApply(ZombieContext ctx)
     {
@@ -12,12 +20,12 @@ public class BurnInfiniteEffect : ITickableEffect
         //burnable.FireVisual.SetActive(true);
         //burnable.OnAmrorDestroyed += OnArmorDestroyed;
         //ctx.Zombie.Body.color = ctx.Zombie.FireColor;
-        ctx.Zombie.SetBodyColor();
+        //ctx.Zombie.SetBodyColor();
     }
 
     public void OnTick(ZombieContext ctx)
     {
-        ctx.Zombie.TakeDamage(5, DamageSource.Burn);
+        ctx.Zombie.TakeDamage(damage, DamageSource.Burn);
     }
 
     public void OnExpire(ZombieContext ctx)
@@ -26,7 +34,7 @@ public class BurnInfiniteEffect : ITickableEffect
         //burnable.FireVisual.SetActive(false);
         //burnable.OnAmrorDestroyed -= OnArmorDestroyed;
         //ctx.Zombie.Body.color = ctx.Zombie.DefaultColor;
-        ctx.Zombie.SetBodyColor();
+        //ctx.Zombie.SetBodyColor();
     }
 
     private void OnArmorDestroyed(ZombieEffectController effectController)

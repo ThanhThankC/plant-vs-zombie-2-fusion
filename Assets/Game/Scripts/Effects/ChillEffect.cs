@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ChillEffect : IEffect
 {
-    public float Duration => 3f;
+    public float Duration { get; private set; }
+
+    public ChillEffect(float duration)
+    {
+        Duration = duration;
+    }
 
     public void OnApply(ZombieContext ctx)
     {
-        //ctx.Zombie.Body.color = ctx.Zombie.IceColor;
+        ctx.Zombie.VisualHandler.ApplyGlowPreset(GlowType.Freeze);
     }
 
     public void OnExpire(ZombieContext ctx)
     {
-        //ctx.Zombie.Body.color = ctx.Zombie.DefaultColor;
+        ctx.Zombie.VisualHandler.ResetGlowPreset();
     }
 }

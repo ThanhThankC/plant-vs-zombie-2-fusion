@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ZombieEffectController : MonoBehaviour
 {
+    public bool IsStun { get; private set; } 
+
+    private const float chillSpeedMultiplier = 0.7f;
+
     private Dictionary<System.Type, Coroutine> activeCoroutines = new();
     private Dictionary<System.Type, Coroutine> activeTickCoroutines = new();
     private Dictionary<System.Type, IEffect> activeEffects = new();
@@ -20,6 +24,7 @@ public class ZombieEffectController : MonoBehaviour
 
     public void ApplyEffect(IEffect newEffect)
     {
+        if (context.Zombie.IsDead) return;
         if (!ResolveInteraction(newEffect)) return;
         if (TryHandleInstant(newEffect)) return;
 
@@ -62,6 +67,7 @@ public class ZombieEffectController : MonoBehaviour
 
     private bool TryHandleInstant(IEffect newEffect)
     {
+        if (newEffect == null) return true;
         if (newEffect.Duration == 0f)
         {
             newEffect.OnApply(context);
@@ -146,10 +152,21 @@ public class ZombieEffectController : MonoBehaviour
         if (activeEffects.ContainsKey(typeof(FreezeEffect)) ||
             activeEffects.ContainsKey(typeof(ButterEffect)) ||
             activeEffects.ContainsKey(typeof(StinkyEffect)))
+        {
+            IsStun = true;
             context.Zombie.Movement.OnStun();
+        }
         else if (activeEffects.ContainsKey(typeof(ChillEffect)))
-            context.Zombie.Movement.OnSlow(0.5f);
+        {
+            IsStun = false;
+            context.Zombie.AnimController.ApplyPendingState();
+            context.Zombie.Movement.OnSlow(chillSpeedMultiplier);
+        }
         else
+        {
+            IsStun = false;
+            context.Zombie.AnimController.ApplyPendingState();
             context.Zombie.Movement.ResetSpeed();
+        }
     }
 }
