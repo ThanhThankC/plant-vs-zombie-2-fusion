@@ -45,10 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8362edd801bec04fa174146b6773b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 564840843, guid: bfa349471f2ee5b4e8fc6ed75738ebb2, type: 3}
-  - {fileID: -924692328, guid: bfa349471f2ee5b4e8fc6ed75738ebb2, type: 3}
-  - {fileID: -286688573, guid: bfa349471f2ee5b4e8fc6ed75738ebb2, type: 3}
+  sprites: []
   fadeDuration: 1.4
   jumpPower1: 1.12
   jumpPower2: 0.44
@@ -100,12 +97,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -286688573, guid: bfa349471f2ee5b4e8fc6ed75738ebb2, type: 3}
+  m_Sprite: {fileID: 564840843, guid: fa03635e11b531940b4847ead0a41dd5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.08, y: 1.13}
+  m_Size: {x: 1.35, y: 1.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

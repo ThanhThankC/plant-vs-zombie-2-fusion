@@ -2,31 +2,25 @@ using Spine;
 using Spine.Unity;
 using UnityEngine;
 
-[System.Serializable]
-public struct DamageStage
-{
-    [Range(0,1)]
-    public float hpThreshold;
-    public string animName;
-}
-
 
 public class PlantNutBase : PlantBase
 {
+    [System.Serializable]
+    private struct DamageStage
+    {
+        [Range(0, 1)]
+        public float hpThreshold;
+        public string animName;
+    }
+
     [Header("DamageState (Descending Order)")]
     [SerializeField] private DamageStage[] damageStages;
 
     [Header("Idle Animations (Alternate)")]
     [SerializeField] private string[] idleAnims;
 
-    private SkeletonAnimation skeletonAnim;
     private int currentStageIndex;
     private int currentIdleIndex;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
 
     private void OnEnable()
     {
@@ -36,7 +30,6 @@ public class PlantNutBase : PlantBase
     private void OnDisable()
     {
         skeletonAnim.AnimationState.Complete -= OnSpineComplete;
-
     }
 
     protected override void OnPlaced()
@@ -48,9 +41,9 @@ public class PlantNutBase : PlantBase
         //PlayAnim(idleAnims[currentIdleIndex]);
     }
 
-    public override void TakeDamage(int amount)
+    public override void TakeDamage(ZombieBase zombie, int amount)
     {
-        base.TakeDamage(amount);
+        base.TakeDamage(zombie, amount);
 
         if (damageStages == null || damageStages.Length <= 0) return;
         if (currentStageIndex >= damageStages.Length) return;

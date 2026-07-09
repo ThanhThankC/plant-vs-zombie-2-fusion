@@ -1,6 +1,7 @@
-using System.Collections;
+using Spine.Unity;
 using UnityEngine;
 
+[RequireComponent(typeof(PlantVisualHandler))]
 public abstract class PlantBase : MonoBehaviour
 {
     public PlantData Data { get; private set; }
@@ -9,21 +10,34 @@ public abstract class PlantBase : MonoBehaviour
     public bool IsActivated { get; private set; }
     public Cell OccupiedCell { get; private set; }
     public FieldType OccupiedFieldType { get; private set; }
+    public bool IsInvincible { get; private set; }
+    public bool CanBeEaten { get; private set; }
     public bool IsGhost { get; private set; }
+    public PlantVisualHandler VisualHandler { get; private set; }
+
+    protected SkeletonAnimation skeletonAnim;
+
+    protected virtual void Awake()
+    {
+        skeletonAnim = GetComponent<SkeletonAnimation>();
+        VisualHandler = GetComponent<PlantVisualHandler>();
+    }
 
     public void Init(PlantData data)
     {
         Data = data;
         CurrentHP = data.maxHP;
+        IsInvincible = data.isInvincible;
+        CanBeEaten = !data.notBeEaten;
     }
 
     public void SetupAsGhost(Cell cell, FieldType fieldType)
     {
         IsGhost = true;
         enabled = false;
-        var render = GetComponent<SpriteRenderer>();
-        if (render != null) render.sortingOrder = 10;
-        SetAlpha(0.5f);
+
+        VisualHandler.SetGhostVisual();
+
         if (cell == null) return;
         transform.position = cell.transform.position;
         transform.position += fieldType == FieldType.Normal 
@@ -35,12 +49,12 @@ public abstract class PlantBase : MonoBehaviour
     {
         IsGhost = false;
         enabled = true;
-        SetAlpha(1f);
+
+        if (cell == null) return;
         OccupiedCell = cell;
         OccupiedFieldType = fieldType;
-        int sorttingOder = fieldType == FieldType.Normal ? 7 : 8;
-        var render = GetComponent<SpriteRenderer>();
-        if (render != null) render.sortingOrder = sorttingOder;
+        VisualHandler.SetRealVisual(Data.plantType, cell.Row);
+
         Vector3 pos;
         float offsetY = fieldType == FieldType.Normal ? 0f : -0.2f;
         pos = transform.position;
@@ -55,22 +69,20 @@ public abstract class PlantBase : MonoBehaviour
     //TODO: Do something when just set down.
     protected virtual void OnPlaced() { }
 
-    public virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(ZombieBase zombie, int amount)
     {
         CurrentHP -= amount;
         transform.position += new Vector3(0f, 0.01f, 0f);
-        if (CurrentHP <= 0) Die();
+        if (CurrentHP <= 0) Die(zombie);
     }
 
     public virtual void Activate() { }
 
-    protected virtual void Die()
+    protected virtual void Die(ZombieBase zombie = null)
     {
         OccupiedCell?.ClearPlant(OccupiedFieldType);
         OccupiedCell = null;
         IsActivated = false;
         Destroy(gameObject);
     }
-
-    protected void SetAlpha(float alpha) { }
 }

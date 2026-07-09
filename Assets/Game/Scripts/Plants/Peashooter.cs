@@ -4,18 +4,15 @@ using UnityEngine;
 
 public class Peashooter : PlantBase
 {
+    [Header("Attack")]
     [SerializeField] protected PeaProjectile projectilePrefab;
     [SerializeField] private Transform attackPoint;
+
+    [Header("Animations")]
     [SerializeField] private int loopCount = 1;
 
-    private SkeletonAnimation skeletonAnim;
     private int currentLoop;
     private string pendingAnim = null;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
 
     private void OnEnable()
     {
@@ -91,7 +88,8 @@ public class Peashooter : PlantBase
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
             PeaProjectile peaProjectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
-            peaProjectile.Init(Vector3.right);
+            var effect = peaProjectile.HasEffect ? Data.CreateOnHitEffect() : null;
+            peaProjectile.Init(Vector3.right, OccupiedCell, effect);
         }
     }
 }

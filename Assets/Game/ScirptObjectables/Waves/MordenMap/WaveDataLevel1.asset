@@ -15,13 +15,13 @@ MonoBehaviour:
   prepareTime: 2
   bigWaves:
   - smallWaves:
-    - spawnCount: 5
+    - spawnCount: 50
       maxWaveDuration: 30
       spawnInterval: 2
       entries:
       - zombieType: 2
         weight: 61
-    - spawnCount: 2
+    - spawnCount: 0
       maxWaveDuration: 16
       spawnInterval: 2
       entries:

@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-
 
 public class PlantManager : Singleton<PlantManager>
 {
@@ -13,7 +11,7 @@ public class PlantManager : Singleton<PlantManager>
         public PlantBase prefab;
     }
 
-    [SerializeField] private List<PlantEntry> plantEntries;
+    [SerializeField] private PlantEntry[] plantEntries;
     public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
 

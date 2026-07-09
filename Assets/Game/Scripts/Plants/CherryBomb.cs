@@ -5,13 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(TargetingHelper))]
 public class CherryBomb : PlantBase
 {
-    private SkeletonAnimation skeletonAnim;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
-
     private void OnEnable()
     {
         skeletonAnim.AnimationState.Event += OnSpineEvent;

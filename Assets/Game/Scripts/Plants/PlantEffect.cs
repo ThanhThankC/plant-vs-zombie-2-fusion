@@ -2,16 +2,15 @@ using Spine;
 using Spine.Unity;
 using UnityEngine;
 
-
 public class PlantEffect : MonoBehaviour
 {
     private SkeletonAnimation skeletonAnim;
-    private Renderer spineRenderer;
+    private MeshRenderer meshRenderer;
 
     private void Awake()
     {
         skeletonAnim = GetComponent<SkeletonAnimation>();
-        spineRenderer = skeletonAnim.GetComponent<Renderer>();
+        meshRenderer = skeletonAnim.GetComponent<MeshRenderer>();
     }
 
     private void OnEnable()
@@ -27,7 +26,7 @@ public class PlantEffect : MonoBehaviour
 
     public void Init(int sortingOrder)
     {
-        spineRenderer.sortingOrder = sortingOrder;
+        meshRenderer.sortingOrder = sortingOrder;
     }
 
     private void OnSpineComplete(TrackEntry trackEntry)

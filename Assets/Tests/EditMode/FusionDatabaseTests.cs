@@ -116,10 +116,10 @@ namespace FusionDatabaseTests
         [TestCase(PlantType.Sunflower, PlantType.Sunflower, PlantType.Pumpkin, PlantType.Twinflower)]
         [TestCase(PlantType.Peashooter, PlantType.Repeater, PlantType.XVine, PlantType.Splitpea)]
         [TestCase(PlantType.Peashooter, PlantType.Peashooter, PlantType.Pumpkin, PlantType.Repeater)]
-        [TestCase(PlantType.Peashooter, PlantType.Twinflower, PlantType.Pumpkin, PlantType.GreenGourd)]
+        [TestCase(PlantType.Peashooter, PlantType.Twinflower, PlantType.Pumpkin, PlantType.PeaVine)]
         [TestCase(PlantType.Sunflower, PlantType.PeaVine, PlantType.Sunflower, PlantType.Twinflower)]
         [TestCase(PlantType.Peashooter, PlantType.XVine, PlantType.Repeater, PlantType.Splitpea)]
-        [TestCase(PlantType.Peashooter, PlantType.Pumpkin, PlantType.Peashooter, PlantType.GreenGourd)]
+        [TestCase(PlantType.Peashooter, PlantType.Pumpkin, PlantType.Peashooter, PlantType.PeaVine)]
         public void HasFull_NormalIncoming_CanFuse_ReturnsFused(PlantType incoming, PlantType? primaryExisting, PlantType? otherExisting, PlantType expected)
         {
             var result = db.GetPlantResult(incoming, primaryExisting, otherExisting);

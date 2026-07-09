@@ -14,6 +14,7 @@ public class ZombieData : ScriptableObject
     public int armorHP;
     public int attackDamage;
     public float baseSpeedMultiplier;
+    public bool isEatAnim;
 
     [Header("Resistances")]
     public bool immuneToFreeze;

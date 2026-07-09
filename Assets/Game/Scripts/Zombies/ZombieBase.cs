@@ -19,6 +19,7 @@ public abstract class ZombieBase : MonoBehaviour
 
     public int CurrentHP { get; private set; }
     public int ArmorHP { get; private set; }
+    public bool IsEatAnim { get; private set; }
     public bool IsDead { get; private set; }
 
     protected virtual void Awake()
@@ -35,9 +36,15 @@ public abstract class ZombieBase : MonoBehaviour
         Data = data;
         CurrentHP = data.maxHP;
         ArmorHP = data.armorHP;
+        IsEatAnim = data.isEatAnim;
         VisualHandler.Shadow.SetActive(true);
         VisualHandler.FreezeEffect.SetActive(false);
         OnInit();
+    }
+
+    public void SetupVisual(Cell cell)
+    {
+        VisualHandler.Init(cell);
     }
 
     protected virtual void OnInit() { }

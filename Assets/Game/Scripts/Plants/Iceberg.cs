@@ -6,13 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Iceberg : PlantBase
 {
-    private SkeletonAnimation skeletonAnim;
     private TargetingHelper targetingHelper;
     private bool isAttacking;
 
-    private void Awake()
+    protected override void Awake()
     {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
+        base.Awake();
         targetingHelper = GetComponent<TargetingHelper>();
     }
 
@@ -50,7 +49,7 @@ public class Iceberg : PlantBase
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
-            AttackFirstZombie();
+            FreezeFirstZombie();
             return;
         }
 
@@ -61,7 +60,7 @@ public class Iceberg : PlantBase
         }
     }
 
-    private void AttackFirstZombie()
+    private void FreezeFirstZombie()
     {
         foreach (var hit in targetingHelper.GetTargetsInBox(transform.position))
         {
@@ -70,7 +69,7 @@ public class Iceberg : PlantBase
             var zombie = hit.GetComponent<ZombieBase>();
             if (zombie == null || zombie.CellTracker.Row != OccupiedCell.Row) continue;
 
-            zombie.TakeDamage(200);
+            zombie.EffectController.ApplyEffect(Data.CreateOnHitEffect());
             return;
         }
     }

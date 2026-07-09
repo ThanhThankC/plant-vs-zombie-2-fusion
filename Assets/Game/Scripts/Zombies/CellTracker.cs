@@ -9,10 +9,12 @@ public class CellTracker : MonoBehaviour
 
     public PlantBase TargetPlant { get; private set; }
 
+    private ZombieBase zombie;
     private ZombieAnimationController animationController;
 
     private void Awake()
     {
+        zombie = GetComponentInParent<ZombieBase>();
         animationController = GetComponentInParent<ZombieAnimationController>();
     }
 
@@ -31,6 +33,8 @@ public class CellTracker : MonoBehaviour
 
             zone.Cell.OnPlantChanged += HandleWithCellHasPlant;
             HandleWithCellHasPlant();
+
+            zombie.SetupVisual(zone.Cell);
         }
     }
 
@@ -50,10 +54,21 @@ public class CellTracker : MonoBehaviour
 
     private void HandleWithCellHasPlant()
     {
-        TargetPlant = PreviousCell?.GetPlantInstance(FieldType.Support)
-                    ?? CurrentCell?.GetPlantInstance(FieldType.Support);
+        TargetPlant = PreviousCell?.GetPlantInstanceForZombie(zombie.IsEatAnim)
+        ?? CurrentCell?.GetPlantInstanceForZombie(zombie.IsEatAnim);
+
+        //if (TargetPlant != null
+        //    && ((TargetPlant.IsGhost || TargetPlant.IsInvincible)
+        //    || (zombie.IsEatAnim && !TargetPlant.CanBeEaten)))
+        //{
+        //    TargetPlant = PreviousCell?.GetPlantInstance(FieldType.Support);
+        //    if (TargetPlant != null
+        //        && ((TargetPlant.IsGhost || TargetPlant.IsInvincible)
+        //        || (zombie.IsEatAnim && !TargetPlant.CanBeEaten)))
+        //    {
+        //        return;
+        //    }
+        //}
         animationController.RefreshState();
     }
-
-    public Cell GetCurrentCell() => GridManager.Instance.GetCell(Row, Col);
 }

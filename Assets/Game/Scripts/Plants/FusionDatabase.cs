@@ -27,15 +27,21 @@ public class FusionDatabase
     {
         recipes = new Dictionary<FusionKey, PlantType>
         {
-            { new FusionKey(PlantType.Sunflower,  PlantType.Sunflower),  PlantType.Twinflower    },
-            { new FusionKey(PlantType.Peashooter, PlantType.Peashooter), PlantType.Repeater      },
-            { new FusionKey(PlantType.Repeater,   PlantType.Peashooter), PlantType.Splitpea      },
-            { new FusionKey(PlantType.Repeater,   PlantType.Repeater),   PlantType.GatlingPea    },
-            { new FusionKey(PlantType.Peashooter, PlantType.Splitpea),   PlantType.GatlingPea    },
-            { new FusionKey(PlantType.Pumpkin,    PlantType.Peashooter), PlantType.GreenGourd    },
-            { new FusionKey(PlantType.Peashooter, PlantType.IceStorm), PlantType.Repeater       },
-            { new FusionKey(PlantType.Peashooter, PlantType.Jalapeno), PlantType.Repeater       },
-            { new FusionKey(PlantType.GreenGourd, PlantType.GreenGourd), PlantType.XVine         },
+            { new FusionKey(PlantType.Peashooter, PlantType.Peashooter), PlantType.Repeater },
+            { new FusionKey(PlantType.Peashooter, PlantType.Repeater), PlantType.Splitpea },
+            { new FusionKey(PlantType.Peashooter, PlantType.IceStorm), PlantType.Snowpea },
+            { new FusionKey(PlantType.Peashooter, PlantType.Jalapeno), PlantType.Fireshooter },
+            { new FusionKey(PlantType.Peashooter, PlantType.BooShroom), PlantType.GooPeashooter },
+            { new FusionKey(PlantType.Sunflower, PlantType.Sunflower), PlantType.Twinflower },
+            { new FusionKey(PlantType.Iceberg, PlantType.Iceberg), PlantType.IceStorm },
+            { new FusionKey(PlantType.Wallnut, PlantType.Wallnut), PlantType.Tallnut },
+            { new FusionKey(PlantType.CherryBomb, PlantType.Wallnut), PlantType.Exonut },
+            { new FusionKey(PlantType.CabbagePult, PlantType.Jalapeno), PlantType.PepperPult },
+            { new FusionKey(PlantType.MelonPult, PlantType.IceStorm), PlantType.WinterMelon },
+            { new FusionKey(PlantType.Pumpkin, PlantType.Peashooter), PlantType.PeaVine },
+
+            //test
+            { new FusionKey(PlantType.GreenGourd, PlantType.GreenGourd), PlantType.XVine },
         };
     }
 

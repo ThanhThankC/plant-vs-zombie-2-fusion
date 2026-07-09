@@ -9,7 +9,10 @@ public static class EffectPlantResolver
         if (data == null) return;
         foreach (var zombie in new List<ZombieBase>(ZombieManager.Instance.ActiveZombies))
             if (zombie != null && zombie.CellTracker.Row == row)
-                zombie.TakeDamage(data.explosionDamage);
+            {
+                zombie.EffectController.ApplyEffect(data.CreateOnHitEffect());
+                zombie.TakeDamage(data.aoeDamage, data.damageSource);  
+            }
     }
 
     public static void DamageRadius(PlantType plantType, Cell cell, TargetingHelper targetingHelper)
@@ -25,7 +28,8 @@ public static class EffectPlantResolver
             int diffRow = Mathf.Abs(zombie.CellTracker.Row - cell.Row);
             if (diffRow > data.rangeRow) continue;
 
-            zombie.TakeDamage(data.explosionDamage);
+            zombie.EffectController.ApplyEffect(data.CreateOnHitEffect());
+            zombie.TakeDamage(data.aoeDamage, data.damageSource);
         }
     }
 
@@ -34,6 +38,6 @@ public static class EffectPlantResolver
         var data = PlantManager.Instance.GetPlantData(plantType);
         if (data == null) return;
         foreach (var zombie in new List<ZombieBase>(ZombieManager.Instance.ActiveZombies))
-            if (zombie != null) zombie.TakeDamage(data.explosionDamage);
+            if (zombie != null) zombie.EffectController.ApplyEffect(data.CreateOnHitEffect());
     }
 }

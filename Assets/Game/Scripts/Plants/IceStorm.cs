@@ -5,13 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class IceStorm : PlantBase
 {
-    private SkeletonAnimation skeletonAnim;
     private bool isAttacking;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
 
     private void OnEnable()
     {

@@ -1,5 +1,4 @@
 using Spine;
-using Spine.Unity;
 using UnityEngine;
 
 public class Sunflower : PlantBase
@@ -10,14 +9,8 @@ public class Sunflower : PlantBase
     [SerializeField] private Vector2 landingOffsetXRange = new Vector2(-1f, 1f);
     [SerializeField] private Vector2 landingOffsetYRange = new Vector2(-1f, -0.5f);
 
-    private SkeletonAnimation skeletonAnim;
     private int currentLoop;
     private string pendingAnim = null;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
 
     private void OnEnable()
     {

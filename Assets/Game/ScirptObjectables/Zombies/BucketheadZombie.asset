@@ -19,6 +19,7 @@ MonoBehaviour:
   armorHP: 300
   attackDamage: 30
   baseSpeedMultiplier: 1
+  isEatAnim: 1
   immuneToFreeze: 0
   weakToElectric: 0
   cardSprite: {fileID: 0}

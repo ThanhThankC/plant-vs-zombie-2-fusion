@@ -42,7 +42,6 @@ public class ZombieSpineController : MonoBehaviour
         ApplySkinIfDirty();
     }
 
-
     private void LateUpdate()
     {
         ApplySkinIfDirty();

@@ -46,13 +46,14 @@ public class ZombieVisualHandler : MonoBehaviour
         glowContrast = 1f
     };
 
-    [SerializeField] private GameObject freezeEffect;
-    [SerializeField] private GameObject shadow;
+    [SerializeField] private SpriteRenderer freezeEffect;
+    [SerializeField] private SpriteRenderer shadow;
 
-    public GameObject FreezeEffect => freezeEffect;
-    public GameObject Shadow => shadow;
+    public GameObject FreezeEffect => freezeEffect.gameObject;
+    public GameObject Shadow => shadow.gameObject;
 
     private SkeletonAnimation skeletonAnim;
+    private MeshRenderer meshRenderer;
     private Material glowMaterial;
 
     private GlowType currentGlow = GlowType.None;
@@ -67,6 +68,8 @@ public class ZombieVisualHandler : MonoBehaviour
     private void Awake()
     {
         skeletonAnim = GetComponent<SkeletonAnimation>();
+        meshRenderer = skeletonAnim.GetComponent<MeshRenderer>();
+        shadow.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Shadow);
     }
 
     private void Update()
@@ -82,6 +85,12 @@ public class ZombieVisualHandler : MonoBehaviour
     private void OnDisable()
     {
         DisposeMaterial();
+    }
+
+    public void Init(Cell cell)
+    {
+        meshRenderer.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Zombie, cell.Row);
+        freezeEffect.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, cell.Row);
     }
 
     private void EnsureGlowMaterial()

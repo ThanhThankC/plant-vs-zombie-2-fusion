@@ -1,7 +1,5 @@
 using UnityEngine;
 
-public enum PlantBehaviorType { Normal, Instant, SemiInstant }
-
 [CreateAssetMenu(fileName = "PlantData", menuName = "PVZF/Plant Data")]
 public class PlantData : ScriptableObject
 {
@@ -16,16 +14,36 @@ public class PlantData : ScriptableObject
     public int sunCost;
     public float firstcooldown;
     public float cooldown;
-
-    [Header("Behavior")]
-    public PlantBehaviorType behaviorType;
+    public bool isInvincible;
 
     [Header("UI")]
     public Sprite cardSprite;
 
+    [Header("Effect Stats")]
+    public EffectHitType effectHitType;
+    public float effectDuration;
+    public float expireEffectDuration;
+    public float effectDieDuration;
+    public int damagePerTick;
+
     [Header("Other Stats")]
+    public DamageSource damageSource;
     public int rangeRow;
-    public int explosionDamage;
+    public int aoeDamage;
+    public bool notBeEaten;
+
+    public IEffect CreateOnHitEffect(bool isOnDie = false)
+    {
+        return effectHitType switch
+        {
+            EffectHitType.Freeze => new FreezeEffect(effectDuration, expireEffectDuration),
+            EffectHitType.Burn => new BurnInstantEffect(),
+            EffectHitType.Chill => new ChillEffect(effectDuration),
+            EffectHitType.Butter => new ButterEffect(effectDuration),
+            EffectHitType.Poison => new PoisonEffect(damagePerTick, !isOnDie ? effectDuration : effectDieDuration),
+            _ => null
+        };
+    }
 }
 
 

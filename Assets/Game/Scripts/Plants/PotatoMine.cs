@@ -1,5 +1,4 @@
 using Spine;
-using Spine.Unity;
 using UnityEngine;
 
 [RequireComponent(typeof(TargetingHelper))]
@@ -8,15 +7,9 @@ public class PotatoMine : PlantBase
 {
     [SerializeField] private int waitingTotal = 500;
 
-    private SkeletonAnimation skeletonAnim;
     private int waitingIndex;
     private bool isRecovered;
     private bool isAttacking;
-
-    private void Awake()
-    {
-        skeletonAnim = GetComponent<SkeletonAnimation>();
-    }
 
     private void OnEnable()
     {
