@@ -52,6 +52,7 @@ public class SunCounterUI : MonoBehaviour
 
         displayValue = targetValue;
         UpdateText();
+        animCoroutine = null;
     }
 
     private int[] SplitIntoParts(int diff, int parts)
