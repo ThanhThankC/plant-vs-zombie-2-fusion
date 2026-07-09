@@ -17,13 +17,20 @@ public class Sun : MonoBehaviour
     [SerializeField] private float collectionDuration = 3f;
     [SerializeField] private float jumpPower = 2f;
     [SerializeField] private float jumpDuration = 1.2f;
+    [SerializeField] private float fadeDuration = 0.3f;
 
     public int Cost => cost;
 
     private SunState sunState = SunState.None;
     private Tween jumpTween;
+    private TweenAnimator tweenAnim;
     private Vector3 groundPos;
     private Vector3 uiPos;
+
+    private void Awake()
+    {
+        tweenAnim = GetComponent<TweenAnimator>();
+    }
 
     public void InitStraight(float groundPosY)
     {
@@ -79,10 +86,10 @@ public class Sun : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, uiPos, collectSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, uiPos) <= 0.01f)
+        if (Vector3.Distance(transform.position, uiPos) <= 0.2f)
         {
             SunManager.Instance.CollectSun(cost);
-            Destroy(gameObject);
+            tweenAnim.FadeOutObject(fadeDuration);
             sunState = SunState.None;
         }
     }

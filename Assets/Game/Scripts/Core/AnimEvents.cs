@@ -2,6 +2,7 @@ public static class AnimEvents
 {
     public const string ANIM_IDLE = "idle";
     public const string ANIM_PLANT_IDLE = "plant_idle";
+    public const string ANIM_ANIMATION = "animation";
     public const string ANIM_RECOVER = "recover";
     public const string ANIM_WALK = "walk";
     public const string ANIM_EAT = "eat";
@@ -17,4 +18,7 @@ public static class AnimEvents
 
     public const string SKIN_HEAD = "head";
     public const string SKIN_ARM = "arm_full";
+
+    public const string EFFECT_BUTTER = "butter";
+    public const string EFFECT_POISON = "poison";
 }

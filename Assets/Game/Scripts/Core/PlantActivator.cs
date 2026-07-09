@@ -43,37 +43,37 @@ public class PlantActivator : Singleton<PlantActivator>
         {
             case PlantType.CherryBomb:
                 EffectPlantResolver.DamageRadius(plantType, cell, entry.targetingHelper);
-                SpawnAt(effectLookup[EffectPlantType.CherryTop], cell, sortingOrder);
-                SpawnAt(effectLookup[EffectPlantType.CherryRear], cell, sortingOrder - 10);
+                SpawnAt(effectLookup[EffectPlantType.CherryTop], cell, LayerType.TopPlantEffect);
+                SpawnAt(effectLookup[EffectPlantType.CherryRear], cell, LayerType.RearPlantEffect);
                 break;
             case PlantType.Jalapeno:
                 EffectPlantResolver.DamageRow(plantType, cell.Row);
-                SpawnAtRow(effectLookup[EffectPlantType.Jalapeno], cell, sortingOrder);
+                SpawnAtRow(effectLookup[EffectPlantType.Jalapeno], cell, LayerType.TopPlantEffect);
                 break;
             case PlantType.PotatoMine:
                 EffectPlantResolver.DamageRadius(plantType, cell, entry.targetingHelper);
-                SpawnAt(effectLookup[EffectPlantType.Potato],cell, sortingOrder);
+                SpawnAt(effectLookup[EffectPlantType.Potato],cell, LayerType.TopPlantEffect);
                 break;
             case PlantType.IceStorm:
                 EffectPlantResolver.FreezeAll(plantType);
-                SpawnAt(effectLookup[EffectPlantType.Storm],cell, sortingOrder);
+                SpawnAt(effectLookup[EffectPlantType.Storm],cell, LayerType.TopPlantEffect);
                 break;
         }
     }
 
-    private void SpawnAt(EffectEntry entry, Cell cell, int sortingOrder)
+    private void SpawnAt(EffectEntry entry, Cell cell, LayerType layerType)
     {
         var effect = Instantiate(entry.prefab, cell.transform.position + entry.spawnOffset , Quaternion.identity);
-        effect.Init(sortingOrder);
+        effect.Init(SortingOrderUtility.GetSortingOrder(layerType, cell.Row));
     }
 
-    private void SpawnAtRow(EffectEntry entry, Cell cell, int sortingOrder)
+    private void SpawnAtRow(EffectEntry entry, Cell cell, LayerType layer)
     {
         for (int col = 0; col < GridManager.Instance.Col; col++)
         {
             var cellSpawn = GridManager.Instance.GetCell(cell.Row, col);
             if (cellSpawn == null) continue;
-            SpawnAt(entry, cellSpawn, sortingOrder);
+            SpawnAt(entry, cellSpawn, layer);
         }
     }
 }
