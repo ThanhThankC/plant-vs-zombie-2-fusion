@@ -72,6 +72,24 @@ public class Cell : MonoBehaviour
             ? NormalPlantInstance ?? SupportPlantInstance 
             : SupportPlantInstance ?? NormalPlantInstance;
 
+    public PlantBase GetPlantInstanceForZombie(bool isEatAnim)
+    {
+        if (SupportPlantInstance != null
+            && ((!SupportPlantInstance.IsGhost && !SupportPlantInstance.IsInvincible)
+            && (!isEatAnim || SupportPlantInstance.CanBeEaten)))
+        {
+            return SupportPlantInstance;
+        }
+
+        if (NormalPlantInstance != null
+            && ((!NormalPlantInstance.IsGhost && !NormalPlantInstance.IsInvincible)
+            && (!isEatAnim || NormalPlantInstance.CanBeEaten)))
+        {
+            return NormalPlantInstance;
+        }
+        return null;
+    }
+
     public void ToggleHighlight(bool show)
     {
         if (highlightRenderer != null)
