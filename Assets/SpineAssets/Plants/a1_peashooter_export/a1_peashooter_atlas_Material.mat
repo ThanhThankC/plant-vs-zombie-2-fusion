@@ -33,7 +33,7 @@ Material:
     m_Floats:
     - _Cutoff: 0.1
     - _Fill: 0
-    - _GlowContrast: 1
+    - _GlowContrast: 2
     - _GlowIntensity: 0
     - _OutlineMipLevel: 0
     - _OutlineOpaqueAlpha: 1

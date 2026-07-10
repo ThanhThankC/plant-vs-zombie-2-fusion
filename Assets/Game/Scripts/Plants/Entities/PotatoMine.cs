@@ -66,7 +66,7 @@ public class PotatoMine : PlantBase
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
-            PlantActivator.Instance.Activate(PlantType, OccupiedCell, 10);
+            PlantActivator.Instance.Activate(PlantType, OccupiedCell);
             return;
         }
 

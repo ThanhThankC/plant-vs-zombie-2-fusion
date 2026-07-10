@@ -5,7 +5,7 @@ using UnityEngine;
 public class Peashooter : PlantBase
 {
     [Header("Attack")]
-    [SerializeField] protected PeaProjectile projectilePrefab;
+    [SerializeField] protected PoolKey projectileKey;
     [SerializeField] private Transform attackPoint;
 
     [Header("Animations")]
@@ -87,9 +87,9 @@ public class Peashooter : PlantBase
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
-            PeaProjectile peaProjectile = Instantiate(projectilePrefab, attackPoint.position, Quaternion.identity);
-            var effect = peaProjectile.HasEffect ? Data.CreateOnHitEffect() : null;
-            peaProjectile.Init(Vector3.right, OccupiedCell, effect);
+            var pea = PoolManager.Instance.Get<PeaProjectile>(projectileKey, attackPoint.position, Quaternion.identity);
+            var effect = pea.HasEffect ? Data.CreateOnHitEffect() : null;
+            pea.Init(Vector3.right, OccupiedCell, effect);
         }
     }
 }

@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 5475030053376881189}
   - component: {fileID: 365026190718619105}
   - component: {fileID: 9016403761708005928}
-  - component: {fileID: 5449792658117808476}
   - component: {fileID: 2803291550839745694}
   - component: {fileID: 7397163923481975445}
+  - component: {fileID: 5449792658117808476}
   m_Layer: 0
   m_Name: a1_Peashooter
   m_TagString: Untagged
@@ -203,6 +203,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2803291550839745694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549291119671307692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 200
+  projectileKey: 0
+  attackPoint: {fileID: 290545965248527750}
+  loopCount: 1
+--- !u!114 &7397163923481975445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8549291119671307692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5449792658117808476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,30 +274,3 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &2803291550839745694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8549291119671307692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 820268684595203259, guid: fef3b8ec0c9b7114095d2815d0666a40, type: 3}
-  attackPoint: {fileID: 290545965248527750}
-  loopCount: 1
---- !u!114 &7397163923481975445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8549291119671307692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

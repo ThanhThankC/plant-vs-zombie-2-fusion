@@ -126,11 +126,11 @@ GameObject:
   - component: {fileID: 349995163783545363}
   - component: {fileID: 5930462839371311366}
   - component: {fileID: 5841328025379810312}
-  - component: {fileID: 5395004309038714385}
+  - component: {fileID: 8422547326180627514}
   - component: {fileID: 2032891738909711270}
   - component: {fileID: 3555510186988335440}
-  - component: {fileID: 8422547326180627514}
   - component: {fileID: 1367301487428875991}
+  - component: {fileID: 5395004309038714385}
   m_Layer: 0
   m_Name: a11_Potatomine
   m_TagString: Untagged
@@ -205,7 +205,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5395004309038714385
+--- !u!114 &8422547326180627514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,40 +214,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9101158643948695336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b941fb7ee33106439fde62aa95c63bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 89fdc2cb83c90c34a9b4885c42187589, type: 2}
-  initialSkinName: 
-  fixPrefabOverrideViaMeshFilter: 2
-  initialFlipX: 0
-  initialFlipY: 0
-  updateWhenInvisible: 3
-  separatorSlotNames: []
-  zSpacing: 0
-  useClipping: 1
-  immutableTriangles: 0
-  pmaVertexColors: 0
-  clearStateOnDisable: 0
-  tintBlack: 0
-  singleSubmesh: 0
-  fixDrawOrder: 0
-  addNormals: 0
-  calculateTangents: 0
-  maskInteraction: 0
-  maskMaterials:
-    materialsMaskDisabled: []
-    materialsInsideMask: []
-    materialsOutsideMask: []
-  disableRenderingOnOverride: 1
-  physicsPositionInheritanceFactor: {x: 1, y: 1}
-  physicsRotationInheritanceFactor: 1
-  physicsMovementRelativeTo: {fileID: 0}
-  updateTiming: 1
-  unscaledTime: 0
-  _animationName: idle
-  loop: 1
-  timeScale: 1
+  plantKey: 210
+  waitingTotal: 100
 --- !u!114 &2032891738909711270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,19 +282,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.265271, y: 0.7601073}
   m_EdgeRadius: 0
---- !u!114 &8422547326180627514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9101158643948695336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b941fb7ee33106439fde62aa95c63bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waitingTotal: 100
 --- !u!114 &1367301487428875991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,3 +294,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5395004309038714385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101158643948695336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonDataAsset: {fileID: 11400000, guid: 89fdc2cb83c90c34a9b4885c42187589, type: 2}
+  initialSkinName: 
+  fixPrefabOverrideViaMeshFilter: 2
+  initialFlipX: 0
+  initialFlipY: 0
+  updateWhenInvisible: 3
+  separatorSlotNames: []
+  zSpacing: 0
+  useClipping: 1
+  immutableTriangles: 0
+  pmaVertexColors: 0
+  clearStateOnDisable: 0
+  tintBlack: 0
+  singleSubmesh: 0
+  fixDrawOrder: 0
+  addNormals: 0
+  calculateTangents: 0
+  maskInteraction: 0
+  maskMaterials:
+    materialsMaskDisabled: []
+    materialsInsideMask: []
+    materialsOutsideMask: []
+  disableRenderingOnOverride: 1
+  physicsPositionInheritanceFactor: {x: 1, y: 1}
+  physicsRotationInheritanceFactor: 1
+  physicsMovementRelativeTo: {fileID: 0}
+  updateTiming: 1
+  unscaledTime: 0
+  _animationName: idle
+  loop: 1
+  timeScale: 1

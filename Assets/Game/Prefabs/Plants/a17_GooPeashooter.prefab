@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6120374027562329303}
   - component: {fileID: 9192494986113038390}
   - component: {fileID: 5614241353549088821}
-  - component: {fileID: 1445167123006966632}
   - component: {fileID: 3298528005151686330}
   - component: {fileID: 4864017399001426283}
+  - component: {fileID: 1445167123006966632}
   m_Layer: 0
   m_Name: a17_GooPeashooter
   m_TagString: Untagged
@@ -89,6 +89,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3298528005151686330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219042445923738250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c99d7ea823cda50469488513dce636d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 216
+  projectileKey: 3
+  attackPoint: {fileID: 7995820881884938682}
+  loopCount: 1
+  booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
+  booPoint: {fileID: 991785067007428565}
+--- !u!114 &4864017399001426283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2219042445923738250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1445167123006966632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,35 +162,6 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &3298528005151686330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219042445923738250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c99d7ea823cda50469488513dce636d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 4659392149812908964, guid: 900550568daf49a449c28061473df9ff, type: 3}
-  attackPoint: {fileID: 7995820881884938682}
-  loopCount: 1
-  booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
-  booPoint: {fileID: 991785067007428565}
---- !u!114 &4864017399001426283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2219042445923738250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2584993628916419866
 GameObject:
   m_ObjectHideFlags: 0

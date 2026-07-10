@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 5843527886407436132}
   - component: {fileID: 1300139897109145262}
   - component: {fileID: 542587961152590803}
-  - component: {fileID: 8148317090553765410}
   - component: {fileID: 7065965311501971040}
   - component: {fileID: 2662183762503960606}
+  - component: {fileID: 8148317090553765410}
   m_Layer: 0
   m_Name: a15_FirePeashooter
   m_TagString: Untagged
@@ -203,6 +203,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7065965311501971040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640051228433366600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 214
+  projectileKey: 2
+  attackPoint: {fileID: 4129012451179322577}
+  loopCount: 1
+--- !u!114 &2662183762503960606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3640051228433366600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8148317090553765410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,30 +274,3 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &7065965311501971040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3640051228433366600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5627258024964323845, guid: 73173cc14da3cc643b60eccefcce1adb, type: 3}
-  attackPoint: {fileID: 4129012451179322577}
-  loopCount: 1
---- !u!114 &2662183762503960606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3640051228433366600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

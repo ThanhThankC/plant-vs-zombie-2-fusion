@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6079877194526661885}
   - component: {fileID: 3895493405306298018}
   - component: {fileID: 4367563028521350517}
-  - component: {fileID: 7743122344142722813}
   - component: {fileID: 2187221892724900698}
   - component: {fileID: 3435302975240972156}
+  - component: {fileID: 7743122344142722813}
   m_Layer: 0
   m_Name: a7_Splitpea
   m_TagString: Untagged
@@ -89,6 +89,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2187221892724900698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016813947322729372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66ef5d29d12fdac4daff1f568863e805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 206
+  projectileKey: 0
+  attackPoint: {fileID: 5366852095218697026}
+  loopCount: 1
+  backAtkPoint: {fileID: 4836829779946380412}
+--- !u!114 &3435302975240972156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5016813947322729372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7743122344142722813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,34 +161,6 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &2187221892724900698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5016813947322729372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66ef5d29d12fdac4daff1f568863e805, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 820268684595203259, guid: fef3b8ec0c9b7114095d2815d0666a40, type: 3}
-  attackPoint: {fileID: 5366852095218697026}
-  loopCount: 1
-  backAtkPoint: {fileID: 4836829779946380412}
---- !u!114 &3435302975240972156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5016813947322729372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5418245883290159752
 GameObject:
   m_ObjectHideFlags: 0

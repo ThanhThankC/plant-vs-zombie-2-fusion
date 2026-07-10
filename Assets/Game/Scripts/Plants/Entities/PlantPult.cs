@@ -7,7 +7,7 @@ public class PlantPult : PlantBase
     [System.Serializable]
     private struct ProjectileEntry
     {
-        public PultProjectile projectilePrefab;
+        public PoolKey projectileKey;
         [Range(0, 100)] public float rate;
         public string animationAttack;
     }
@@ -19,7 +19,7 @@ public class PlantPult : PlantBase
     [Header("Animations")]
     [SerializeField] private int loopCount = 1;
 
-    private PultProjectile currentProjectile;
+    private PoolKey spawnKey;
     private int currentLoop;
     private string pendingAnim = null;
 
@@ -38,7 +38,7 @@ public class PlantPult : PlantBase
     protected override void OnPlaced()
     {
         if (projectileEntries.Length > 0) 
-            currentProjectile = projectileEntries[0].projectilePrefab;
+            spawnKey = projectileEntries[0].projectileKey;
         currentLoop = loopCount;
         PlayIdle();
     }
@@ -108,11 +108,11 @@ public class PlantPult : PlantBase
 
     private void SpawnProjectile()
     {
-        if (projectileEntries.Length <= 0 || currentProjectile == null) return;
+        if (projectileEntries.Length <= 0) return;
 
-        var pultProjectile = Instantiate(currentProjectile, attackPoint.position, Quaternion.identity);
-        var effect = pultProjectile.HasEffect ? Data.CreateOnHitEffect() : null;
-        pultProjectile.Init(GetTargetPosition(), OccupiedCell, effect);
+        var pult = PoolManager.Instance.Get<PultProjectile>(spawnKey, attackPoint.position, Quaternion.identity);
+        var effect = pult.HasEffect ? Data.CreateOnHitEffect() : null;
+        pult.Init(GetTargetPosition(), OccupiedCell, effect);
     }
 
     private string PickAnimation(ProjectileEntry[] projectileEntries)
@@ -128,7 +128,7 @@ public class PlantPult : PlantBase
             cumulative += p.rate;
             if (roll < cumulative)
             {
-                currentProjectile = p.projectilePrefab;
+                spawnKey = p.projectileKey;
                 return p.animationAttack;
             }
         }

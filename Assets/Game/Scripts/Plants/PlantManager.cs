@@ -8,14 +8,14 @@ public class PlantManager : Singleton<PlantManager>
     private struct PlantEntry
     {
         public PlantData data;
-        public PlantBase prefab;
+        public PoolKey plantKey;
     }
 
     [SerializeField] private PlantEntry[] plantEntries;
     public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
 
-    private Dictionary<PlantType, PlantBase> prefabLookup = new();
+    private Dictionary<PlantType, PoolKey> plantKeyLookup = new();
     private Dictionary<PlantType, PlantData> dataLookup = new();
     private DragContext dragContext;
     private PlantBase ghostPlant;
@@ -25,7 +25,7 @@ public class PlantManager : Singleton<PlantManager>
         base.Awake();
         foreach (var entry in plantEntries)
         {
-            prefabLookup[entry.data.plantType] = entry.prefab;
+            plantKeyLookup[entry.data.plantType] = entry.plantKey;
             dataLookup[entry.data.plantType] = entry.data;
         }
     }
@@ -61,15 +61,15 @@ public class PlantManager : Singleton<PlantManager>
         {
             if (isFusion)
             {
-                PlantActivator.Instance.Activate(ctx.PlantType, cell, 10);
-                Destroy(ctx.Plant.gameObject);
+                PlantActivator.Instance.Activate(ctx.PlantType, cell);
+                PoolManager.Instance.Release(ctx.Plant.PlantKey, ctx.Plant);
             }
             ctx.SourceCell.ClearPlant(ctx.SourceFieldType);
         }
 
         if (isFusion)
         {
-            PlantActivator.Instance.Activate(ctx.PlantType, cell, 10);
+            PlantActivator.Instance.Activate(ctx.PlantType, cell);
             DestroyPlantAt(cell, result.GetFieldType());
         }
 
@@ -80,7 +80,8 @@ public class PlantManager : Singleton<PlantManager>
         }
         else
         {
-            plantToPlace = Instantiate(prefabLookup[result]);
+            if (!plantKeyLookup.TryGetValue(result, out var key)) return;
+            plantToPlace = PoolManager.Instance.Get<PlantBase>(key, transform.position, Quaternion.identity);
             plantToPlace.Init(dataLookup[result]);
         }
 
@@ -93,7 +94,7 @@ public class PlantManager : Singleton<PlantManager>
 
     public void EndDrag()
     {
-        if (ghostPlant != null) { Destroy(ghostPlant.gameObject); ghostPlant = null; }
+        if (ghostPlant != null) { PoolManager.Instance.Release(ghostPlant.PlantKey, ghostPlant); ghostPlant = null; }
         dragContext = null;
     }
 
@@ -102,7 +103,7 @@ public class PlantManager : Singleton<PlantManager>
     public void DestroyPlantAt(Cell cell, FieldType fieldType)
     {
         var oldPlant = cell.GetPlantInstance(fieldType);
-        Destroy(oldPlant.gameObject);
+        PoolManager.Instance.Release(oldPlant.PlantKey, oldPlant);
         cell.ClearPlant(fieldType);
     }
 
@@ -113,8 +114,8 @@ public class PlantManager : Singleton<PlantManager>
 
     private void SpawnGhost(PlantType plantType, Cell cell = null)
     {
-        if (!prefabLookup.TryGetValue(plantType, out var prefab)) return;
-        ghostPlant = Instantiate(prefab, transform);
+        if (!plantKeyLookup.TryGetValue(plantType, out var key)) return;
+        ghostPlant = PoolManager.Instance.Get<PlantBase>(key, transform.position, Quaternion.identity);
         ghostPlant.SetupAsGhost(cell, plantType.GetFieldType());
     }
 

@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 5114098533407569699}
   - component: {fileID: 6790592523048610759}
   - component: {fileID: 8046005436054316585}
-  - component: {fileID: 3626922728025152735}
   - component: {fileID: 1805925719144026809}
   - component: {fileID: 8865834491754687905}
+  - component: {fileID: 3626922728025152735}
   m_Layer: 0
   m_Name: a28_PeaVine
   m_TagString: Untagged
@@ -171,6 +171,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1805925719144026809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989631682693611197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a569afe52356a49be93de7f5809b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 227
+--- !u!114 &8865834491754687905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6989631682693611197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3626922728025152735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,27 +239,3 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &1805925719144026809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989631682693611197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a569afe52356a49be93de7f5809b38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8865834491754687905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989631682693611197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -22,7 +22,7 @@ public class Jalapeno : PlantBase
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
-            PlantActivator.Instance.Activate(PlantType, OccupiedCell, 15);
+            PlantActivator.Instance.Activate(PlantType, OccupiedCell);
             return;
         }
 

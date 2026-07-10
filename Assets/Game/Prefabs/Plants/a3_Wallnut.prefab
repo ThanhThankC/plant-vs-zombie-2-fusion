@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 701418044576913686}
   - component: {fileID: 3754830597160995811}
   - component: {fileID: 7574570733651653935}
-  - component: {fileID: 4297918513532436761}
   - component: {fileID: 8905836517563054192}
   - component: {fileID: 7970804652557061585}
+  - component: {fileID: 4297918513532436761}
   m_Layer: 0
   m_Name: a3_Wallnut
   m_TagString: Untagged
@@ -171,6 +171,41 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 12
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8905836517563054192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566871054805970751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3be41dcd0f882b409d68ffc73445e90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 202
+  damageStages:
+  - hpThreshold: 0.75
+    animName: damage
+  - hpThreshold: 0.5
+    animName: damage2
+  - hpThreshold: 0.25
+    animName: damage3
+  idleAnims:
+  - idle
+  - idle2
+--- !u!114 &7970804652557061585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566871054805970751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4297918513532436761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,37 +249,3 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &8905836517563054192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7566871054805970751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3be41dcd0f882b409d68ffc73445e90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageStages:
-  - hpThreshold: 0.75
-    animName: damage
-  - hpThreshold: 0.5
-    animName: damage2
-  - hpThreshold: 0.25
-    animName: damage3
-  idleAnims:
-  - idle
-  - idle2
---- !u!114 &7970804652557061585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7566871054805970751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

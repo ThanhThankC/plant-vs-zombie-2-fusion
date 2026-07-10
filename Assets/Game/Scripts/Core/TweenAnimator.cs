@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class TweenAnimator : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class TweenAnimator : MonoBehaviour
                 ScaleObject(e);
     }
 
-    public void FadeOutObject(float fadeDuration)
+    public void FadeOutObject(float fadeDuration, Action onComplete = null)
     {
         if (fadeRenderer == null || fadeRenderer.Length == 0) return;
 
@@ -70,11 +71,18 @@ public class TweenAnimator : MonoBehaviour
             seq.Join(t); 
         }
 
-        seq.OnComplete(() =>
+        seq.OnComplete(() => onComplete?.Invoke());
+    }
+
+    public void ResetAlpha()
+    {
+        if (fadeRenderer == null || fadeRenderer.Length == 0) return;
+        foreach (var render in fadeRenderer)
         {
-            if (this != null && gameObject != null)
-                Destroy(gameObject);
-        });
+            if (render == null) continue;
+            Color c = render.color;
+            render.color = new Color(c.r, c.g, c.b, 1f);
+        }
     }
 
     private void RotateObject(RotationEntry e)

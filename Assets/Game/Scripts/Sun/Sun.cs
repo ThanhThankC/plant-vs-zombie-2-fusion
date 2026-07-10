@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class Sun : MonoBehaviour
+public class Sun : MonoBehaviour, IPoolable
 {
     private enum SunState
     {
@@ -11,6 +11,7 @@ public class Sun : MonoBehaviour
         CurvedFall,
     }
 
+    [SerializeField] private PoolKey sunKey;
     [SerializeField] private int cost = 25;
     [SerializeField] private float fallSpeed = 3f;
     [SerializeField] private float collectSpeed = 10f;
@@ -26,6 +27,7 @@ public class Sun : MonoBehaviour
     private TweenAnimator tweenAnim;
     private Vector3 groundPos;
     private Vector3 uiPos;
+    private bool isReturned;
 
     private void Awake()
     {
@@ -89,7 +91,7 @@ public class Sun : MonoBehaviour
         if (Vector3.Distance(transform.position, uiPos) <= 0.2f)
         {
             SunManager.Instance.CollectSun(cost);
-            tweenAnim.FadeOutObject(fadeDuration);
+            tweenAnim.FadeOutObject(fadeDuration, () => ReturnPool());
             sunState = SunState.None;
         }
     }
@@ -100,5 +102,28 @@ public class Sun : MonoBehaviour
         jumpTween = transform.DOJump(groundPos, jumpPower, 1, jumpDuration)
             .SetEase(Ease.Linear)
             .OnComplete(() => Invoke(nameof(OnTap), collectionDuration));
+    }
+
+    public void OnSpawn()
+    {
+        isReturned = false;
+        sunState = SunState.None;
+        jumpTween?.Kill();
+        CancelInvoke();
+    }
+
+    public void OnDespawn()
+    {
+        tweenAnim.ResetAlpha();
+        jumpTween?.Kill();
+        CancelInvoke();
+    }
+
+    private void ReturnPool()
+    {
+        if (isReturned) return;
+        isReturned = true;
+
+        PoolManager.Instance.Release(sunKey, this);
     }
 }

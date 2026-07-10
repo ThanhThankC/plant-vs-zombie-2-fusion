@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class ProjectileBase : MonoBehaviour
+public abstract class ProjectileBase : MonoBehaviour, IPoolable
 {
     [System.Serializable]
     private struct SpriteEntry
@@ -11,19 +11,21 @@ public abstract class ProjectileBase : MonoBehaviour
 
     [Header("References")]
     [SerializeField] protected ProjectileData data;
+    [SerializeField] private PoolKey projectileKey;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private SpriteEntry[] sprites;
 
     [Header("Splat")]
-    [SerializeField] private SplatProjectile splatPrefab;
+    [SerializeField] private PoolKey splatKey;
     [SerializeField] private Vector3 spawnOffset;
 
     public bool HasEffect { get; private set; }
 
-    private bool isSpineRender;
-    private GameObject shadow;
     protected IEffect onHitEffect;
     protected Cell spawnCell;
+    private GameObject shadow;
+    private bool isSpineRender;
+    protected bool isReturned;
 
     private const float shadowOffsetY = -0.4f;
 
@@ -36,8 +38,12 @@ public abstract class ProjectileBase : MonoBehaviour
         shadow.GetComponent<SpriteRenderer>().sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Shadow);
     }
 
+    public virtual void OnSpawn() => isReturned = false;
+
     public virtual void Init(Vector3 direction, Cell cell, IEffect effect = null)
     {
+        if (effect != null)
+            HasEffect = true;
         onHitEffect = effect;
         spawnCell = cell;
         InitRenderer(cell.Row);
@@ -66,11 +72,21 @@ public abstract class ProjectileBase : MonoBehaviour
         shadow.transform.position = new Vector3(transform.position.x, groundPosY, 0f);
         shadow.transform.rotation = Quaternion.identity;
     }
+    public virtual void OnDespawn() => spawnCell = null;
 
-    protected void OnImpact()
+    protected void ReturnPool()
     {
-        if (splatPrefab == null) return;
-        var splat = Instantiate(splatPrefab, transform.position + spawnOffset, Quaternion.identity);
+        if (isReturned) return;
+        isReturned = true;
+
+        OnImpact();
+        PoolManager.Instance.Release(projectileKey, this);
+    }
+
+    private void OnImpact()
+    {
+        var splat = PoolManager.Instance.Get<SplatProjectile>(splatKey, transform.position + spawnOffset, Quaternion.identity);
         splat.Init(SortingOrderUtility.GetSortingOrder(LayerType.Splat, spawnCell.Row));
     }
+
 }

@@ -71,7 +71,12 @@ public class ZombieAnimationController : MonoBehaviour
             movement.DisallowMove();
     }
 
-    private void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
+    public void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
     private void PlayAttack() => SetAnimation(AnimEvents.ANIM_EAT, true);
     public void PlayDie() => SetAnimation(AnimEvents.ANIM_DIE, false);
+
+    public void ResetAll()
+    {
+        state = WantToStates.Walk;
+    }
 }

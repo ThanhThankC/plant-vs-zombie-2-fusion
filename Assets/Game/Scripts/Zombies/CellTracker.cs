@@ -57,18 +57,6 @@ public class CellTracker : MonoBehaviour
         TargetPlant = PreviousCell?.GetPlantInstanceForZombie(zombie.IsEatAnim)
         ?? CurrentCell?.GetPlantInstanceForZombie(zombie.IsEatAnim);
 
-        //if (TargetPlant != null
-        //    && ((TargetPlant.IsGhost || TargetPlant.IsInvincible)
-        //    || (zombie.IsEatAnim && !TargetPlant.CanBeEaten)))
-        //{
-        //    TargetPlant = PreviousCell?.GetPlantInstance(FieldType.Support);
-        //    if (TargetPlant != null
-        //        && ((TargetPlant.IsGhost || TargetPlant.IsInvincible)
-        //        || (zombie.IsEatAnim && !TargetPlant.CanBeEaten)))
-        //    {
-        //        return;
-        //    }
-        //}
         animationController.RefreshState();
     }
 }

@@ -12,6 +12,7 @@ public class ProjectileData : ScriptableObject
     public float arcHeight;
     public float arcDuration;
 
+    [Header("AOE Stats")]
     public int rangeRow;
     public int aoeDamage;
 }

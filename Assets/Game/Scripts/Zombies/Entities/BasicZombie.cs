@@ -2,18 +2,22 @@ using UnityEngine;
 
 public class BasicZombie : ZombieBase
 {
-    [SerializeField] private BodyPart armPartPrefab;
-    [SerializeField] private BodyPart headPartPrefab;
+    [Header("Part References")]
+    [SerializeField] private ZombiePoolKey armKey;
+    [SerializeField] private ZombiePoolKey headKey;
     [SerializeField] private Transform armSpawnPoint;
     [SerializeField] protected Transform headSpawnPoint;
-    [SerializeField] private ZombieAsh zombieAsh;
-    [SerializeField] private Transform ashPoint;
 
     private bool armLost;
 
     private const string SKIN_ARM_FULL = "arm_full";
     private const string SKIN_ARM_TORN = "arm_torn";
     private const string SKIN_HEAD_PART = "head";
+
+    protected override void OnInit()
+    {
+        armLost = false;
+    }
 
     public override void TakeDamage(int amount, DamageSource source = DamageSource.Normal)
     {
@@ -30,21 +34,16 @@ public class BasicZombie : ZombieBase
         SpineController.SetSkinActive(SKIN_ARM_FULL, false);
         SpineController.SetSkinActive(SKIN_ARM_TORN, true);
 
-        var armObj = Instantiate(armPartPrefab, armSpawnPoint.position, Quaternion.identity);
-        armObj.Init(GetGroundY(), 10);
+        var arm = PoolManager.Instance.GetZombie<BodyPart>(armKey, armSpawnPoint.position, Quaternion.identity);
+        arm.Init(GetGroundY(), SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, CellTracker.Row)); ;
     }
 
     protected override void LostHead()
     {
         SpineController.SetSkinActive(SKIN_HEAD_PART, false);
 
-        var headObj = Instantiate(headPartPrefab, headSpawnPoint.position, Quaternion.identity);
-        headObj.Init(GetGroundY(), 11);
-    }
-
-    protected override void Ash()
-    {
-        Instantiate(zombieAsh, ashPoint.position, Quaternion.identity);
+        var head = PoolManager.Instance.GetZombie<BodyPart>(headKey, headSpawnPoint.position, Quaternion.identity);
+        head.Init(GetGroundY(), SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, CellTracker.Row)); ;
     }
 
     protected float GetGroundY()

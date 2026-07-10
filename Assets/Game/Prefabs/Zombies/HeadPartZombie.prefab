@@ -45,13 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8362edd801bec04fa174146b6773b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partKey: 101
   sprites: []
   fadeDuration: 1.4
   jumpPower1: 1.12
-  jumpPower2: 0.44
   jumpDuration1: 0.8
-  jumpDuration2: 0.44
   rotationAmount1: 100
+  jumpPower2: 0.44
+  jumpDuration2: 0.44
   rotationAmount2: 130
   bounceDistance: {x: 1.16, y: 2}
   rollDistance: {x: 0.2, y: 0.5}

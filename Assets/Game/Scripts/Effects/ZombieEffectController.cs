@@ -169,4 +169,13 @@ public class ZombieEffectController : MonoBehaviour
             context.Zombie.Movement.ResetSpeed();
         }
     }
+
+    public void ResetAll()
+    {
+        IsStun = false;
+        activeCoroutines.Clear();
+        activeTickCoroutines.Clear();
+        activeEffects.Clear();
+        context.ResetAll();
+    }
 }

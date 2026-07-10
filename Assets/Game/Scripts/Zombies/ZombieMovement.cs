@@ -79,4 +79,6 @@ public class ZombieMovement : MonoBehaviour
         var current = skeletonAnim.AnimationState.GetCurrent(0);
         if (current != null) current.TimeScale = speed;
     }
+
+    public void ResetAll() => ResetSpeed();
 }

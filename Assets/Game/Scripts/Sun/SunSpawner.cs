@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SunSpawner : MonoBehaviour
 {
-    [SerializeField] private Sun sunPrefab;
+    [SerializeField] private PoolKey sunKey;
     [SerializeField] List<SunData> sunDatas;
 
     [SerializeField] private float spawnHeight = 3f;
@@ -70,7 +70,7 @@ public class SunSpawner : MonoBehaviour
         Vector3 pos = new Vector3(offsetX, offsetY, 0);
         float targetPosY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
 
-        Sun sun = Instantiate(sunPrefab, pos, Quaternion.identity, transform);
+        var sun = PoolManager.Instance.Get<Sun>(sunKey, pos, Quaternion.identity);
         sun.InitStraight(targetPosY);
     }
 }

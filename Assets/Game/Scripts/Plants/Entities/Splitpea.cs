@@ -11,9 +11,9 @@ public class Splitpea : Peashooter
 
         if (e.Data.Name == AnimEvents.EVENT_BACK_ATTACK)
         {
-            PeaProjectile peaProjectile = Instantiate(projectilePrefab, backAtkPoint.position, Quaternion.identity);
-            var effect = peaProjectile.HasEffect ? Data.CreateOnHitEffect() : null;
-            peaProjectile.Init(Vector3.left, OccupiedCell, effect);
+            var pea = PoolManager.Instance.Get<PeaProjectile>(projectileKey, backAtkPoint.position, Quaternion.identity);
+            var effect = pea.HasEffect ? Data.CreateOnHitEffect() : null;
+            pea.Init(Vector3.left, OccupiedCell, effect);
         }
     }
 }

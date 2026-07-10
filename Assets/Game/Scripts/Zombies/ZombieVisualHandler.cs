@@ -72,23 +72,9 @@ public class ZombieVisualHandler : MonoBehaviour
         shadow.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Shadow);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            ApplyGlowPreset(GlowType.Freeze);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            ApplyGlowPreset(GlowType.Poison);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            ResetGlowPreset();
-    }
-
-    private void OnDisable()
-    {
-        DisposeMaterial();
-    }
-
     public void Init(Cell cell)
     {
+        FreezeEffect.SetActive(false);
         meshRenderer.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Zombie, cell.Row);
         freezeEffect.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, cell.Row);
     }
@@ -97,10 +83,9 @@ public class ZombieVisualHandler : MonoBehaviour
     {
         if (glowMaterial != null) return;
 
-        var renderer = skeletonAnim.GetComponent<MeshRenderer>();
-        if (renderer == null) return;
+        if (meshRenderer == null) return;
 
-        var originalMaterial = renderer.sharedMaterial;
+        var originalMaterial = meshRenderer.sharedMaterial;
         if (originalMaterial == null) return;
 
         glowMaterial = new Material(originalMaterial);
@@ -178,14 +163,10 @@ public class ZombieVisualHandler : MonoBehaviour
         };
     }
 
-    private void DisposeMaterial()
+    public void ResetAll()
     {
-        if (glowMaterial == null) return;
-
-        var sharedMat = skeletonAnim.GetComponent<MeshRenderer>().sharedMaterial;
-        skeletonAnim.CustomMaterialOverride.Remove(sharedMat);
-
-        Destroy(glowMaterial);
-        glowMaterial = null;
+        FreezeEffect.SetActive(false);
+        Shadow.SetActive(true);
+        ResetGlowPreset();
     }
 }

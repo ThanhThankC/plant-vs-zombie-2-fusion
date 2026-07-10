@@ -5,15 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Spikeweed : PlantBase
 {
-    private TargetingHelper targetingHelper;
     private List<ZombieBase> targets = new();
     private bool isAttacking;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        targetingHelper = GetComponent<TargetingHelper>();
-    }
 
     private void OnEnable()
     {
@@ -55,7 +48,7 @@ public class Spikeweed : PlantBase
         targets.Remove(zombie);
 
         if (targets.Count > 0) return;
-        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, false);
+        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
         isAttacking = false;
     }
 

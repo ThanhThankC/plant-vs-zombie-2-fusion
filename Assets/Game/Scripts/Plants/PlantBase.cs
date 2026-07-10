@@ -2,9 +2,12 @@ using Spine.Unity;
 using UnityEngine;
 
 [RequireComponent(typeof(PlantVisualHandler))]
-public abstract class PlantBase : MonoBehaviour
+public abstract class PlantBase : MonoBehaviour, IPoolable
 {
+    [SerializeField] private PoolKey plantKey;
+
     public PlantData Data { get; private set; }
+    public PoolKey PlantKey => plantKey;
     public PlantType PlantType => Data.plantType;
     public int CurrentHP { get; private set; }
     public bool IsActivated { get; private set; }
@@ -16,6 +19,7 @@ public abstract class PlantBase : MonoBehaviour
     public PlantVisualHandler VisualHandler { get; private set; }
 
     protected SkeletonAnimation skeletonAnim;
+    private bool isReturned;
 
     protected virtual void Awake()
     {
@@ -30,6 +34,8 @@ public abstract class PlantBase : MonoBehaviour
         IsInvincible = data.isInvincible;
         CanBeEaten = !data.notBeEaten;
     }
+
+    public void OnSpawn() => isReturned = false;
 
     public void SetupAsGhost(Cell cell, FieldType fieldType)
     {
@@ -60,7 +66,6 @@ public abstract class PlantBase : MonoBehaviour
         pos = transform.position;
         pos.y += offsetY;
         transform.position = pos;
-        transform.SetParent(cell.transform);
         transform.name = Data.name;
         OnPlaced();
         IsActivated = true;
@@ -83,6 +88,16 @@ public abstract class PlantBase : MonoBehaviour
         OccupiedCell?.ClearPlant(OccupiedFieldType);
         OccupiedCell = null;
         IsActivated = false;
-        Destroy(gameObject);
+        ReturnPool();
     }
+
+    private void ReturnPool()
+    {
+        if (isReturned) return;
+        isReturned = true;
+
+        PoolManager.Instance.Release(plantKey, this);
+    }
+
+    public void OnDespawn() => enabled = false;
 }

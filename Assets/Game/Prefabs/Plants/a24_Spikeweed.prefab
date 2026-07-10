@@ -95,11 +95,11 @@ GameObject:
   - component: {fileID: 2786859935132987736}
   - component: {fileID: 7232970932745856214}
   - component: {fileID: 915683200723623354}
-  - component: {fileID: 6956052062396131565}
+  - component: {fileID: 5867678835822757519}
   - component: {fileID: 9195701308573207166}
+  - component: {fileID: 6956052062396131565}
   - component: {fileID: 7763919802645915453}
   - component: {fileID: 1659801447251041541}
-  - component: {fileID: 5867678835822757519}
   m_Layer: 0
   m_Name: a24_Spikeweed
   m_TagString: Untagged
@@ -173,6 +173,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5867678835822757519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189685614921680736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31cc6fc09b084b4d9ab7903338033b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 223
+--- !u!114 &9195701308573207166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4189685614921680736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6956052062396131565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,18 +241,6 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &9195701308573207166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189685614921680736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7763919802645915453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,15 +304,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1211646, y: 0.38570487}
   m_EdgeRadius: 0
---- !u!114 &5867678835822757519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189685614921680736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e31cc6fc09b084b4d9ab7903338033b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

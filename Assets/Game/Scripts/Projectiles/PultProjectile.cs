@@ -3,14 +3,15 @@ using UnityEngine;
 
 public class PultProjectile : ProjectileBase
 {
+    [Header("Not touching zombie")]
+    [SerializeField] private bool onlyGround = false;
+
     private Vector3 targetPosition;
-    private bool splated;
 
     public override void Init(Vector3 target, Cell cell, IEffect effect = null)
     {
         base.Init(target, cell, effect);
         targetPosition = target;
-        splated = false;
         LaunchParabola();
     }
 
@@ -24,7 +25,7 @@ public class PultProjectile : ProjectileBase
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (splated) return;
+        if (isReturned || onlyGround) return;
         if (!collider.CompareTag("Zombie")) return;
 
         var zombie = collider.GetComponent<ZombieBase>();
@@ -40,11 +41,9 @@ public class PultProjectile : ProjectileBase
 
     private void OnSplat()
     {
-        if (splated) return;
-        OnImpact();
         OnHit();
         DOTween.Kill(transform);
-        Destroy(gameObject);
+        ReturnPool();
     }
 
     protected virtual void OnHit() { }

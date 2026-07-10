@@ -2,29 +2,41 @@ using Spine;
 using Spine.Unity;
 using UnityEngine;
 
-public class ZombieAsh : MonoBehaviour
+public class ZombieAsh : MonoBehaviour, IPoolable
 {
+    [SerializeField] private ZombiePoolKey ashKey;
+
     private SkeletonAnimation skeletonAnim;
+    private MeshRenderer meshRenderer;
+    private bool isReturned;
 
     private void Awake()
     {
         skeletonAnim = GetComponent<SkeletonAnimation>();
+        meshRenderer = skeletonAnim.GetComponent<MeshRenderer>();
     }
 
-    private void OnEnable()
+    private void OnEnable() => skeletonAnim.AnimationState.Complete += OnSpineComplete;
+
+    private void OnDisable() => skeletonAnim.AnimationState.Complete -= OnSpineComplete;
+
+    public void OnSpawn() => isReturned = false;
+
+    public void Init(int sortingOrder)
     {
-        skeletonAnim.AnimationState.Complete += OnSpineComplete;
+        meshRenderer.sortingOrder = sortingOrder;
         skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, false);
     }
 
-    private void OnDisable()
-    {
-        skeletonAnim.AnimationState.Complete -= OnSpineComplete;
+    private void OnSpineComplete(TrackEntry trackEntry) => ReturnPool();
 
-    }
+    public void OnDespawn() { }
 
-    private void OnSpineComplete(TrackEntry trackEntry)
+    private void ReturnPool()
     {
-        Destroy(gameObject);
+        if (isReturned) return;
+        isReturned = true;
+
+        PoolManager.Instance.ReleaseZombie(ashKey, this);
     }
 }

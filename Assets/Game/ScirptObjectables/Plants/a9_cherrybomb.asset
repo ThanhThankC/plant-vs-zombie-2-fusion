@@ -29,5 +29,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 1
   rangeRow: 1
-  aoeDamage: 500
+  aoeDamage: 1000
   notBeEaten: 0

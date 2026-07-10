@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Sunflower : PlantBase
 {
-    [SerializeField] private Sun sunPrefab;
+    [SerializeField] private PoolKey sunKey;
     [SerializeField] private Transform specialTransform;
     [SerializeField] private int loopCount = 3;
     [SerializeField] private Vector2 landingOffsetXRange = new Vector2(-1f, 1f);
@@ -81,7 +81,7 @@ public class Sunflower : PlantBase
     {
         if (e.Data.Name == AnimEvents.EVENT_SPECIAL)
         {
-            var sun = Instantiate(sunPrefab, specialTransform.position, Quaternion.identity);
+            var sun = PoolManager.Instance.Get<Sun>(sunKey, specialTransform.position, Quaternion.identity);
             sun.InitCurved(GetGroundPosition());
         }
     }

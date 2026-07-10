@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ArmoredHeadZombie : BasicZombie
@@ -8,7 +6,7 @@ public class ArmoredHeadZombie : BasicZombie
     [SerializeField] private string[] armorSkins;
 
     [Header("Armor Settings")]
-    [SerializeField] private BodyPart armorPartPrefab;
+    [SerializeField] private ZombiePoolKey armorPartKey;
 
     private int totalSkins;
     private int currentStageIndex;
@@ -38,8 +36,8 @@ public class ArmoredHeadZombie : BasicZombie
     {
         SpineController.SetSkinActive(armorSkins[currentStageIndex], false);
 
-        var armorObj = Instantiate(armorPartPrefab, headSpawnPoint.position, Quaternion.identity);
-        armorObj.Init(GetGroundY(), 12);
+        var armor = PoolManager.Instance.GetZombie<BodyPart>(armorPartKey, headSpawnPoint.position, Quaternion.identity);
+        armor.Init(GetGroundY(), 12);
     }
 
     private int GetStageIndex()

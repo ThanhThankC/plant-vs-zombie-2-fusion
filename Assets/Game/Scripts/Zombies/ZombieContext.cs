@@ -8,4 +8,10 @@ public class ZombieContext
         Zombie = zombie;
         Stat = stat;
     }
+
+    public void ResetAll()
+    {
+        Stat.PoisonDamageTick = 0;
+        Stat.DamageMultiplier = 0;
+    }
 }

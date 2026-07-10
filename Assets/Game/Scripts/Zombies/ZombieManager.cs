@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 
 public class ZombieManager : Singleton<ZombieManager>
 {
@@ -10,14 +8,14 @@ public class ZombieManager : Singleton<ZombieManager>
     private struct ZombieEntry
     {
         public ZombieData data;
-        public ZombieBase prefab;
+        public ZombiePoolKey zombieKey;
     }
 
     [SerializeField] private List<ZombieEntry> zombieEntries;
 
     public IReadOnlyList<ZombieBase> ActiveZombies => activeZombies;
 
-    private Dictionary<ZombieType, ZombieBase> prefabLookup = new();
+    private Dictionary<ZombieType, ZombiePoolKey> keyLookup = new();
     private Dictionary<ZombieType, ZombieData> dataLookup = new();
     private readonly List<ZombieBase> activeZombies = new();
 
@@ -26,28 +24,14 @@ public class ZombieManager : Singleton<ZombieManager>
         base.Awake();
         foreach (var entry in zombieEntries)
         {
-            prefabLookup[entry.data.zombieType] = entry.prefab;
+            keyLookup[entry.data.zombieType] = entry.zombieKey;
             dataLookup[entry.data.zombieType] = entry.data;
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            Spawn(ZombieType.Basic, 0);
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            Spawn(ZombieType.Basic, 1);
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-            Spawn(ZombieType.Basic, 2);
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-            Spawn(ZombieType.Basic, 3);
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-            Spawn(ZombieType.Basic, 4);
-    }
-
     public ZombieBase Spawn(ZombieType zombieType, int row)
     {
-        if (!prefabLookup.TryGetValue(zombieType, out var prefab))
+        if (!keyLookup.TryGetValue(zombieType, out var key))
         {
             Debug.LogWarning($"[ZombieManager] Zombie type not found: {zombieType}!");
             return null;
@@ -56,7 +40,7 @@ public class ZombieManager : Singleton<ZombieManager>
         var spawnCell = GridManager.Instance.GetCell(row, GridManager.ZombieSpawnCol);
         if (spawnCell == null) return null;
 
-        var zombie = Instantiate(prefabLookup[zombieType], spawnCell.transform.position, Quaternion.identity, transform);
+        var zombie = PoolManager.Instance.GetZombie<ZombieBase>(key, spawnCell.transform.position, Quaternion.identity);
         zombie.Init(dataLookup[zombieType]);
 
         RegisterZombie(zombie);

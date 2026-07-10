@@ -1,4 +1,3 @@
-using Spine;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ZombieData", menuName = "PVZF/Zombie Data")]

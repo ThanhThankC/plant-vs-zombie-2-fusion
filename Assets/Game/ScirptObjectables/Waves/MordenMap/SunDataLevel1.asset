@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingSun: 100
   autoSpawn: 1
-  firstDuration: 5
-  interval: 7
+  firstDuration: 1
+  interval: 1

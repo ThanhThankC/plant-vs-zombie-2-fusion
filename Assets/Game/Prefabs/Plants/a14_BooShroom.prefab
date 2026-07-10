@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1662609660745406012}
   - component: {fileID: 82315861471825463}
   - component: {fileID: 274164843877059594}
-  - component: {fileID: 3727059861375419460}
   - component: {fileID: 9098445581962293621}
   - component: {fileID: 4018880855120375961}
+  - component: {fileID: 3727059861375419460}
   m_Layer: 0
   m_Name: a14_BooShroom
   m_TagString: Untagged
@@ -88,6 +88,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9098445581962293621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697921965252153460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c13680001f97a44895c88e8b57ac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantKey: 213
+  booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
+  booPoint: {fileID: 8199095871702279174}
+--- !u!114 &4018880855120375961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697921965252153460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3727059861375419460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,32 +158,6 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &9098445581962293621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697921965252153460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90c13680001f97a44895c88e8b57ac6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
-  booPoint: {fileID: 8199095871702279174}
---- !u!114 &4018880855120375961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697921965252153460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160d8a0d9b7707740a11782e6f87988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3476303244180336850
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,6 +23,7 @@ public class PeaProjectile : ProjectileBase
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (isReturned) return;
         if (!other.CompareTag("Zombie")) return;
 
         var zombie = other.GetComponent<ZombieBase>();
@@ -33,7 +34,6 @@ public class PeaProjectile : ProjectileBase
 
         zombie.TakeDamage(data.damage, data.damageSource);
 
-        OnImpact();
-        Destroy(gameObject);
+        ReturnPool();
     }
 }

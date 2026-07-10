@@ -30,10 +30,13 @@ public class ZombieSpineController : MonoBehaviour
         skeletonAnim = GetComponent<SkeletonAnimation>();
     }
 
-    private void Start()
+    public void Init()
     {
-        CacheAllSkins();
-        runtimeSkin = new Skin("mix_runtime");
+        if (runtimeSkin == null)
+        {
+            CacheAllSkins();
+            runtimeSkin = new Skin("mix_runtime");
+        }
 
         foreach (var entry in toggleableSkins)
             skinToggles[entry.skinName] = entry.activeByDefault;

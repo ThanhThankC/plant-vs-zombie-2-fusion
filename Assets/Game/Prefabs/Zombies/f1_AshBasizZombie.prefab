@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1183089344416546180}
   - component: {fileID: 8857334187493463546}
   - component: {fileID: 2860152507740882850}
-  - component: {fileID: 8435093399022003423}
   - component: {fileID: 8251183344827430380}
+  - component: {fileID: 8435093399022003423}
   m_Layer: 0
   m_Name: f1_AshBasizZombie
   m_TagString: Untagged
@@ -85,6 +85,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8251183344827430380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619449527047706411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14843dfcdf0c9b4ca3b62a7b1a056a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ashKey: 200
 --- !u!114 &8435093399022003423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,15 +141,3 @@ MonoBehaviour:
   _animationName: idle
   loop: 1
   timeScale: 1
---- !u!114 &8251183344827430380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2619449527047706411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b14843dfcdf0c9b4ca3b62a7b1a056a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -5,9 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieSpineController))]
 [RequireComponent(typeof(ZombieAnimationController))]
 [RequireComponent(typeof(ZombieVisualHandler))]
-public abstract class ZombieBase : MonoBehaviour
+public abstract class ZombieBase : MonoBehaviour, IPoolable
 {
+    [Header("References")]
+    [SerializeField] private ZombiePoolKey zombieKey;
     [SerializeField] private CellTracker cellTracker;
+
+    [Header("Ash VFX")]
+    [SerializeField] private ZombiePoolKey ashKey;
+    [SerializeField] private Transform ashPoint;
 
     public ZombieData Data { get; private set; }
     public ZombieMovement Movement { get; private set; }
@@ -22,6 +28,8 @@ public abstract class ZombieBase : MonoBehaviour
     public bool IsEatAnim { get; private set; }
     public bool IsDead { get; private set; }
 
+    private bool isReturned;
+
     protected virtual void Awake()
     {
         Movement = GetComponent<ZombieMovement>();
@@ -31,23 +39,26 @@ public abstract class ZombieBase : MonoBehaviour
         VisualHandler = GetComponent<ZombieVisualHandler>();
     }
 
+    public void OnSpawn()
+    {
+        isReturned = false;
+        IsDead = false;
+        AnimController.PlayWalk();
+        SpineController.Init();
+    }
+
     public void Init(ZombieData data)
     {
         Data = data;
         CurrentHP = data.maxHP;
         ArmorHP = data.armorHP;
         IsEatAnim = data.isEatAnim;
-        VisualHandler.Shadow.SetActive(true);
-        VisualHandler.FreezeEffect.SetActive(false);
         OnInit();
     }
 
-    public void SetupVisual(Cell cell)
-    {
-        VisualHandler.Init(cell);
-    }
-
     protected virtual void OnInit() { }
+
+    public void SetupVisual(Cell cell) => VisualHandler.Init(cell);
 
     public virtual void TakeDamage(int amount, DamageSource source = DamageSource.Normal)
     {
@@ -102,7 +113,11 @@ public abstract class ZombieBase : MonoBehaviour
 
     protected virtual void LostHead() { }
 
-    protected virtual void Ash() { }
+    private void Ash()
+    {
+        var ash = PoolManager.Instance.GetZombie<ZombieAsh>(ashKey, ashPoint.position, Quaternion.identity);
+        ash.Init(SortingOrderUtility.GetSortingOrder(LayerType.Zombie, CellTracker.Row));
+    }
 
     public void OnAttackAnimFinished(PlantBase targetPlant)
     {
@@ -110,9 +125,21 @@ public abstract class ZombieBase : MonoBehaviour
         targetPlant.TakeDamage(this, Data.attackDamage);
     }
 
-    public void OnDieAnimFinished()
+    public void OnDieAnimFinished() => ReturnPool();
+
+    public void OnDespawn()
     {
-        VisualHandler.Shadow.SetActive(false);
-        Destroy(gameObject);
+        Movement.ResetAll();
+        EffectController.ResetAll();
+        AnimController.ResetAll();
+        VisualHandler.ResetAll();
+    }
+
+    private void ReturnPool()
+    {
+        if (isReturned) return;
+        isReturned = true;
+
+        PoolManager.Instance.ReleaseZombie(zombieKey, this);
     }
 }

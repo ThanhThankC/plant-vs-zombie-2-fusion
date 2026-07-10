@@ -16,7 +16,7 @@ public class PlantActivator : Singleton<PlantActivator>
     private struct EffectEntry
     {
         public EffectPlantType effectType;
-        public PlantEffect prefab;
+        public PoolKey effectKey;
         public Vector3 spawnOffset;
     }
 
@@ -35,7 +35,7 @@ public class PlantActivator : Singleton<PlantActivator>
             effectLookup[e.effectType] = e;
     }
 
-    public void Activate(PlantType plantType, Cell cell, int sortingOrder)
+    public void Activate(PlantType plantType, Cell cell)
     {
         if (cell == null) return;
         if (!actLookup.TryGetValue(plantType, out var entry)) return;
@@ -63,7 +63,7 @@ public class PlantActivator : Singleton<PlantActivator>
 
     private void SpawnAt(EffectEntry entry, Cell cell, LayerType layerType)
     {
-        var effect = Instantiate(entry.prefab, cell.transform.position + entry.spawnOffset , Quaternion.identity);
+        var effect = PoolManager.Instance.Get<PlantEffect>(entry.effectKey, cell.transform.position + entry.spawnOffset, Quaternion.identity);
         effect.Init(SortingOrderUtility.GetSortingOrder(layerType, cell.Row));
     }
 
