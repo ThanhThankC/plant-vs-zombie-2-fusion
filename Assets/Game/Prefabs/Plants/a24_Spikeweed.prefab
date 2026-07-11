@@ -186,6 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantKey: 223
+  onPlantAttack: {fileID: 11400000, guid: 62a721439e4956445b4bfe6dc553143b, type: 2}
+  attackType: 4
 --- !u!114 &9195701308573207166
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -102,9 +102,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantKey: 216
+  onPlantAttack: {fileID: 11400000, guid: 62a721439e4956445b4bfe6dc553143b, type: 2}
+  attackType: 2
   projectileKey: 3
   attackPoint: {fileID: 7995820881884938682}
   loopCount: 1
+  onEffectActivate: {fileID: 11400000, guid: 645c570b7d6c1e543b79c467a94b4f44, type: 2}
+  effectType: 5
   booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
   booPoint: {fileID: 991785067007428565}
 --- !u!114 &4864017399001426283

@@ -5,6 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Spikeweed : PlantBase
 {
+    [Header("Events")]
+    [SerializeField] private PlantAttackEvent onPlantAttack;
+    [SerializeField] private PlantAttackType attackType;
+
     private List<ZombieBase> targets = new();
     private bool isAttacking;
 
@@ -58,6 +62,7 @@ public class Spikeweed : PlantBase
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
+            onPlantAttack.Raise(attackType);
             AttackAllZombie();
             return;
         }

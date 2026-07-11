@@ -6,6 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Iceberg : PlantBase
 {
+    [Header("Events")]
+    [SerializeField] private PlantAttackEvent onPlantAttack;
+    [SerializeField] private PlantAttackType attackType;
+
     private TargetingHelper targetingHelper;
     private bool isAttacking;
 
@@ -49,6 +53,7 @@ public class Iceberg : PlantBase
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
+            onPlantAttack.Raise(attackType);
             FreezeFirstZombie();
             return;
         }

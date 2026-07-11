@@ -20,7 +20,7 @@ public class PultProjectile : ProjectileBase
         transform.DOJump(targetPosition, data.arcHeight, 1, data.arcDuration)
             .SetEase(Ease.Linear)
             .OnUpdate(() => UpdateShadow())
-            .OnComplete(() => OnSplat());
+            .OnComplete(() => OnSplat(null));
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -36,12 +36,13 @@ public class PultProjectile : ProjectileBase
 
         zombie.TakeDamage(data.damage, data.damageSource);
 
-        OnSplat();
+        OnSplat(zombie);
     }
 
-    private void OnSplat()
+    private void OnSplat(ZombieBase zombie)
     {
         OnHit();
+        PlayHitSound(zombie);
         DOTween.Kill(transform);
         ReturnPool();
     }

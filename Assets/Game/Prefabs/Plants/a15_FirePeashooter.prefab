@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantKey: 214
+  onPlantAttack: {fileID: 11400000, guid: 62a721439e4956445b4bfe6dc553143b, type: 2}
+  attackType: 1
   projectileKey: 2
   attackPoint: {fileID: 4129012451179322577}
   loopCount: 1

@@ -946,6 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb985565f38fe04bb23da40cdaac400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onSunCollected: {fileID: 11400000, guid: 5cef3788d7b5d4a47b8b3138404623df, type: 2}
   sunCounter: {fileID: 1479066414}
 --- !u!1 &158547420
 GameObject:
@@ -2361,6 +2362,7 @@ Transform:
   - {fileID: 156516165}
   - {fileID: 604107388}
   - {fileID: 1540971602}
+  - {fileID: 1268880944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351978737
@@ -4437,29 +4439,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43bdfc60f40d52842853d7b9aad80024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onEffectActivate: {fileID: 11400000, guid: 645c570b7d6c1e543b79c467a94b4f44, type: 2}
   entries:
   - plantType: 8
+    effectType: 1
     targetingHelper: {fileID: 692619820277003885, guid: 9b3f2d697f2b84c4191ded908f7b2c69, type: 3}
   - plantType: 12
+    effectType: 2
     targetingHelper: {fileID: 0}
   - plantType: 10
+    effectType: 3
     targetingHelper: {fileID: 2032891738909711270, guid: 16f9e5338958fa241a2e3292d7c0d012, type: 3}
   - plantType: 9
+    effectType: 4
     targetingHelper: {fileID: 0}
   effects:
-  - effectType: 0
+  - visualType: 0
     effectKey: 300
     spawnOffset: {x: 0, y: 1, z: 0}
-  - effectType: 1
+  - visualType: 1
     effectKey: 301
     spawnOffset: {x: 0, y: 1, z: 0}
-  - effectType: 2
+  - visualType: 2
     effectKey: 302
     spawnOffset: {x: 0, y: -0.1, z: 0}
-  - effectType: 3
+  - visualType: 3
     effectKey: 303
     spawnOffset: {x: 0, y: 1, z: 0}
-  - effectType: 4
+  - visualType: 4
     effectKey: 304
     spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &616110145
@@ -8383,6 +8390,206 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268880943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268880944}
+  - component: {fileID: 1268880945}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1268880944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268880943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 337601494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1268880945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268880943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149e1237e5e5f4b44ba688af5c38e707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onZombieDied: {fileID: 11400000, guid: 6ba5282296502f046b3fa5cc342aa85b, type: 2}
+  onPartZombieDropped: {fileID: 11400000, guid: 00f28cd8d3e74b2488668e5f6813c691, type: 2}
+  onProjectileHit: {fileID: 11400000, guid: 7ae6e55036497cf46bea6f0f4fd707b7, type: 2}
+  onEffectActivate: {fileID: 11400000, guid: 645c570b7d6c1e543b79c467a94b4f44, type: 2}
+  onPlantAttack: {fileID: 11400000, guid: 62a721439e4956445b4bfe6dc553143b, type: 2}
+  zombieDieSfx:
+    clip: {fileID: 8300000, guid: ae40278b38f63a64887b0139d67fb1ed, type: 3}
+    volume: 0.885
+    pitch: 1
+    pitchVariance: 0.146
+  partZombieDropSfx:
+    clip: {fileID: 8300000, guid: bbe5d9043a1da0040880452fe7703caf, type: 3}
+    volume: 0.778
+    pitch: 0.98
+    pitchVariance: 0.067
+  hitSounds:
+  - type: 0
+    sound:
+      clip: {fileID: 8300000, guid: 8a2ff69eff09540459bb4d65d9ac1dd6, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.148
+  - type: 1
+    sound:
+      clip: {fileID: 8300000, guid: eaa127d07b9cf7e48b9ed4a622a435fe, type: 3}
+      volume: 0.559
+      pitch: 1
+      pitchVariance: 0.084
+  - type: 2
+    sound:
+      clip: {fileID: 8300000, guid: b49fd58f9e15ceb47a7645abd7e0ca08, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.084
+  - type: 3
+    sound:
+      clip: {fileID: 8300000, guid: 3c9659b15329a844b93a0642518c6240, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.084
+  - type: 4
+    sound:
+      clip: {fileID: 8300000, guid: 5e59109b74e6c0b449cf0cd22efe88eb, type: 3}
+      volume: 0.923
+      pitch: 1
+      pitchVariance: 0.104
+  - type: 5
+    sound:
+      clip: {fileID: 8300000, guid: 5f26998990784414e86e2d263982d989, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.058
+  - type: 6
+    sound:
+      clip: {fileID: 8300000, guid: 2dfcf8eaa6895f148954543130e9fe37, type: 3}
+      volume: 0.923
+      pitch: 1
+      pitchVariance: 0.089
+  - type: 7
+    sound:
+      clip: {fileID: 8300000, guid: 08cfad8ab14de4b41a9e5c988b6a5883, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.104
+  - type: 8
+    sound:
+      clip: {fileID: 8300000, guid: cb6666ea7583eb149bbb8e209d2449da, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.087
+  - type: 9
+    sound:
+      clip: {fileID: 8300000, guid: c0395213bf1b8954195c26636c6cea43, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.087
+  - type: 10
+    sound:
+      clip: {fileID: 8300000, guid: dce82c89b2570e842979f247dfe7263c, type: 3}
+      volume: 0.612
+      pitch: 1
+      pitchVariance: 0.153
+  - type: 11
+    sound:
+      clip: {fileID: 8300000, guid: 05e1253370766e54f93274e7043da18d, type: 3}
+      volume: 0.303
+      pitch: 1
+      pitchVariance: 0.177
+  effectSounds:
+  - type: 1
+    sound:
+      clip: {fileID: 8300000, guid: dc7111ae890ad1341bcab320200c2fbf, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0
+  - type: 2
+    sound:
+      clip: {fileID: 8300000, guid: e8089abe0e2fa2e4c96704a0d8a090a5, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0
+  - type: 3
+    sound:
+      clip: {fileID: 8300000, guid: 229ea6929ddf31546b1e9de77200f452, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0
+  - type: 4
+    sound:
+      clip: {fileID: 8300000, guid: 5c60bababc30a1b4cab641f689085409, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0
+  - type: 5
+    sound:
+      clip: {fileID: 8300000, guid: 8d06d257ab1cd164299352b46ab102d1, type: 3}
+      volume: 0.07
+      pitch: 1
+      pitchVariance: 0
+  plantAttackSounds:
+  - type: 1
+    sound:
+      clip: {fileID: 8300000, guid: 15c788351088f664ba5081a19ba13b84, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.055
+  - type: 2
+    sound:
+      clip: {fileID: 8300000, guid: ec1e1ab195b6f254fa2fb2a21af0d040, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.054
+  - type: 3
+    sound:
+      clip: {fileID: 8300000, guid: 087899c38a4a3e24b87d7d976116be38, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.061
+  - type: 4
+    sound:
+      clip: {fileID: 8300000, guid: 2440727daeeee3f45847afe3dd4c865c, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0.064
+  - type: 5
+    sound:
+      clip: {fileID: 8300000, guid: ec8052c5e5bc5cc4d97708c7eabc1172, type: 3}
+      volume: 1
+      pitch: 1
+      pitchVariance: 0
+  sunClickSfx:
+    clip: {fileID: 8300000, guid: e318f85cb9b3f1d41a9bd84164e81a20, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariance: 0.037
+  poolSize: 10
 --- !u!1 &1282710956
 GameObject:
   m_ObjectHideFlags: 0
@@ -9967,6 +10174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b26b88e442174042951a035e1911f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onZombieDied: {fileID: 11400000, guid: 6ba5282296502f046b3fa5cc342aa85b, type: 2}
   zombieEntries:
   - data: {fileID: 11400000, guid: 71cc6271476798d4298083acaec5514b, type: 2}
     zombieKey: 0

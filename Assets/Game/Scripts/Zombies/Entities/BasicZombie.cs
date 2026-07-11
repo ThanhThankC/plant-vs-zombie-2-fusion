@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BasicZombie : ZombieBase
 {
+    [Header("Events")]
+    [SerializeField] protected ZombiePartDroppedEvent onPartDropped;
+
     [Header("Part References")]
     [SerializeField] private ZombiePoolKey armKey;
     [SerializeField] private ZombiePoolKey headKey;
@@ -34,6 +37,8 @@ public class BasicZombie : ZombieBase
         SpineController.SetSkinActive(SKIN_ARM_FULL, false);
         SpineController.SetSkinActive(SKIN_ARM_TORN, true);
 
+        onPartDropped?.Raise();
+
         var arm = PoolManager.Instance.GetZombie<BodyPart>(armKey, armSpawnPoint.position, Quaternion.identity);
         arm.Init(GetGroundY(), SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, CellTracker.Row)); ;
     }
@@ -41,6 +46,8 @@ public class BasicZombie : ZombieBase
     protected override void LostHead()
     {
         SpineController.SetSkinActive(SKIN_HEAD_PART, false);
+
+        onPartDropped?.Raise();
 
         var head = PoolManager.Instance.GetZombie<BodyPart>(headKey, headSpawnPoint.position, Quaternion.identity);
         head.Init(GetGroundY(), SortingOrderUtility.GetSortingOrder(LayerType.ZombieEffect, CellTracker.Row)); ;

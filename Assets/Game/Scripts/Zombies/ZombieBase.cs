@@ -7,6 +7,10 @@ using UnityEngine;
 [RequireComponent(typeof(ZombieVisualHandler))]
 public abstract class ZombieBase : MonoBehaviour, IPoolable
 {
+    [Header("Events")]
+    [SerializeField] private ZombieDiedEvent onZombieDied;
+    [SerializeField] private ProjectileHitType armorHitType = ProjectileHitType.Metal;
+
     [Header("References")]
     [SerializeField] private ZombiePoolKey zombieKey;
     [SerializeField] private CellTracker cellTracker;
@@ -22,6 +26,7 @@ public abstract class ZombieBase : MonoBehaviour, IPoolable
     public ZombieAnimationController AnimController { get; private set; }
     public ZombieVisualHandler VisualHandler { get; private set; }
     public CellTracker CellTracker => cellTracker;
+    public ProjectileHitType ArmorHitType => armorHitType;
 
     public int CurrentHP { get; private set; }
     public int ArmorHP { get; private set; }
@@ -95,7 +100,7 @@ public abstract class ZombieBase : MonoBehaviour, IPoolable
     {
         if (IsDead) return;
         IsDead = true;
-        ZombieManager.Instance.OnZombieDied(this);
+        onZombieDied?.Raise(this);
         VisualHandler.FreezeEffect.SetActive(false);
 
         if (source == DamageSource.Normal)

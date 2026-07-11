@@ -34,6 +34,7 @@ public class PeaProjectile : ProjectileBase
 
         zombie.TakeDamage(data.damage, data.damageSource);
 
+        PlayHitSound(zombie);
         ReturnPool();
     }
 }

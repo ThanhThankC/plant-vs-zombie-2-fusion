@@ -302,6 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993b8d4d1c8db7848bf2e8e38f1b802e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onProjectileHit: {fileID: 11400000, guid: 7ae6e55036497cf46bea6f0f4fd707b7, type: 2}
+  normalType: 9
   data: {fileID: 11400000, guid: 1dccb94eec17c8a4a9eaf046f7cd22e3, type: 2}
   projectileKey: 9
   meshRenderer: {fileID: 0}

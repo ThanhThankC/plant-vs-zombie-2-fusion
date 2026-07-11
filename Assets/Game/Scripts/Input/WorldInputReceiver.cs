@@ -23,6 +23,9 @@ public class WorldInputReceiver : MonoBehaviour
         int loopCount = Mathf.Min(sunHits.Length, count);
         for (int i = 0; i < loopCount; i++)
             sunHits[i].GetComponent<Sun>()?.OnTap();
+
+        if (loopCount > 0)
+            AudioManager.Instance.PlaySunlick();
     }
 
     private Vector3 GetMouseWorldPos()

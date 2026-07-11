@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da829c173ec8c434c9528e98210e4571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onProjectileHit: {fileID: 11400000, guid: 7ae6e55036497cf46bea6f0f4fd707b7, type: 2}
+  normalType: 6
   data: {fileID: 11400000, guid: dbc8a67f009d1694cb3990f40b6f937d, type: 2}
   projectileKey: 5
   meshRenderer: {fileID: 0}
@@ -192,6 +194,7 @@ MonoBehaviour:
     sortingBonus: 1
   splatKey: 105
   spawnOffset: {x: -0.39, y: 0, z: 0}
+  onlyGround: 0
 --- !u!114 &6304458793926098086
 MonoBehaviour:
   m_ObjectHideFlags: 0

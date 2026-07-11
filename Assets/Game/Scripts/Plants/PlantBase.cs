@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlantVisualHandler))]
 public abstract class PlantBase : MonoBehaviour, IPoolable
 {
+    [Header("Pool")]
     [SerializeField] private PoolKey plantKey;
 
     public PlantData Data { get; private set; }
@@ -71,7 +72,6 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
         IsActivated = true;
     }
 
-    //TODO: Do something when just set down.
     protected virtual void OnPlaced() { }
 
     public virtual void TakeDamage(ZombieBase zombie, int amount)

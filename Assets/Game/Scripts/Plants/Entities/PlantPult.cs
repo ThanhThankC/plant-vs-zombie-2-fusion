@@ -12,6 +12,10 @@ public class PlantPult : PlantBase
         public string animationAttack;
     }
 
+    [Header("Events")]
+    [SerializeField] protected PlantAttackEvent onPlantAttack;
+    [SerializeField] protected PlantAttackType attackType;
+
     [Header("Projectiles")]
     [SerializeField] private ProjectileEntry[] projectileEntries;
     [SerializeField] private Transform attackPoint;
@@ -103,7 +107,10 @@ public class PlantPult : PlantBase
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
+        {
+            onPlantAttack.Raise(attackType);
             SpawnProjectile();
+        }
     }
 
     private void SpawnProjectile()

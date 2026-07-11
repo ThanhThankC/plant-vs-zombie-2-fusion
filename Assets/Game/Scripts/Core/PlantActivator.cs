@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EffectPlantType { CherryTop, CherryRear, Jalapeno, Potato, Storm}
+public enum VisualEffectType { CherryTop, CherryRear, Jalapeno, Potato, Storm}
 
 public class PlantActivator : Singleton<PlantActivator>
 {
@@ -9,22 +9,27 @@ public class PlantActivator : Singleton<PlantActivator>
     private struct ActivatorEntry
     {
         public PlantType plantType;
+        public PlantEffectType effectType;
         public TargetingHelper targetingHelper;
     }
 
     [System.Serializable]
     private struct EffectEntry
     {
-        public EffectPlantType effectType;
+        public VisualEffectType visualType;
         public PoolKey effectKey;
         public Vector3 spawnOffset;
     }
 
+    [Header("Events")]
+    [SerializeField] private PlantEffectActivateEvent onEffectActivate;
+
+    [Header("References")]
     [SerializeField] private List<ActivatorEntry> entries;
     private Dictionary<PlantType, ActivatorEntry> actLookup = new();
 
     [SerializeField] private List<EffectEntry> effects;
-    private Dictionary<EffectPlantType, EffectEntry> effectLookup = new();
+    private Dictionary<VisualEffectType, EffectEntry> effectLookup = new();
 
     protected override void Awake()
     {
@@ -32,31 +37,32 @@ public class PlantActivator : Singleton<PlantActivator>
         foreach (var entry in entries)
             actLookup[entry.plantType] = entry;
         foreach (var e in effects)
-            effectLookup[e.effectType] = e;
+            effectLookup[e.visualType] = e;
     }
 
     public void Activate(PlantType plantType, Cell cell)
     {
         if (cell == null) return;
         if (!actLookup.TryGetValue(plantType, out var entry)) return;
+        onEffectActivate?.Raise(entry.effectType);
         switch (plantType)
         {
             case PlantType.CherryBomb:
                 EffectPlantResolver.DamageRadius(plantType, cell, entry.targetingHelper);
-                SpawnAt(effectLookup[EffectPlantType.CherryTop], cell, LayerType.TopPlantEffect);
-                SpawnAt(effectLookup[EffectPlantType.CherryRear], cell, LayerType.RearPlantEffect);
+                SpawnAt(effectLookup[VisualEffectType.CherryTop], cell, LayerType.TopPlantEffect);
+                SpawnAt(effectLookup[VisualEffectType.CherryRear], cell, LayerType.RearPlantEffect);
                 break;
             case PlantType.Jalapeno:
                 EffectPlantResolver.DamageRow(plantType, cell.Row);
-                SpawnAtRow(effectLookup[EffectPlantType.Jalapeno], cell, LayerType.TopPlantEffect);
+                SpawnAtRow(effectLookup[VisualEffectType.Jalapeno], cell, LayerType.TopPlantEffect);
                 break;
             case PlantType.PotatoMine:
                 EffectPlantResolver.DamageRadius(plantType, cell, entry.targetingHelper);
-                SpawnAt(effectLookup[EffectPlantType.Potato],cell, LayerType.TopPlantEffect);
+                SpawnAt(effectLookup[VisualEffectType.Potato],cell, LayerType.TopPlantEffect);
                 break;
             case PlantType.IceStorm:
                 EffectPlantResolver.FreezeAll(plantType);
-                SpawnAt(effectLookup[EffectPlantType.Storm],cell, LayerType.TopPlantEffect);
+                SpawnAt(effectLookup[VisualEffectType.Storm],cell, LayerType.TopPlantEffect);
                 break;
         }
     }

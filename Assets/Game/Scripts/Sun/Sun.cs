@@ -11,7 +11,13 @@ public class Sun : MonoBehaviour, IPoolable
         CurvedFall,
     }
 
+    [Header("Events")]
+    [SerializeField] private SunCollectedEvent onSunCollected;
+
+    [Header("Pools")]
     [SerializeField] private PoolKey sunKey;
+
+    [Header("References")]
     [SerializeField] private int cost = 25;
     [SerializeField] private float fallSpeed = 3f;
     [SerializeField] private float collectSpeed = 10f;
@@ -34,22 +40,23 @@ public class Sun : MonoBehaviour, IPoolable
         tweenAnim = GetComponent<TweenAnimator>();
     }
 
-    public void InitStraight(float groundPosY)
+    public void InitStraight(float groundPosY, Vector3 uiTargetPos)
     {
         groundPos = new Vector3(transform.position.x, groundPosY, 0f);
         sunState = SunState.StraightFall;
-        uiPos = SunManager.Instance.SunCounterPos;
+        uiPos = uiTargetPos;
     }
 
     public void InitCurved(Vector3 groundPosY)
     {
         this.groundPos = groundPosY;
         sunState = SunState.CurvedFall;
-        uiPos = SunManager.Instance.SunCounterPos;
+        onSunCollected?.Raise(cost);
     }
 
     private void Update()
     {
+        if (isReturned) return;
         switch (sunState)
         {
             case SunState.StraightFall:

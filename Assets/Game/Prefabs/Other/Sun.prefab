@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c023daf6646fab419ddb856dab8b138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onSunCollected: {fileID: 11400000, guid: 5cef3788d7b5d4a47b8b3138404623df, type: 2}
   sunKey: 400
   cost: 25
   fallSpeed: 50

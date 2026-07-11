@@ -36,6 +36,8 @@ public class ArmoredHeadZombie : BasicZombie
     {
         SpineController.SetSkinActive(armorSkins[currentStageIndex], false);
 
+        onPartDropped?.Raise();
+
         var armor = PoolManager.Instance.GetZombie<BodyPart>(armorPartKey, headSpawnPoint.position, Quaternion.identity);
         armor.Init(GetGroundY(), 12);
     }

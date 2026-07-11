@@ -9,6 +9,10 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
         public int sortingBonus;
     }
 
+    [Header("Events")]
+    [SerializeField] private ProjectileHitEvent onProjectileHit;
+    [SerializeField] private ProjectileHitType normalType;
+
     [Header("References")]
     [SerializeField] protected ProjectileData data;
     [SerializeField] private PoolKey projectileKey;
@@ -73,6 +77,12 @@ public abstract class ProjectileBase : MonoBehaviour, IPoolable
         shadow.transform.rotation = Quaternion.identity;
     }
     public virtual void OnDespawn() => spawnCell = null;
+
+    protected void PlayHitSound(ZombieBase zombie)
+    {
+        var type = (zombie != null && zombie.ArmorHP > 0) ? zombie.ArmorHitType : normalType;
+        onProjectileHit?.Raise(type);
+    }
 
     protected void ReturnPool()
     {

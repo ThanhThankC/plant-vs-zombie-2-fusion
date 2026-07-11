@@ -1,9 +1,12 @@
 using Spine;
-using Spine.Unity;
 using UnityEngine;
 
 public class Peashooter : PlantBase
 {
+    [Header("Events")]
+    [SerializeField] protected PlantAttackEvent onPlantAttack;
+    [SerializeField] protected PlantAttackType attackType;
+
     [Header("Attack")]
     [SerializeField] protected PoolKey projectileKey;
     [SerializeField] private Transform attackPoint;
@@ -87,6 +90,7 @@ public class Peashooter : PlantBase
     {
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
+            onPlantAttack.Raise(attackType);
             var pea = PoolManager.Instance.Get<PeaProjectile>(projectileKey, attackPoint.position, Quaternion.identity);
             var effect = pea.HasEffect ? Data.CreateOnHitEffect() : null;
             pea.Init(Vector3.right, OccupiedCell, effect);

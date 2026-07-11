@@ -11,6 +11,10 @@ public class ZombieManager : Singleton<ZombieManager>
         public ZombiePoolKey zombieKey;
     }
 
+    [Header("Events")]
+    [SerializeField] private ZombieDiedEvent onZombieDied;
+
+    [Header("References")]
     [SerializeField] private List<ZombieEntry> zombieEntries;
 
     public IReadOnlyList<ZombieBase> ActiveZombies => activeZombies;
@@ -28,6 +32,9 @@ public class ZombieManager : Singleton<ZombieManager>
             dataLookup[entry.data.zombieType] = entry.data;
         }
     }
+
+    private void OnEnable() => onZombieDied.OnRaised += OnZombieDied;
+    private void OnDisable() => onZombieDied.OnRaised -= OnZombieDied;
 
     public ZombieBase Spawn(ZombieType zombieType, int row)
     {

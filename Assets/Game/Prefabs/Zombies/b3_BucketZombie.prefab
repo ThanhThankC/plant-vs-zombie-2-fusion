@@ -461,10 +461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856fbc4e6dfe05c45a81b687bba76263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onZombieDied: {fileID: 11400000, guid: 6ba5282296502f046b3fa5cc342aa85b, type: 2}
   zombieKey: 2
   cellTracker: {fileID: 28731187573992062}
   ashKey: 200
   ashPoint: {fileID: 6150453036483580311}
+  onPartDropped: {fileID: 11400000, guid: 00f28cd8d3e74b2488668e5f6813c691, type: 2}
   armKey: 100
   headKey: 101
   armSpawnPoint: {fileID: 6617238643899918114}

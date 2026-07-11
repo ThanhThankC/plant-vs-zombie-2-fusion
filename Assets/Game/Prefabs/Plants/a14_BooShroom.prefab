@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantKey: 213
+  onEffectActivate: {fileID: 11400000, guid: 645c570b7d6c1e543b79c467a94b4f44, type: 2}
+  effectType: 5
   booExplosionPrefab: {fileID: 408556868125713911, guid: 230a817a15454b04a98422f5e01e45f3, type: 3}
   booPoint: {fileID: 8199095871702279174}
 --- !u!114 &4018880855120375961

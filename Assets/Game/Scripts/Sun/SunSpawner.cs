@@ -46,7 +46,7 @@ public class SunSpawner : MonoBehaviour
     {
         //TODO: Variable Conventions
         Cell leftBottomCell = GridManager.Instance.GetCell(0, 1);
-        Cell rightTopCell = GridManager.Instance.GetCell(5 - 1, 12 - 1);
+        Cell rightTopCell = GridManager.Instance.GetCell(5 - 1, 10 - 1);
 
         if (leftBottomCell == null || rightTopCell == null) return;
         landingOffsetXRange = new Vector2(leftBottomCell.Position.x, rightTopCell.Position.x);
@@ -71,6 +71,6 @@ public class SunSpawner : MonoBehaviour
         float targetPosY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
 
         var sun = PoolManager.Instance.Get<Sun>(sunKey, pos, Quaternion.identity);
-        sun.InitStraight(targetPosY);
+        sun.InitStraight(targetPosY, SunManager.Instance.SunCounterPos);
     }
 }
