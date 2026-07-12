@@ -17,7 +17,7 @@ MonoBehaviour:
   plantType: 8
   tier: 1
   maxHP: 400
-  sunCost: 0
+  sunCost: 150
   firstcooldown: 0
   cooldown: 0
   isInvincible: 1

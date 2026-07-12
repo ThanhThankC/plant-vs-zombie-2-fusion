@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(SkeletonAnimation))]
 public class ZombieMovement : MonoBehaviour
 {
+    [Header("Event - Lose Trigger")]
+    [SerializeField] private ZombieReachedEvent onReachedEnd;
+
     [SerializeField] private float baseSpeedMultiplier = 3f;
 
     private SkeletonAnimation skeletonAnim;
@@ -12,15 +15,23 @@ public class ZombieMovement : MonoBehaviour
     private float speedMultiplier = 1f;
     private Vector3 targetPosition;
     private bool isMoving = false;
+    private bool reachedEndFired = false;
 
     private void Awake()
     {
         skeletonAnim = GetComponent<SkeletonAnimation>();
     }
 
-    private void OnEnable() => skeletonAnim.AnimationState.Event += OnSpineEvent;
+    private void OnEnable()
+    {
+        skeletonAnim.AnimationState.Event += OnSpineEvent;
+        reachedEndFired = false;    
+    }
 
-    private void OnDisable() => skeletonAnim.AnimationState.Event -= OnSpineEvent;
+    private void OnDisable()
+    {
+        skeletonAnim.AnimationState.Event -= OnSpineEvent;
+    }
 
     private void Update()
     {
@@ -29,6 +40,17 @@ public class ZombieMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
             isMoving = false;
+
+        CheckLoseThreshold();
+    }
+
+    private void CheckLoseThreshold()
+    {
+        if (reachedEndFired) return;
+        if (transform.position.x > GridManager.Instance.LoseThresholdX) return;
+
+        reachedEndFired = true;
+        onReachedEnd?.Raise();
     }
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)

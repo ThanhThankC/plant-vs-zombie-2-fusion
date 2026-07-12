@@ -13,6 +13,9 @@ public class PlantManager : Singleton<PlantManager>
 
     [SerializeField] private PlantEntry[] plantEntries;
 
+    [Header("Events")]
+    [SerializeField] private SunCollectedEvent onSunCollected;
+
     public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
     public IReadOnlyList<PlantData> AllPlantData => dataList;
@@ -79,8 +82,10 @@ public class PlantManager : Singleton<PlantManager>
                 DestroyPlantAt(cell, result.GetFieldType());
             }
 
-            //var card = FindCardByType(dragContext.PlantType);
-            //card?.TriggerCooldown();
+            var card = BattleStarter.Instance.GetCard(dragContext.PlantType);
+            card?.TriggerCooldown();
+
+            onSunCollected?.Raise(-card.Cost);
         }
 
         PlantBase plantToPlace;

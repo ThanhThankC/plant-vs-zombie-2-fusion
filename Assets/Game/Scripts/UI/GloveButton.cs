@@ -23,7 +23,7 @@ public class GloveButton : MonoBehaviour, IDraggableButton, ISelectableButton
 
     private void OnDestroy()
     {
-        dragController.OnDragEnd -= Deselect;
+        if (dragController != null) dragController.OnDragEnd -= Deselect;
     }
 
     public void OnPointerClick(PointerEventData eventData)

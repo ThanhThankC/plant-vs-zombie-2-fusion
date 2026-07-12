@@ -7,12 +7,14 @@ public class PotatoMine : PlantBase
 {
     [SerializeField] private int waitingTotal = 500;
 
+    private BoxCollider2D collider2d;
     private int waitingIndex;
     private bool isRecovered;
     private bool isAttacking;
 
     private void OnEnable()
     {
+        collider2d = transform.GetComponent<BoxCollider2D>();
         skeletonAnim.AnimationState.Event += OnSpineEvent;
         skeletonAnim.AnimationState.Complete += OnSpineComplete;
     }
@@ -28,6 +30,8 @@ public class PotatoMine : PlantBase
         waitingIndex = 0;
         isAttacking = false;
         isRecovered = false;
+        CanBeEaten = true;
+        collider2d.isTrigger = true;
         skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_PLANT_IDLE, true);
     }
 
@@ -49,6 +53,8 @@ public class PotatoMine : PlantBase
         {
             skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
             isRecovered = true;
+            collider2d.isTrigger = true;
+            CanBeEaten = false;
         }
 
         if (trackEntry.Animation.Name == AnimEvents.ANIM_PLANT_IDLE)

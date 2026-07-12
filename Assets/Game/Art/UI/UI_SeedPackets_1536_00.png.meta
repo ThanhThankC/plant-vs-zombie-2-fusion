@@ -719,7 +719,7 @@ TextureImporter:
         width: 249
         height: 159
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -727,6 +727,48 @@ TextureImporter:
       bones: []
       spriteID: 1bfb02e48faa76944b9d81a0419918d1
       internalID: 1629657829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mask
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 2362
+        width: 238
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d57b21366c4604c41be82e6b694c3185
+      internalID: -526722996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EmptyCard
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 2363
+        width: 233
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 228cd3eccb1fb6f46a7daf01faa9597d
+      internalID: -348900761
       vertices: []
       indices: 
       edges: []
@@ -744,7 +786,9 @@ TextureImporter:
     nameFileIdTable:
       BackCard: -101715635
       CardSelected: 1629657829
+      EmptyCard: -348900761
       Fontcard: 460469061
+      Mask: -526722996
       UI_SeedPackets_1536_00_1: -589353462
       a10_icestorm: 880234241
       a11_potatomine: -1045848907

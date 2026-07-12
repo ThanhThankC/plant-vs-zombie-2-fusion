@@ -40,18 +40,21 @@ public class Sun : MonoBehaviour, IPoolable
         tweenAnim = GetComponent<TweenAnimator>();
     }
 
-    public void InitStraight(float groundPosY, Vector3 uiTargetPos)
+    private void Start()
+    {
+        uiPos = SunManager.Instance.SunCounterPos;
+    }
+
+    public void InitStraight(float groundPosY)
     {
         groundPos = new Vector3(transform.position.x, groundPosY, 0f);
         sunState = SunState.StraightFall;
-        uiPos = uiTargetPos;
     }
 
     public void InitCurved(Vector3 groundPosY)
     {
         this.groundPos = groundPosY;
         sunState = SunState.CurvedFall;
-        onSunCollected?.Raise(cost);
     }
 
     private void Update()
@@ -131,6 +134,7 @@ public class Sun : MonoBehaviour, IPoolable
         if (isReturned) return;
         isReturned = true;
 
+        onSunCollected?.Raise(cost);
         PoolManager.Instance.Release(sunKey, this);
     }
 }

@@ -25,23 +25,19 @@ public class MainLoadingController : MonoBehaviour
 
         float elapsed = 0f;
 
-        while (op.progress < 0.9f || elapsed < minLoadTime)
+        while (elapsed < minLoadTime)
         {
             elapsed += Time.deltaTime;
-
-            float realProgress = op.progress / 0.9f;
-            float timeProgress = elapsed / minLoadTime;
-            float display = Mathf.Max(realProgress, timeProgress);
-
             if (fillBar != null)
-                fillBar.fillAmount = Mathf.Clamp01(display);
-
+                fillBar.fillAmount = elapsed / minLoadTime;
             yield return null;
         }
 
-        if (fillBar != null) fillBar.fillAmount = 1f;
-        yield return new WaitForSeconds(0.3f); 
+        while (op.progress < 0.9f)
+            yield return null;
 
+        if (fillBar != null) fillBar.fillAmount = 1f;
+        yield return new WaitForSeconds(0.3f);
         op.allowSceneActivation = true;
     }
 }

@@ -8,7 +8,9 @@ public class GridManager : Singleton<GridManager>
     [SerializeField] private Vector2 cellSize = Vector2.one;
     [SerializeField] private float houseDistance = 3f;
     [SerializeField] private float leftScreenDistance = 2f;
+    [SerializeField] private float loseThresholdX = -12f;
 
+    public float LoseThresholdX => loseThresholdX;
     public const int ZombieSpawnCol = 11;
     public Vector2 CellSize => cellSize;
     public int Col => maxCol;

@@ -10,8 +10,8 @@ public class TimeManager : MonoBehaviour
 
     private void Start()
     {
-        speedBtn.onClick.AddListener(SpeedDown);
-        normalBtn.onClick.AddListener(NormalSpeed);
+        //speedBtn.onClick.AddListener(SpeedDown);
+        //normalBtn.onClick.AddListener(NormalSpeed);
     }
 
     private void Update()

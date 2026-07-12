@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +9,9 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     [SerializeField] private Image cardImage;
     [SerializeField] private Image selectedFrame;
 
+    [Header("Cost")]
+    [SerializeField] private TextMeshProUGUI sunCostText;
+
     [Header("Cooldown Mask")]
     [SerializeField] private GameObject cooldownMask;
     [SerializeField] private Image cooldownFillImage;
@@ -16,6 +20,7 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     [SerializeField] private GameObject sunMask;
 
     public SelectionCard SelectionCard { get; private set; }
+    public int Cost { get; private set; }
 
     private PlantManager plantManager;
     private DragController dragController;
@@ -44,9 +49,10 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     {
         if (data == null) return;
         this.data = data;
+        Cost = data.sunCost;
         plantType = data.plantType;
         if (cardImage != null) cardImage.sprite = data.cardSprite;
-
+        if (sunCostText != null) sunCostText.text = data.sunCost.ToString();
     }
 
     public void EnableBattle()
@@ -55,6 +61,7 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
         dragController.OnDragEnd += Deselect;
         sunManager.OnSunChanged += OnSunChanged;
         StartCooldown(data.firstcooldown);
+        UpdateSunMask(sunManager.TotalSun);
     }
 
     private void Update()
@@ -79,14 +86,6 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
 
     private void StartCooldown(float duration)
     {
-        if (!CanUse())
-        {
-            AudioManager.Instance.PlayCardDenied();
-            return;
-        }
-
-        AudioManager.Instance.PlayCardSelect();
-
         isOnCooldown = true;
         cooldownTimer = duration;
         totalCooldownDuration = duration;
@@ -97,14 +96,6 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
 
     private void EndCooldown()
     {
-        if (!CanUse())
-        {
-            AudioManager.Instance.PlayCardDenied();
-            return;
-        }
-
-        AudioManager.Instance.PlayCardSelect();
-
         isOnCooldown = false;
         cooldownTimer = 0;
 
@@ -117,7 +108,10 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     private void UpdateSunMask(int currentSun)
     {
         if (sunMask == null || data == null) return;
-        sunMask.SetActive(currentSun < data.sunCost);
+        bool canAfford = currentSun >= data.sunCost;
+        sunMask.SetActive(!canAfford);
+        if (sunCostText != null)
+            sunCostText.color = canAfford ? Color.white : Color.red;
     }
 
     private bool CanUse()
@@ -136,6 +130,14 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     {
         if (!enableBattle) return;
 
+        if (!CanUse())
+        {
+            AudioManager.Instance.PlayCardDenied();
+            return;
+        }
+
+        AudioManager.Instance.PlayCardSelect();
+
         dragController.RefreshTool();
         plantManager.OnCardClicked(plantType);
         dragController.BeginDrag(ToolType.None);
@@ -146,6 +148,15 @@ public class CardPlant : MonoBehaviour, IDraggableButton, ISelectableButton
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!enableBattle) return;
+
+        if (!CanUse())
+        {
+            AudioManager.Instance.PlayCardDenied();
+            return;
+        }
+
+        AudioManager.Instance.PlayCardSelect();
+
 
         dragController.RefreshTool();
         plantManager.OnCardClicked(plantType);

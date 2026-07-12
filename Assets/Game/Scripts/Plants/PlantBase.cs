@@ -15,7 +15,7 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
     public Cell OccupiedCell { get; private set; }
     public FieldType OccupiedFieldType { get; private set; }
     public bool IsInvincible { get; private set; }
-    public bool CanBeEaten { get; private set; }
+    public bool CanBeEaten { get; protected set; }
     public bool IsGhost { get; private set; }
     public PlantVisualHandler VisualHandler { get; private set; }
 

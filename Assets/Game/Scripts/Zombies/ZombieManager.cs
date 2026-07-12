@@ -13,15 +13,19 @@ public class ZombieManager : Singleton<ZombieManager>
 
     [Header("Events")]
     [SerializeField] private ZombieDiedEvent onZombieDied;
+    [SerializeField] private LevelClearedEvent onLevelCleared;
 
     [Header("References")]
     [SerializeField] private List<ZombieEntry> zombieEntries;
+    [SerializeField] private float distanceSpawn = 3f;
 
     public IReadOnlyList<ZombieBase> ActiveZombies => activeZombies;
 
     private Dictionary<ZombieType, ZombiePoolKey> keyLookup = new();
     private Dictionary<ZombieType, ZombieData> dataLookup = new();
     private readonly List<ZombieBase> activeZombies = new();
+
+    private bool allWavesSpawned = false;
 
     protected override void Awake()
     {
@@ -36,6 +40,12 @@ public class ZombieManager : Singleton<ZombieManager>
     private void OnEnable() => onZombieDied.OnRaised += OnZombieDied;
     private void OnDisable() => onZombieDied.OnRaised -= OnZombieDied;
 
+    public void NotifyAllWavesSpawned()
+    {
+        allWavesSpawned = true;
+        CheckLevelCleared();  
+    }
+
     public ZombieBase Spawn(ZombieType zombieType, int row)
     {
         if (!keyLookup.TryGetValue(zombieType, out var key))
@@ -43,11 +53,13 @@ public class ZombieManager : Singleton<ZombieManager>
             Debug.LogWarning($"[ZombieManager] Zombie type not found: {zombieType}!");
             return null;
         }
-        
+
         var spawnCell = GridManager.Instance.GetCell(row, GridManager.ZombieSpawnCol);
         if (spawnCell == null) return null;
 
-        var zombie = PoolManager.Instance.GetZombie<ZombieBase>(key, spawnCell.transform.position, Quaternion.identity);
+        Vector3 spawnPos = spawnCell.transform.position + new Vector3(distanceSpawn, 0f, 0f);
+
+        var zombie = PoolManager.Instance.GetZombie<ZombieBase>(key, spawnPos, Quaternion.identity);
         zombie.Init(dataLookup[zombieType]);
 
         RegisterZombie(zombie);
@@ -63,6 +75,13 @@ public class ZombieManager : Singleton<ZombieManager>
     public void OnZombieDied(ZombieBase zombie)
     {
         activeZombies.Remove(zombie);
+    }
+
+    private void CheckLevelCleared()
+    {
+        if (!allWavesSpawned) return;
+        if (activeZombies.Count != 0) return;
+        onLevelCleared?.Raise();
     }
 
     public bool HasZombieInRow(int row, float fromPosX)

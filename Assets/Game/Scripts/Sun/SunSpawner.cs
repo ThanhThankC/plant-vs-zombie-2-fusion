@@ -2,43 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SunSpawner : MonoBehaviour
+public class SunSpawner : Singleton<SunSpawner>
 {
     [SerializeField] private PoolKey sunKey;
     [SerializeField] List<SunData> sunDatas;
 
     [SerializeField] private float spawnHeight = 3f;
-    
+
     private float firstDuration;
     private float interval;
     private Vector2 landingOffsetXRange;
     private Vector2 landingOffsetYRange;
     private bool autoSpawn = true;
+    private bool spawningStarted;
 
-    //TODO: Game State Manager Conventions
-    private bool isGameOver;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         InitData();
     }
 
     private void Start()
     {
         if (!autoSpawn) return;
-        InitEdge();
-        StartCoroutine(SpawnSun());
+        InitData();
     }
 
     private void InitData()
     {
+        if (sunDatas == null || GameSettings.SelectedLevel >= sunDatas.Count) return;
         var data = sunDatas[GameSettings.SelectedLevel];
         if (data == null) return;
-
         SunManager.Instance.InitSun(data.startingSun);
         autoSpawn = data.autoSpawn;
         firstDuration = data.firstDuration;
         interval = data.interval;
+    }
+
+    public void StartSpawning()
+    {
+        if (!autoSpawn || spawningStarted) return;
+        spawningStarted = true;
+        InitEdge();
+        StartCoroutine(SpawnSun());
     }
 
     private void InitEdge()
@@ -55,7 +61,8 @@ public class SunSpawner : MonoBehaviour
     IEnumerator SpawnSun()
     {
         yield return new WaitForSeconds(firstDuration);
-        while (!isGameOver)
+        while (GameFlowManager.Instance.CurrentState != GameState.Win
+            && GameFlowManager.Instance.CurrentState != GameState.Lose)
         {
             CreateSun();
             yield return new WaitForSeconds(interval);
@@ -70,6 +77,6 @@ public class SunSpawner : MonoBehaviour
         float targetPosY = Random.Range(landingOffsetYRange.x, landingOffsetYRange.y);
 
         var sun = PoolManager.Instance.Get<Sun>(sunKey, pos, Quaternion.identity);
-        sun.InitStraight(targetPosY, SunManager.Instance.SunCounterPos);
+        sun.InitStraight(targetPosY);
     }
 }

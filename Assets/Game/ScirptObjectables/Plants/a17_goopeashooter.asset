@@ -20,11 +20,14 @@ MonoBehaviour:
   sunCost: 0
   firstcooldown: 0
   cooldown: 0
-  behaviorType: 0
+  isInvincible: 0
   cardSprite: {fileID: 116727564, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 3
   effectDuration: 5
+  expireEffectDuration: 0
   effectDieDuration: 10
   damagePerTick: 5
+  damageSource: 0
   rangeRow: 0
-  explosionDamage: 0
+  aoeDamage: 0
+  notBeEaten: 0

@@ -26,13 +26,11 @@ public class WaveManager : Singleton<WaveManager>
         base.Awake();
     }
 
-    private void Start()
-    {
-        StartLevel(GameSettings.SelectedLevel);
-    }
+    public void StartLevel() => StartLevel(GameSettings.SelectedLevel);
 
     private void StartLevel(int level)
     {
+        if (waveDatas == null || level >= waveDatas.Length) return;
         currentWaveData = waveDatas[level];
         if (currentWaveData == null) return;
         StartCoroutine(RunWave());
@@ -50,6 +48,8 @@ public class WaveManager : Singleton<WaveManager>
             smallWaveIndex = 0;
             bigWaveIndex++;
         }
+
+        ZombieManager.Instance.NotifyAllWavesSpawned();
     }
 
     IEnumerator RunBigWave(List<SmallWave> smallWaves)
