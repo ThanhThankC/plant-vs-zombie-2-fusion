@@ -15,12 +15,12 @@ MonoBehaviour:
   plantName: Winter Melon
   plantID: 7
   plantType: 21
-  tier: 1
+  tier: 2
   maxHP: 300
   sunCost: 0
   firstcooldown: 0
   cooldown: 0
-  behaviorType: 0
+  isInvincible: 0
   cardSprite: {fileID: -2681557, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 2
   effectDuration: 4
@@ -29,4 +29,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  explosionDamage: 0
+  aoeDamage: 0
+  notBeEaten: 0

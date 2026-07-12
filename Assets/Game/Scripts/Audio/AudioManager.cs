@@ -46,7 +46,10 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private HitSound[] hitSounds;
     [SerializeField] private EffectSound[] effectSounds;
     [SerializeField] private PlantAttackSound[] plantAttackSounds;
-    [SerializeField] private Sound sunClickSfx;
+    [SerializeField] private Sound sunClickSfx; 
+    [SerializeField] private Sound cardSelectSfx;
+    [SerializeField] private Sound cardDeselectSfx;
+    [SerializeField] private Sound cardDeniedSfx;
 
     [Header("AudioSource Pool")]
     [SerializeField] private int poolSize = 10;
@@ -134,6 +137,9 @@ public class AudioManager : Singleton<AudioManager>
     }
 
     public void PlaySunlick() => PlaySound(sunClickSfx);
+    public void PlayCardSelect() => PlaySound(cardSelectSfx);
+    public void PlayCardDeselect() => PlaySound(cardDeselectSfx);
+    public void PlayCardDenied() => PlaySound(cardDeniedSfx);
 
     private AudioSource GetFreeAudioSource()
     {

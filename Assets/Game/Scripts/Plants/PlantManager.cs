@@ -12,11 +12,14 @@ public class PlantManager : Singleton<PlantManager>
     }
 
     [SerializeField] private PlantEntry[] plantEntries;
+
     public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
+    public IReadOnlyList<PlantData> AllPlantData => dataList;
 
     private Dictionary<PlantType, PoolKey> plantKeyLookup = new();
     private Dictionary<PlantType, PlantData> dataLookup = new();
+    private List<PlantData> dataList = new();
     private DragContext dragContext;
     private PlantBase ghostPlant;
 
@@ -27,6 +30,7 @@ public class PlantManager : Singleton<PlantManager>
         {
             plantKeyLookup[entry.data.plantType] = entry.plantKey;
             dataLookup[entry.data.plantType] = entry.data;
+            dataList.Add(entry.data);
         }
     }
 
@@ -63,14 +67,20 @@ public class PlantManager : Singleton<PlantManager>
             {
                 PlantActivator.Instance.Activate(ctx.PlantType, cell);
                 PoolManager.Instance.Release(ctx.Plant.PlantKey, ctx.Plant);
+                DestroyPlantAt(cell, result.GetFieldType());
             }
             ctx.SourceCell.ClearPlant(ctx.SourceFieldType);
         }
-
-        if (isFusion)
+        else if (ctx.DragSource == DragSource.Deck)
         {
-            PlantActivator.Instance.Activate(ctx.PlantType, cell);
-            DestroyPlantAt(cell, result.GetFieldType());
+            if (isFusion)
+            {
+                PlantActivator.Instance.Activate(ctx.PlantType, cell);
+                DestroyPlantAt(cell, result.GetFieldType());
+            }
+
+            //var card = FindCardByType(dragContext.PlantType);
+            //card?.TriggerCooldown();
         }
 
         PlantBase plantToPlace;
