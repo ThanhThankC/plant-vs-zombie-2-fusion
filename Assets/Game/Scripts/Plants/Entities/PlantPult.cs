@@ -49,6 +49,7 @@ public class PlantPult : PlantBase
 
     private void OnSpineComplete(TrackEntry trackEntry)
     {
+        if (IsGhost) return;
         bool hasZombie = ZombieManager.Instance.HasZombieInRow(OccupiedCell.Row, transform.position.x);
         if (hasZombie)
             PlayAttack();
@@ -106,6 +107,7 @@ public class PlantPult : PlantBase
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
             onPlantAttack.Raise(attackType);

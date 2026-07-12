@@ -79,6 +79,7 @@ public class Sunflower : PlantBase
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         if (e.Data.Name == AnimEvents.EVENT_SPECIAL)
         {
             var sun = PoolManager.Instance.Get<Sun>(sunKey, specialTransform.position, Quaternion.identity);

@@ -16,10 +16,12 @@ MonoBehaviour:
   plantID: 3
   plantType: 2
   tier: 1
-  maxHP: 400
-  sunCost: 0
-  firstcooldown: 0
-  cooldown: 0
+  description: Wall-nuts have hard shells which you can use to protect your other
+    plants.
+  maxHP: 4000
+  sunCost: 50
+  firstcooldown: 5
+  cooldown: 20
   isInvincible: 1
   cardSprite: {fileID: -1446292102, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0
@@ -29,5 +31,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  explosionDamage: 0
-  canBeEaten: 0
+  aoeDamage: 0
+  notBeEaten: 0

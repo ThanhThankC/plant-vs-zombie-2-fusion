@@ -16,18 +16,20 @@ MonoBehaviour:
   plantID: 9
   plantType: 8
   tier: 1
-  maxHP: 400
+  description: Cherry Bombs can blow up all zombies in an area. They have a short
+    fuse so plant them near zombies.
+  maxHP: 0
   sunCost: 150
-  firstcooldown: 0
-  cooldown: 0
+  firstcooldown: 10
+  cooldown: 35
   isInvincible: 1
   cardSprite: {fileID: -52124541, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0
-  effectDuration: 0
-  expireEffectDuration: 0
+  effectDuration: 4
+  expireEffectDuration: 4
   effectDieDuration: 0
   damagePerTick: 0
   damageSource: 1
   rangeRow: 1
-  aoeDamage: 1000
+  aoeDamage: 1800
   notBeEaten: 0

@@ -16,10 +16,12 @@ MonoBehaviour:
   plantID: 2
   plantType: 11
   tier: 1
-  maxHP: 300
-  sunCost: 200
-  firstcooldown: 2.38
-  cooldown: 1.48
+  description: Pumpkins can be planted on top of other plants to provide a tough
+    additional layer of armor.
+  maxHP: 4000
+  sunCost: 150
+  firstcooldown: 4
+  cooldown: 12
   isInvincible: 0
   cardSprite: {fileID: 14184675, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0

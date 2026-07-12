@@ -135,4 +135,5 @@ public class PlantManager : Singleton<PlantManager>
     }
 
     public PlantData GetPlantData(PlantType plantType) => dataLookup[plantType];
+    public PoolKey GetPoolKey(PlantType plantType) => plantKeyLookup[plantType];
 }

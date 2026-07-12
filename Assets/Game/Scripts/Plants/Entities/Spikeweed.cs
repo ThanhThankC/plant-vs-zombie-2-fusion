@@ -58,6 +58,7 @@ public class Spikeweed : PlantBase
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         if (!isAttacking) return;
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)

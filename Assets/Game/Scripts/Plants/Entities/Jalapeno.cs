@@ -20,6 +20,7 @@ public class Jalapeno : PlantBase
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
             PlantActivator.Instance.Activate(PlantType, OccupiedCell);

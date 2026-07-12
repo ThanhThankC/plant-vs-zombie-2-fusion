@@ -19,12 +19,16 @@ public class SelectionCard : MonoBehaviour, IPointerClickHandler
     private bool isAnimating;
     private bool isReturned = true;
     private Transform occupiedSlot;
+    private PoolKey plantKey;
+    private PlantData plantData;
 
-    public void Init(Canvas root, DeckCardSlot deck, Transform slot)
+    public void Init(Canvas root, DeckCardSlot deck, Transform slot, PlantData data, PoolKey key)
     {
         rootCanvas = root;
         deckBar = deck;
         slotWrapper = slot;
+        plantKey = key;
+        plantData = data;
         Init(false);
     }
 
@@ -54,6 +58,7 @@ public class SelectionCard : MonoBehaviour, IPointerClickHandler
         isReturned = false;
         occupiedSlot = targetSlot;
         AudioManager.Instance.PlayCardSelect();
+        PlantPreviewManager.Instance.Show(plantKey, plantData);
 
         transform.SetParent(rootCanvas.transform, worldPositionStays: true);
         transform.DOMove(targetSlot.position, MoveDuration)
@@ -72,6 +77,7 @@ public class SelectionCard : MonoBehaviour, IPointerClickHandler
         isAnimating = true;
         isReturned = true;
         AudioManager.Instance.PlayCardDeselect();
+        PlantPreviewManager.Instance.Show(plantKey, plantData);
 
         if (occupiedSlot != null)
         {

@@ -16,6 +16,8 @@ MonoBehaviour:
   plantID: 7
   plantType: 23
   tier: 2
+  description: Spikeweeds destroy one rolling zombie and hurt any zombies that step
+    on them.
   maxHP: 300
   sunCost: 0
   firstcooldown: 0

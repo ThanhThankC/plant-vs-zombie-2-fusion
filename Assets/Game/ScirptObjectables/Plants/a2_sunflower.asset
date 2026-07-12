@@ -16,10 +16,12 @@ MonoBehaviour:
   plantID: 2
   plantType: 1
   tier: 1
+  description: Sunflowers are essential for you to produce extra sun. Try planting
+    as many as you can!
   maxHP: 300
   sunCost: 50
   firstcooldown: 0
-  cooldown: 2
+  cooldown: 5
   isInvincible: 0
   cardSprite: {fileID: 408804793, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0

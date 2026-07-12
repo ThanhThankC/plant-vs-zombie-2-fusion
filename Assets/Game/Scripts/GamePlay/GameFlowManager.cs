@@ -41,7 +41,6 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     [Header("Win")]
     [SerializeField] private GameObject cupObject;
-    [SerializeField] private float cupSpawnDelay = 0.5f;
 
     [Header("Lose ")]
     [SerializeField] private GameObject loseOverlay;
@@ -123,9 +122,9 @@ public class GameFlowManager : Singleton<GameFlowManager>
 
     private void EnterCardSelection()
     {
-        SetState(GameState.CardSelection);
         Vector3 target = camOriginalPos + new Vector3(camShiftRightX, 0f, 0f);
-        cameraTransform.DOMove(target, camDuration).SetEase(camEase);
+        cameraTransform.DOMove(target, camDuration).SetEase(camEase)
+            .OnComplete(() => SetState(GameState.CardSelection));
         SetActive(selectionPanel, true);
         SetActive(startButton, true);
         PlayBGM(bgmSelection);

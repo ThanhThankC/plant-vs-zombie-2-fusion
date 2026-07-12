@@ -16,6 +16,7 @@ MonoBehaviour:
   plantID: 1
   plantType: 9
   tier: 2
+  description: 
   maxHP: 400
   sunCost: 0
   firstcooldown: 0
@@ -23,11 +24,11 @@ MonoBehaviour:
   isInvincible: 1
   cardSprite: {fileID: 880234241, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 1
-  effectDuration: 4
-  expireEffectDuration: 4
+  effectDuration: 3
+  expireEffectDuration: 5
   effectDieDuration: 0
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  explosionDamage: 115
-  canBeEaten: 0
+  aoeDamage: 0
+  notBeEaten: 0

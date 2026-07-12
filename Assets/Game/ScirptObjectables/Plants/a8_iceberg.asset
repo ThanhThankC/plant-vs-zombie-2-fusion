@@ -16,10 +16,11 @@ MonoBehaviour:
   plantID: 8
   plantType: 7
   tier: 1
-  maxHP: 400
+  description: Iceberg Lettuces freeze a zombie when stepped on.
+  maxHP: 0
   sunCost: 0
-  firstcooldown: 0
-  cooldown: 0
+  firstcooldown: 5
+  cooldown: 20
   isInvincible: 1
   cardSprite: {fileID: -557755335, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 1
@@ -29,5 +30,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  explosionDamage: 0
-  canBeEaten: 0
+  aoeDamage: 0
+  notBeEaten: 0

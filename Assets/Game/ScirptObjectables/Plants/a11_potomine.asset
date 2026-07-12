@@ -16,10 +16,12 @@ MonoBehaviour:
   plantID: 1
   plantType: 10
   tier: 1
-  maxHP: 40
+  description: Potato Mines explode on contact, but they take time to arm. Plant
+    them ahead of zombies.
+  maxHP: 300
   sunCost: 25
-  firstcooldown: 1.32
-  cooldown: 3.03
+  firstcooldown: 4
+  cooldown: 20
   isInvincible: 0
   cardSprite: {fileID: -1045848907, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0
@@ -29,5 +31,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  aoeDamage: 0
+  aoeDamage: 1800
   notBeEaten: 0

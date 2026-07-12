@@ -35,6 +35,12 @@ public class PlantVisualHandler : MonoBehaviour
         SetAlpha(1f);
     }
 
+    public void SetDisplayVisual()
+    {
+        shadow.SetActive(false);
+        meshRenderer.sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.DisplayPlant);
+    }
+
     public void SetAlpha(float alpha)
     {
         var color = skeletonAnim.Skeleton.GetColor();

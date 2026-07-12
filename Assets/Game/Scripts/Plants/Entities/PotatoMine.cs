@@ -49,6 +49,7 @@ public class PotatoMine : PlantBase
 
     private void OnSpineComplete(TrackEntry trackEntry)
     {
+        if (IsGhost) return;
         if (trackEntry.Animation.Name == AnimEvents.ANIM_RECOVER)
         {
             skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
@@ -68,6 +69,7 @@ public class PotatoMine : PlantBase
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         if (!isAttacking) return;
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)

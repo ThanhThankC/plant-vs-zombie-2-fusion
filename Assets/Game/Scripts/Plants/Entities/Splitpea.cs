@@ -7,6 +7,7 @@ public class Splitpea : Peashooter
 
     protected override void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
+        if (IsGhost) return;
         base.OnSpineEvent(trackEntry, e);
 
         if (e.Data.Name == AnimEvents.EVENT_BACK_ATTACK)

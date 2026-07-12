@@ -1116,6 +1116,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 809327209}
   - {fileID: 1544476747}
   - {fileID: 1904642797}
   - {fileID: 1492082491}
@@ -1164,7 +1165,6 @@ MonoBehaviour:
   hudRoot: {fileID: 1967343559}
   pausePanel: {fileID: 730729106}
   cupObject: {fileID: 345364497}
-  cupSpawnDelay: 0.5
   loseOverlay: {fileID: 1287672713}
   losePanel: {fileID: 309254108}
   loseOverlayFadeDuration: 1.2
@@ -1284,7 +1284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &345364498
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2463,6 +2463,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 799085708}
   m_CullTransparentMesh: 1
+--- !u!1 &809327208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809327209}
+  - component: {fileID: 809327210}
+  m_Layer: 0
+  m_Name: PlantPreviewManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &809327209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809327208}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 337601494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &809327210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809327208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1fa5213e8e3f74fa797dab0e1d0a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantName: {fileID: 4957754163953013600}
+  plantDescription: {fileID: 2633229756527210633}
+  spawnPoint: {fileID: 4292029904629341633}
+  template: 200
+  templateData: {fileID: 11400000, guid: 5d590f6a49e22d6448f65eb91f337ea5, type: 2}
 --- !u!1 &854098781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3043,7 +3092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1043517679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7725,7 +7774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: -68}
+  m_AnchoredPosition: {x: -70, y: -68}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2439512616006694412
@@ -7887,7 +7936,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Create a Power Tile
+  m_text: Peashooters are your first line of defense. They shoot peas at attacking
+    zombies.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5047bbf75daf43d4f908501a2cfde19b, type: 2}
   m_sharedMaterial: {fileID: 2601742757223315681, guid: 5047bbf75daf43d4f908501a2cfde19b, type: 2}
@@ -7896,8 +7946,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281556839
-  m_fontColor: {r: 0.4037736, g: 0.37066025, b: 0.20036311, a: 1}
+    rgba: 4280646359
+  m_fontColor: {r: 0.8415094, g: 0.4778448, b: 0.14448556, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7914,8 +7964,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 39.6
+  m_fontSizeBase: 39.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7924,7 +7974,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -0.58
+  m_characterSpacing: 3.14
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -9700,8 +9750,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Peashooter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5047bbf75daf43d4f908501a2cfde19b, type: 2}
+  m_sharedMaterial: {fileID: 2601742757223315681, guid: 5047bbf75daf43d4f908501a2cfde19b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11086,14 +11136,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1569166583, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 05df849c204b5bb46ae3ca9d8c1d073e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

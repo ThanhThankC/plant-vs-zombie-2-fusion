@@ -16,7 +16,8 @@ MonoBehaviour:
   plantID: 7
   plantType: 25
   tier: 2
-  maxHP: 300
+  description: 
+  maxHP: 4000
   sunCost: 0
   firstcooldown: 0
   cooldown: 0

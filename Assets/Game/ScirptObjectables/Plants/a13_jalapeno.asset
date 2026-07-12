@@ -16,10 +16,11 @@ MonoBehaviour:
   plantID: 13
   plantType: 12
   tier: 1
-  maxHP: 400
-  sunCost: 0
-  firstcooldown: 0
-  cooldown: 0
+  description: Jalapenos destroy an entire lane of zombies.
+  maxHP: 0
+  sunCost: 125
+  firstcooldown: 6
+  cooldown: 35
   isInvincible: 0
   cardSprite: {fileID: -239586362, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 5
@@ -29,5 +30,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 1
   rangeRow: 0
-  aoeDamage: 500
+  aoeDamage: 1800
   notBeEaten: 0

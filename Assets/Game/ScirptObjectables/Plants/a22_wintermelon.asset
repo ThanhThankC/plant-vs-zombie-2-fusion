@@ -16,6 +16,7 @@ MonoBehaviour:
   plantID: 7
   plantType: 21
   tier: 2
+  description: 
   maxHP: 300
   sunCost: 0
   firstcooldown: 0
@@ -29,5 +30,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  aoeDamage: 0
+  aoeDamage: 20
   notBeEaten: 0

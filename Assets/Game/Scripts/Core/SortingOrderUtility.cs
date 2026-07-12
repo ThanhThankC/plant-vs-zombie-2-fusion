@@ -13,7 +13,8 @@ public enum LayerType
     Shadow,
     Sun,
     GhostPlant,
-    Tool
+    Tool,
+    DisplayPlant,
 }
 
 public static class SortingOrderUtility
@@ -24,6 +25,7 @@ public static class SortingOrderUtility
     private const int sunOrderSpace = 145;
     private const int ghostPlantOrderSpace = 148;
     private const int toolOrderSpace = 150;
+    private const int displayPlantOrderSpace = 248;
 
     private const int rowOrderSpace = 20;
     private const int rearEffectPlantOrderSpace = 1;
@@ -61,6 +63,7 @@ public static class SortingOrderUtility
             LayerType.Sun => maxOrder + sunOrderSpace,
             LayerType.GhostPlant => maxOrder + ghostPlantOrderSpace,
             LayerType.Tool => maxOrder + toolOrderSpace,
+            LayerType.DisplayPlant => maxOrder + displayPlantOrderSpace,
             _ => startOrder
         };
     }

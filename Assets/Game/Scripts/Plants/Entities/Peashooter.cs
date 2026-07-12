@@ -37,6 +37,7 @@ public class Peashooter : PlantBase
 
     private void OnSpineComplete(TrackEntry trackEntry)
     {
+        if (IsGhost) return;
         bool hasZombie = ZombieManager.Instance.HasZombieInRow(OccupiedCell.Row, transform.position.x);
         if (hasZombie)
             PlayAttack();

@@ -35,7 +35,7 @@ public class CardSelectionManager : MonoBehaviour
 
             var card = Instantiate(cardPrefab, slot.transform);
             card.Init(data);
-            card.SelectionCard.Init(rootCanvas, deck, slot.transform);
+            card.SelectionCard.Init(rootCanvas, deck, slot.transform, data, PlantManager.Instance.GetPoolKey(data.plantType));
             BattleStarter.Instance.RegisterCard(card, data.plantType);
 
             var ghostCard = Instantiate(cardPrefab, slot.transform);

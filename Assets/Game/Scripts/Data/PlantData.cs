@@ -8,6 +8,8 @@ public class PlantData : ScriptableObject
     public int plantID;
     public PlantType plantType;
     public int tier;
+    [TextArea(3, 5)]
+    public string description;
 
     [Header("Stats")]
     public int maxHP = 300;

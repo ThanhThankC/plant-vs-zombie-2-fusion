@@ -91,6 +91,13 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
         ReturnPool();
     }
 
+    public void OnDisplay()
+    {
+        IsGhost = true;
+        VisualHandler.SetDisplayVisual();
+        skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
+    }
+
     private void ReturnPool()
     {
         if (isReturned) return;

@@ -16,11 +16,12 @@ MonoBehaviour:
   plantID: 7
   plantType: 22
   tier: 2
+  description: 
   maxHP: 300
   sunCost: 0
   firstcooldown: 0
   cooldown: 0
-  behaviorType: 0
+  isInvincible: 0
   cardSprite: {fileID: 245080857, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 5
   effectDuration: 0
@@ -29,4 +30,5 @@ MonoBehaviour:
   damagePerTick: 0
   damageSource: 0
   rangeRow: 0
-  explosionDamage: 0
+  aoeDamage: 40
+  notBeEaten: 0
