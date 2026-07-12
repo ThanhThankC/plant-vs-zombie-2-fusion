@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -320,7 +320,7 @@ TextureImporter:
         width: 45
         height: 47
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -328,6 +328,237 @@ TextureImporter:
       bones: []
       spriteID: b7d99811f92fcb747893f98bfb29b07a
       internalID: -958703164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressFill
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1749
+        width: 412
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414796d3e82dd7944b455b08cce83936
+      internalID: -898720782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressBlank
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1790
+        width: 431
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a2771175845d694e8dfe15d544ec331
+      internalID: -1659803546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Setting_fill
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 1012
+        width: 278
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 106c21c0841830f4d851f7f45964001c
+      internalID: 1729927689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Setting_blank
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 968
+        width: 305
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 295be49279c8a354d950624997ecb611
+      internalID: -83756147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brownbtn_normal
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 810
+        width: 160
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882f4099492044145aed35ceffb9a9e0
+      internalID: 1172028074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: brownbtn_pressed
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 888
+        width: 161
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ed02f6e2dde95e44a8da6bfd2a3c1f9
+      internalID: 1201158227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: purplebtn_pressed
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 887
+        width: 169
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dee37f9646a28043a4c53ea21650af2
+      internalID: 1450683859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: purplebtn
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 806
+        width: 168
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c20faf73d446512468ebac7c070fc50d
+      internalID: 981638799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pausebtn
+      rect:
+        serializedVersion: 2
+        x: 1327
+        y: 137
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687a83846537e714e906a880aeeb2975
+      internalID: 1837208580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pausebtn_pressed
+      rect:
+        serializedVersion: 2
+        x: 1406
+        y: 138
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df35f5ecd6dbdb949b13b770a1af849a
+      internalID: 1878864355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: redbtn
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 730
+        width: 168
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72b58947b73e7a441a0e2847322ff924
+      internalID: 238068622
       vertices: []
       indices: 
       edges: []
@@ -346,13 +577,24 @@ TextureImporter:
       Glove_Drag: -74283588
       Glove_Normal: 1584069838
       Glove_Pressed: -2040143286
+      ProgressBlank: -1659803546
+      ProgressFill: -898720782
       Progress_Blank: 1529014000
       Progress_Fill: -2056419658
       Progress_Flag: -178830358
+      Setting_blank: -83756147
+      Setting_fill: 1729927689
       Shovel_Drag: 1093986857
       Shovel_Normal: -1705859378
       Shovel_Pressed: -1954550789
+      brownbtn_normal: 1172028074
+      brownbtn_pressed: 1201158227
+      pausebtn: 1837208580
+      pausebtn_pressed: 1878864355
       progress_icon: -958703164
+      purplebtn: 981638799
+      purplebtn_pressed: 1450683859
+      redbtn: 238068622
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

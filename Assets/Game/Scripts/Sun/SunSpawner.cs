@@ -16,7 +16,6 @@ public class SunSpawner : MonoBehaviour
     private bool autoSpawn = true;
 
     //TODO: Game State Manager Conventions
-    private int currentLevel;
     private bool isGameOver;
 
     private void Awake()
@@ -33,7 +32,7 @@ public class SunSpawner : MonoBehaviour
 
     private void InitData()
     {
-        var data = sunDatas[currentLevel];
+        var data = sunDatas[GameSettings.SelectedLevel];
         if (data == null) return;
 
         SunManager.Instance.InitSun(data.startingSun);

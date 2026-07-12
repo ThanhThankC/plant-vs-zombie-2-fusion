@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaveManager : Singleton<WaveManager>
 {
-    [SerializeField] private List<WaveData> waveDatas;
+    [SerializeField] private WaveData[] waveDatas;
     //TODO: Variable Conventions
     [SerializeField] private int recentRowMemorySize = 3;
     [SerializeField] private float progressSize = 1.1f;
@@ -20,7 +20,6 @@ public class WaveManager : Singleton<WaveManager>
     private int smallWaveCount;
     private int bigWaveIndex;
     private int smallWaveIndex;
-    private int currentLevel;
 
     protected override void Awake()
     {
@@ -29,7 +28,7 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Start()
     {
-        StartLevel(currentLevel);
+        StartLevel(GameSettings.SelectedLevel);
     }
 
     private void StartLevel(int level)

@@ -21,9 +21,9 @@ public static class SortingOrderUtility
     private const int maxRow = 4;
     private const int startOrder = 5;
     private const int shadowOrder = 1;
-    private const int sunOrderSpace = 45;
-    private const int ghostPlantOrderSpace = 48;
-    private const int toolOrderSpace = 50;
+    private const int sunOrderSpace = 145;
+    private const int ghostPlantOrderSpace = 148;
+    private const int toolOrderSpace = 150;
 
     private const int rowOrderSpace = 20;
     private const int rearEffectPlantOrderSpace = 1;
