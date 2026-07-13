@@ -15,4 +15,4 @@ MonoBehaviour:
   startingSun: 50
   autoSpawn: 1
   firstDuration: 5
-  interval: 7
+  interval: 8

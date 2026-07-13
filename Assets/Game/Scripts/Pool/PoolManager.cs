@@ -164,6 +164,8 @@ public enum ZombiePoolKey
     BasicArm = 100,
     BasicHead = 101,
     Buckethead = 102,
+    Conehead = 103,
+    Brickhead = 104,
 
     //Zombie VFX
     BasicZombieAsh = 200,

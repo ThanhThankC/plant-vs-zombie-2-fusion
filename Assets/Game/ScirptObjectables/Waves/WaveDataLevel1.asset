@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: WaveDataLevel1
   m_EditorClassIdentifier: 
   prepareTime: 2
-  previews: 00000000020000000200000000000000
+  previews: 03000000020000000000000001000000
   bigWaves:
   - smallWaves:
     - spawnCount: 10
       maxWaveDuration: 30
       spawnInterval: 5
       entries:
-      - zombieType: 0
+      - zombieType: 1
+        weight: 61
+      - zombieType: 6
         weight: 61
     - spawnCount: 0
       maxWaveDuration: 16
@@ -28,7 +30,7 @@ MonoBehaviour:
       entries:
       - zombieType: 0
         weight: 37
-      - zombieType: 2
+      - zombieType: 1
         weight: 43
     - spawnCount: 2
       maxWaveDuration: 5

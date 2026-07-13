@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 127448632}
   - component: {fileID: 127448633}
   m_Layer: 5
-  m_Name: MusicSlider
+  m_Name: SoundFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,10 +382,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
-        m_MethodName: ChangeMusicVolume
-        m_Mode: 1
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: OnSfxSliderChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1252,6 +1252,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1364414179}
   - {fileID: 809327209}
   - {fileID: 2121668424}
   - {fileID: 1544476747}
@@ -2359,7 +2360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &730729107
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2630,8 +2631,8 @@ RectTransform:
   - {fileID: 1340282837}
   m_Father: {fileID: 2016145899}
   m_LocalEulerAnglesHint: {x: 0, y: 0.17, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -3.2000046, y: 0.3000002}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2706,7 +2707,7 @@ RectTransform:
   m_Father: {fileID: 116857517}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2.790001, y: 0}
   m_SizeDelta: {x: 9.81, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3128,13 +3129,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 337601495}
-        m_TargetAssemblyTypeName: GameFlowManager, PVZ2_Fusion_Runtime
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
         m_MethodName: OnPauseButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: PlayUISfx
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3e4115104e1e941458735492ff75e6fd, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3554,7 +3567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1043517679
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3588,7 +3601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 6612785385696020788, guid: 2168805e59aef3d4c8825571e07787cb, type: 3}
-  enableTiers: 01000000
+  enableTiers: 0100000002000000
   bannedPlants: 18000000
   rootCanvas: {fileID: 783798222}
   deck: {fileID: 159123533}
@@ -4823,6 +4836,150 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1364414178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364414179}
+  - component: {fileID: 1364414180}
+  - component: {fileID: 1364414181}
+  m_Layer: 0
+  m_Name: GameUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1364414179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364414178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 337601494}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364414180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364414178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46471bf6ea0e9548b3da250c542aad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 1351724898416231587}
+  sfxSlider: {fileID: 127448633}
+  sfxSource: {fileID: 1364414181}
+--- !u!82 &1364414181
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364414178}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1382457696
 GameObject:
   m_ObjectHideFlags: 0
@@ -5414,6 +5571,10 @@ MonoBehaviour:
     zombieKey: 0
   - data: {fileID: 11400000, guid: e381b9656e1bff04fa35fa9587b8e976, type: 2}
     zombieKey: 2
+  - data: {fileID: 11400000, guid: 4229c98258996d14f8f8b0cc17f26a7c, type: 2}
+    zombieKey: 1
+  - data: {fileID: 11400000, guid: 57a61117542b1b44e88863ba859129cd, type: 2}
+    zombieKey: 3
   distanceSpawn: 1
 --- !u!1 &1507986422
 GameObject:
@@ -5839,6 +6000,12 @@ MonoBehaviour:
   - key: 2
     prefab: {fileID: 8116654779533721438, guid: b1567301a454d6e4ab8db9f31b9008ed, type: 3}
     initialCapacity: 0
+  - key: 1
+    prefab: {fileID: 8116654779533721438, guid: ca421fdcc6d4c8444bde8a6423ed837f, type: 3}
+    initialCapacity: 0
+  - key: 3
+    prefab: {fileID: 8116654779533721438, guid: a223e7db3ebbc7744a76ebed1ba40375, type: 3}
+    initialCapacity: 0
   vfxEntries:
   - key: 200
     prefab: {fileID: 2619449527047706411, guid: f1faa14931f94e74b9ff04c92f7224cf, type: 3}
@@ -5851,6 +6018,12 @@ MonoBehaviour:
     initialCapacity: 0
   - key: 102
     prefab: {fileID: 4077329376876542730, guid: 119653ff5f1252545b4fef27d73676bf, type: 3}
+    initialCapacity: 0
+  - key: 103
+    prefab: {fileID: 4077329376876542730, guid: c7d056f3a516ebb4f80ca58f9258fa1c, type: 3}
+    initialCapacity: 0
+  - key: 104
+    prefab: {fileID: 4077329376876542730, guid: 0b0edb5a9fad30749937b8878ef1708d, type: 3}
     initialCapacity: 0
 --- !u!1 &1544476744
 GameObject:
@@ -5950,8 +6123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveDatas:
-  - {fileID: 11400000, guid: 956542e9b01e7c04fbd2f4a74f56e02a, type: 2}
   - {fileID: 11400000, guid: bb6969d69db89414d9f5987743d00d66, type: 2}
+  - {fileID: 11400000, guid: 956542e9b01e7c04fbd2f4a74f56e02a, type: 2}
   recentRowMemorySize: 3
   progressSize: 1.1
 --- !u!4 &1668378041
@@ -6248,7 +6421,6 @@ MonoBehaviour:
   bgmSourceA: {fileID: 1738110529}
   bgmSourceB: {fileID: 1738110528}
   fadeDuration: 1
-  masterVolume: 1
   midWaveThreshold: 2
   finalWaveOffset: 1
 --- !u!82 &1738110528
@@ -7065,9 +7237,9 @@ RectTransform:
   - {fileID: 1141814938}
   m_Father: {fileID: 6193073198881723463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 639.8, y: -50}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026018474
@@ -7121,6 +7293,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: PlayUISfx
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: df8d2d7cc58443b40b1568f45879aacb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8263,7 +8447,7 @@ RectTransform:
   m_Father: {fileID: 2227033127393123309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 2.790001, y: 0}
   m_SizeDelta: {x: 9.81, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8540,10 +8724,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MusicManager, Assembly-CSharp
-        m_MethodName: ChangeMusicVolume
-        m_Mode: 1
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: OnMusicSliderChanged
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9780,9 +9964,9 @@ RectTransform:
   - {fileID: 6378935893546912241}
   m_Father: {fileID: 6193073198881723463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 959.69995, y: -50}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3103400191568845439
@@ -10744,8 +10928,8 @@ RectTransform:
   - {fileID: 6169391207994605560}
   m_Father: {fileID: 6980343870751597787}
   m_LocalEulerAnglesHint: {x: 0, y: 0.17, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -3.2000046, y: 0.3000002}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11733,6 +11917,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: PlayUISfx
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: df8d2d7cc58443b40b1568f45879aacb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &5770713121095537277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12203,9 +12399,9 @@ RectTransform:
   - {fileID: 7112937063248353369}
   m_Father: {fileID: 6193073198881723463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 319.9, y: -50}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6122774987742605670
@@ -13451,6 +13647,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: PlayUISfx
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: df8d2d7cc58443b40b1568f45879aacb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &7419948607138355413
 GameObject:
   m_ObjectHideFlags: 0
@@ -13570,6 +13778,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1364414180}
+        m_TargetAssemblyTypeName: GameUIController, PVZ2_Fusion_Runtime
+        m_MethodName: PlayUISfx
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: df8d2d7cc58443b40b1568f45879aacb, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &7566039490717286956
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13586,9 +13806,9 @@ RectTransform:
   - {fileID: 4293251149377708758}
   m_Father: {fileID: 6193073198881723463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &7615657029886958682

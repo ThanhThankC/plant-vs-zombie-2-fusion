@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 1773783566374957657}
   - component: {fileID: 6964740978791303167}
   m_Layer: 0
-  m_Name: b3_BucketZombie
+  m_Name: b4_BrickheadZombie
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,8 +462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onZombieDied: {fileID: 11400000, guid: 6ba5282296502f046b3fa5cc342aa85b, type: 2}
-  armorHitType: 11
-  zombieKey: 2
+  armorHitType: 10
+  zombieKey: 3
   cellTracker: {fileID: 28731187573992062}
   ashKey: 200
   ashPoint: {fileID: 6150453036483580311}
@@ -473,10 +473,10 @@ MonoBehaviour:
   armSpawnPoint: {fileID: 6617238643899918114}
   headSpawnPoint: {fileID: 7283757162768166011}
   armorSkins:
-  - buckethead_1
-  - buckethead_2
-  - buckethead_3
-  armorPartKey: 102
+  - brickhead_1
+  - brickhead_2
+  - brickhead_3
+  armorPartKey: 104
 --- !u!114 &5409367681896376076
 MonoBehaviour:
   m_ObjectHideFlags: 0

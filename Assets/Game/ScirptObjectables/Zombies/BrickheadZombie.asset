@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d5712720e0d7324e9dc5d108fd9eff7, type: 3}
-  m_Name: BucketheadZombie
+  m_Name: BrickheadZombie
   m_EditorClassIdentifier: 
-  zombieName: Buckethead Zombie
+  zombieName: Conehead Zombie
   zombieID: 1
-  zombieType: 2
-  maxHP: 600
-  armorHP: 300
+  zombieType: 6
+  maxHP: 1000
+  armorHP: 320
   attackDamage: 30
   baseSpeedMultiplier: 1
   isEatAnim: 1

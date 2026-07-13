@@ -51,7 +51,7 @@ MonoBehaviour:
   onSunCollected: {fileID: 11400000, guid: 5cef3788d7b5d4a47b8b3138404623df, type: 2}
   sunKey: 400
   cost: 25
-  fallSpeed: 50
+  fallSpeed: 45
   collectSpeed: 10
   collectionDuration: 4
   jumpPower: 3

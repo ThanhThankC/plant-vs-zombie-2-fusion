@@ -572,7 +572,7 @@ TextureImporter:
         width: 67
         height: 66
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -593,7 +593,7 @@ TextureImporter:
         width: 66
         height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -601,6 +601,48 @@ TextureImporter:
       bones: []
       spriteID: ab9de2e04652fb24d8bd7f0d3ba19801
       internalID: 1798869572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SettingButton
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 578
+        width: 72
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b96d9908a1430c94d905534c255cd8ca
+      internalID: -370040898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SettingButton_Pressed
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 507
+        width: 73
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02d7694fd8fb5a34a96fa797c10a7d67
+      internalID: 1271931051
       vertices: []
       indices: 
       edges: []
@@ -626,6 +668,8 @@ TextureImporter:
       Progress_Blank: 1529014000
       Progress_Fill: -2056419658
       Progress_Flag: -178830358
+      SettingButton: -370040898
+      SettingButton_Pressed: 1271931051
       Setting_blank: -83756147
       Setting_fill: 1729927689
       Shovel_Drag: 1093986857

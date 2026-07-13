@@ -3,31 +3,29 @@ using UnityEngine;
 
 public class BGMManager : Singleton<BGMManager>
 {
-    [Header("BGM – Clips")]
+    [Header("BGM Clips")]
     [SerializeField] private AudioClip bgmSelection;
-    [SerializeField] private AudioClip bgmBattleEarly; 
-    [SerializeField] private AudioClip bgmBattleLate;   
-    [SerializeField] private AudioClip bgmBattleFinal;  
+    [SerializeField] private AudioClip bgmBattleEarly;
+    [SerializeField] private AudioClip bgmBattleLate;
+    [SerializeField] private AudioClip bgmBattleFinal;
     [SerializeField] private AudioClip bgmWin;
     [SerializeField] private AudioClip bgmLoss;
-
 
     [SerializeField] private AudioSource bgmSourceA;
     [SerializeField] private AudioSource bgmSourceB;
 
-    [Header("BGM – Settings")]
+    [Header("BGM Settings")]
     [SerializeField] private float fadeDuration = 1.0f;
-    [SerializeField] private float masterVolume = 1.0f;
 
-    [Header("BGM – Wave Thresholds")]
+    [Header("BGM Wave Thresholds")]
     [SerializeField] private int midWaveThreshold = 2;
     [SerializeField] private int finalWaveOffset = 1;
-
 
     private AudioSource bgmActive;
     private Coroutine fadeCoroutine;
     private AudioClip lastBattleClip;
 
+    private float Volume => GameSettings.MasterMusicVolume;
 
     protected override void Awake()
     {
@@ -38,13 +36,22 @@ public class BGMManager : Singleton<BGMManager>
     private void SetupSources()
     {
         if (bgmSourceA == null || bgmSourceB == null)
-            Debug.LogWarning("[BMGManager] Not found AudioSource");
+        {
+            Debug.LogWarning("[BGMManager] AudioSource(s) not assigned.");
+            return;
+        }
 
-        bgmSourceA.volume = masterVolume;
+        bgmSourceA.volume = Volume;
         bgmSourceB.volume = 0f;
         bgmActive = bgmSourceA;
     }
 
+
+    public void ApplyVolume()
+    {
+        if (bgmActive != null)
+            bgmActive.volume = Volume;
+    }
 
     public void PlaySelection() => PlayImmediate(bgmSelection);
     public void PlayBattleEarly()
@@ -58,8 +65,7 @@ public class BGMManager : Singleton<BGMManager>
     public void Pause() => bgmActive?.Pause();
     public void Resume() => bgmActive?.UnPause();
     public void StopAll() => StopAllBGM();
-
-    public void FadeOut(float duration) => FadeTo(0f, duration);
+    public void FadeOut(float dur) => FadeTo(0f, dur);
 
     public void OnWaveChanged(float progress, int bigWaveIndex, int totalWaves)
     {
@@ -71,7 +77,6 @@ public class BGMManager : Singleton<BGMManager>
         else if (isMidWave && bgmBattleLate != null) target = bgmBattleLate;
 
         if (lastBattleClip == target) return;
-
         lastBattleClip = target;
         CrossFade(target);
     }
@@ -88,7 +93,7 @@ public class BGMManager : Singleton<BGMManager>
         bgmActive = bgmSourceA;
         bgmActive.clip = clip;
         bgmActive.loop = loop;
-        bgmActive.volume = masterVolume;
+        bgmActive.volume = Volume;
         bgmActive.Play();
     }
 
@@ -106,7 +111,6 @@ public class BGMManager : Singleton<BGMManager>
 
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(CrossFadeRoutine(outgoing, incoming));
-
         bgmActive = incoming;
     }
 
@@ -123,7 +127,6 @@ public class BGMManager : Singleton<BGMManager>
         bgmSourceB.Stop();
     }
 
-
     private IEnumerator CrossFadeRoutine(AudioSource outgoing, AudioSource incoming)
     {
         float elapsed = 0f;
@@ -134,13 +137,13 @@ public class BGMManager : Singleton<BGMManager>
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / fadeDuration);
             outgoing.volume = Mathf.Lerp(startOut, 0f, t);
-            incoming.volume = Mathf.Lerp(0f, masterVolume, t);
+            incoming.volume = Mathf.Lerp(0f, Volume, t);
             yield return null;
         }
 
         outgoing.Stop();
         outgoing.volume = 0f;
-        incoming.volume = masterVolume;
+        incoming.volume = Volume;
         fadeCoroutine = null;
     }
 

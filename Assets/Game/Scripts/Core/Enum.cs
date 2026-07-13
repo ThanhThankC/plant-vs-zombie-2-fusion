@@ -84,5 +84,6 @@ public enum ZombieType
     Bucket,
     Newspaper,
     Gargantuar,
-    Imp
+    Imp,
+    Brickhead,
 }

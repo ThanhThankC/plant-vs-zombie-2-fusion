@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1533283664173907207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5762627897660754835}
+  m_Layer: 0
+  m_Name: atkPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5762627897660754835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533283664173907207}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.535, y: -0.194, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5114098533407569699}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6989631682693611197
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +126,7 @@ GameObject:
   - component: {fileID: 5114098533407569699}
   - component: {fileID: 6790592523048610759}
   - component: {fileID: 8046005436054316585}
-  - component: {fileID: 1805925719144026809}
+  - component: {fileID: 350435360977789822}
   - component: {fileID: 8865834491754687905}
   - component: {fileID: 3626922728025152735}
   m_Layer: 0
@@ -119,6 +150,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 172312526772854843}
+  - {fileID: 5762627897660754835}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6790592523048610759
@@ -171,7 +203,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1805925719144026809
+--- !u!114 &350435360977789822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -180,10 +212,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6989631682693611197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8a569afe52356a49be93de7f5809b38, type: 3}
+  m_Script: {fileID: 11500000, guid: b014f912c88fd55468ecccf2304353b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   plantKey: 227
+  onPlantAttack: {fileID: 11400000, guid: 62a721439e4956445b4bfe6dc553143b, type: 2}
+  attackType: 1
+  projectileKey: 0
+  attackPoint: {fileID: 5762627897660754835}
+  loopCount: 1
 --- !u!114 &8865834491754687905
 MonoBehaviour:
   m_ObjectHideFlags: 0
