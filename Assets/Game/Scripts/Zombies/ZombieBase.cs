@@ -48,6 +48,7 @@ public abstract class ZombieBase : MonoBehaviour, IPoolable
     {
         isReturned = false;
         IsDead = false;
+        SetGhostZombie(false);
         AnimController.PlayWalk();
         SpineController.Init();
     }
@@ -122,6 +123,15 @@ public abstract class ZombieBase : MonoBehaviour, IPoolable
     {
         var ash = PoolManager.Instance.GetZombie<ZombieAsh>(ashKey, ashPoint.position, Quaternion.identity);
         ash.Init(SortingOrderUtility.GetSortingOrder(LayerType.Zombie, CellTracker.Row));
+    }
+
+    public void SetGhostZombie(bool isGhost)
+    {
+
+        if (isGhost) { SpineController.Init(); OnInit(); }
+        if (Movement.enabled == isGhost) Movement.enabled = !isGhost;
+        if (EffectController.enabled == isGhost) EffectController.enabled = !isGhost;
+        if (CellTracker.gameObject.activeSelf == isGhost) CellTracker.gameObject.SetActive(!isGhost);
     }
 
     public void OnAttackAnimFinished(PlantBase targetPlant)

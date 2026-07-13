@@ -1,11 +1,19 @@
 using Spine.Unity;
+using System.Collections;
 using UnityEngine;
 
 public class PlantVisualHandler : MonoBehaviour
 {
     private SkeletonAnimation skeletonAnim;
     private MeshRenderer meshRenderer;
+    private Material glowMaterial;
     private GameObject shadow;
+
+    private Coroutine flashCoroutine;
+    private const float flashDuration = 0.09f;
+    private const float flashIntensity = 1f;
+
+    private static readonly int PropGlowIntensity = Shader.PropertyToID("_GlowIntensity");
 
     private void Awake()
     {
@@ -17,6 +25,43 @@ public class PlantVisualHandler : MonoBehaviour
             Debug.LogWarning($"[PlantBase] Not found Shadow Object!");
         }
         shadow.GetComponent<SpriteRenderer>().sortingOrder = SortingOrderUtility.GetSortingOrder(LayerType.Shadow);
+    }
+
+    private void EnsureGlowMaterial()
+    {
+        if (glowMaterial != null) return;
+        if (meshRenderer == null) return;
+
+        var originalMaterial = meshRenderer.sharedMaterial;
+        if (originalMaterial == null) return;
+
+        glowMaterial = new Material(originalMaterial);
+        skeletonAnim.CustomMaterialOverride[originalMaterial] = glowMaterial;
+    }
+
+    public void FlashHit()
+    {
+        if (flashCoroutine != null) StopCoroutine(flashCoroutine);
+        flashCoroutine = StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        EnsureGlowMaterial();
+        if (glowMaterial == null) yield break;
+
+        glowMaterial.SetFloat(PropGlowIntensity, flashIntensity);
+        yield return new WaitForSeconds(flashDuration);
+        ResetGlow();
+        flashCoroutine = null;
+    }
+
+    private void ResetGlow()
+    {
+        EnsureGlowMaterial();
+        if (glowMaterial == null) return;
+
+        glowMaterial.SetFloat(PropGlowIntensity, 0f);
     }
 
     public void SetGhostVisual()
@@ -47,4 +92,6 @@ public class PlantVisualHandler : MonoBehaviour
         color.a = alpha;
         skeletonAnim.Skeleton.SetColor(color);
     }
+
+    public void ResetAll() => ResetGlow();
 }

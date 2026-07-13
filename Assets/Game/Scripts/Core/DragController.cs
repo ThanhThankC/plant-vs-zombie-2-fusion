@@ -112,7 +112,7 @@ public class DragController : Singleton<DragController>
             case ToolType.None:
                 return PlantManager.Instance.GhostPlant;
             case ToolType.Glove:
-                return ToolManager.Instance.Glove;
+                return ToolManager.Instance.Glove.gameObject;
             case ToolType.Shovel:
                 return ToolManager.Instance.Shovel;
             default: return null;

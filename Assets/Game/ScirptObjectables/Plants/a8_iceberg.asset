@@ -19,7 +19,7 @@ MonoBehaviour:
   description: Iceberg Lettuces freeze a zombie when stepped on.
   maxHP: 0
   sunCost: 0
-  firstcooldown: 5
+  firstcooldown: 7
   cooldown: 20
   isInvincible: 1
   cardSprite: {fileID: -557755335, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}

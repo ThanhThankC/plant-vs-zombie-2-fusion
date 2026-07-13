@@ -22,6 +22,7 @@ public class ToolManager : Singleton<ToolManager>
     public void OnDragBegin()
     {
         if (MovingPlant) ChangeGlovePhase();
+        if (MovingPlant) Debug.Log("Hello");
     }
 
     public void EndDrag()

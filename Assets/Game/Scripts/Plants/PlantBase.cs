@@ -52,7 +52,7 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
             : new Vector3(-0.2f, 0f, 0f);
     }
 
-    public void SetupAsReal(Cell cell, FieldType fieldType)
+    public void SetupAsReal(Cell cell, FieldType fieldType, bool isMoved)
     {
         IsGhost = false;
         enabled = true;
@@ -68,7 +68,8 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
         pos.y += offsetY;
         transform.position = pos;
         transform.name = Data.name;
-        OnPlaced();
+
+        if (!isMoved) OnPlaced();
         IsActivated = true;
     }
 
@@ -77,7 +78,7 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
     public virtual void TakeDamage(ZombieBase zombie, int amount)
     {
         CurrentHP -= amount;
-        transform.position += new Vector3(0f, 0.01f, 0f);
+        VisualHandler.FlashHit();
         if (CurrentHP <= 0) Die(zombie);
     }
 
@@ -103,6 +104,7 @@ public abstract class PlantBase : MonoBehaviour, IPoolable
         if (isReturned) return;
         isReturned = true;
 
+        VisualHandler.ResetAll();
         PoolManager.Instance.Release(plantKey, this);
     }
 

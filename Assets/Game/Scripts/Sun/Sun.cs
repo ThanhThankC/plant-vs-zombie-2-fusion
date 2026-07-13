@@ -100,7 +100,7 @@ public class Sun : MonoBehaviour, IPoolable
 
         if (Vector3.Distance(transform.position, uiPos) <= 0.2f)
         {
-            SunManager.Instance.CollectSun(cost);
+            onSunCollected?.Raise(cost);
             tweenAnim.FadeOutObject(fadeDuration, () => ReturnPool());
             sunState = SunState.None;
         }
@@ -134,7 +134,6 @@ public class Sun : MonoBehaviour, IPoolable
         if (isReturned) return;
         isReturned = true;
 
-        onSunCollected?.Raise(cost);
         PoolManager.Instance.Release(sunKey, this);
     }
 }

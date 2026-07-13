@@ -22,7 +22,7 @@ MonoBehaviour:
   sunCost: 50
   firstcooldown: 5
   cooldown: 20
-  isInvincible: 1
+  isInvincible: 0
   cardSprite: {fileID: -1446292102, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0
   effectDuration: 0

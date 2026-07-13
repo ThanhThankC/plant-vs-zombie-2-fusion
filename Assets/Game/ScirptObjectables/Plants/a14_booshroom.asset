@@ -16,15 +16,19 @@ MonoBehaviour:
   plantID: 14
   plantType: 13
   tier: 1
+  description: 
   maxHP: 5
-  sunCost: 0
-  firstcooldown: 0
-  cooldown: 0
-  behaviorType: 0
+  sunCost: 50
+  firstcooldown: 4
+  cooldown: 10
+  isInvincible: 0
   cardSprite: {fileID: -1368666575, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 3
   effectDuration: 0
+  expireEffectDuration: 0
   effectDieDuration: 20
   damagePerTick: 5
+  damageSource: 0
   rangeRow: 0
-  explosionDamage: 50
+  aoeDamage: 0
+  notBeEaten: 0

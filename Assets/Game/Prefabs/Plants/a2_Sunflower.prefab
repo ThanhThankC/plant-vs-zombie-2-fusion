@@ -218,7 +218,7 @@ MonoBehaviour:
   plantKey: 201
   sunKey: 400
   specialTransform: {fileID: 6767263103605436679}
-  loopCount: 3
+  loopCount: 5
   landingOffsetXRange: {x: -1, y: 1}
   landingOffsetYRange: {x: -1, y: -0.5}
 --- !u!114 &8535799564090392305

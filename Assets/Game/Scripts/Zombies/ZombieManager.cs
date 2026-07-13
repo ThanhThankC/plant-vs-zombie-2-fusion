@@ -75,6 +75,7 @@ public class ZombieManager : Singleton<ZombieManager>
     public void OnZombieDied(ZombieBase zombie)
     {
         activeZombies.Remove(zombie);
+        if (allWavesSpawned) CheckLevelCleared();
     }
 
     private void CheckLevelCleared()

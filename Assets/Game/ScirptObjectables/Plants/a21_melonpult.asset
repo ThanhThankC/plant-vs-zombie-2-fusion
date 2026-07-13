@@ -16,10 +16,11 @@ MonoBehaviour:
   plantID: 7
   plantType: 20
   tier: 1
+  description: Melon-pults do heavy damage to groups of zombies.
   maxHP: 300
   sunCost: 300
-  firstcooldown: 1.9
-  cooldown: 0
+  firstcooldown: 4
+  cooldown: 5
   isInvincible: 0
   cardSprite: {fileID: -373632062, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}
   effectHitType: 0

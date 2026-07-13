@@ -32,6 +32,7 @@ public class Zone : MonoBehaviour
 
     public void OnZoneInteract()
     {
+        if (Cell.CellType != CellType.Plantable) return;
         if (plantManager.IsDraggingFromCell(cell)) return;
         if (!dragController.IsDragging) return;
         if (dragController.CurrentToolType == ToolType.Glove)

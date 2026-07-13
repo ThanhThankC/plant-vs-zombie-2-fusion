@@ -20,7 +20,7 @@ MonoBehaviour:
     fuse so plant them near zombies.
   maxHP: 0
   sunCost: 150
-  firstcooldown: 10
+  firstcooldown: 15
   cooldown: 35
   isInvincible: 1
   cardSprite: {fileID: -52124541, guid: 3b8e5b83bffc86945b48e15902695d6c, type: 3}

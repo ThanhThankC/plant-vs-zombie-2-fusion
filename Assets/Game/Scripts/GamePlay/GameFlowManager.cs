@@ -4,24 +4,22 @@ using TMPro;
 using UnityEngine;
 
 public enum GameState { Idle, CardSelection, BattleIntro, Playing, Paused, Win, Lose }
+
 public class GameFlowManager : Singleton<GameFlowManager>
 {
     public GameState CurrentState { get; private set; } = GameState.Idle;
     public event System.Action<GameState> OnStateChanged;
 
-    [Header("BGM")]
-    [SerializeField] private AudioSource bgmSource;
-    [SerializeField] private AudioClip bgmSelection;
-    [SerializeField] private AudioClip bgmBattle;
-    [SerializeField] private AudioClip bgmWin;
-    [SerializeField] private AudioClip bgmLoss;
-    [SerializeField] private float bgmFadeDuration = 0.5f;
+    [Header("BGM – Transition")]
+    [SerializeField] private float bgmFadeDuration = 1.0f;
+
 
     [Header("Camera")]
     [SerializeField] private float camShiftRightX = 2f;
     [SerializeField] private float camShiftLeftX = -2f;
     [SerializeField] private float camDuration = 0.6f;
     [SerializeField] private Ease camEase = Ease.InOutSine;
+
 
     [Header("UI Panel (Card Selection)")]
     [SerializeField] private GameObject selectionPanel;
@@ -39,17 +37,24 @@ public class GameFlowManager : Singleton<GameFlowManager>
     [Header("Pause")]
     [SerializeField] private GameObject pausePanel;
 
+    [Header("Exit Level")]
+    [SerializeField] private GameObject exitPanel;
+
+    [Header("Quit Game")]
+    [SerializeField] private GameObject quitPanel;
+
     [Header("Win")]
     [SerializeField] private GameObject cupObject;
 
-    [Header("Lose ")]
+    [Header("Lose")]
     [SerializeField] private GameObject loseOverlay;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private float loseOverlayFadeDuration = 1.2f;
 
     [Header("Events (ScriptableObject)")]
-    [SerializeField] private ZombieReachedEvent onZombieReachedEnd; 
+    [SerializeField] private ZombieReachedEvent onZombieReachedEnd;
     [SerializeField] private LevelClearedEvent onLevelCleared;
+
 
     private Transform cameraTransform;
     private Vector3 camOriginalPos;
@@ -75,14 +80,13 @@ public class GameFlowManager : Singleton<GameFlowManager>
     private void Start()
     {
         camOriginalPos = cameraTransform.position;
-
         SetActive(hudRoot, false);
         SetActive(pausePanel, false);
+        SetActive(quitPanel, false);
         SetActive(losePanel, false);
         SetActive(loseOverlay, false);
         SetActive(cupObject, false);
         HideIntroImages();
-
         EnterCardSelection();
     }
 
@@ -98,26 +102,25 @@ public class GameFlowManager : Singleton<GameFlowManager>
         else if (CurrentState == GameState.Paused) ResumeFromPause();
     }
 
-    public void OnRestartClicked() => SceneLoader.Instance.GoToLevel(GameSettings.SelectedLevel);
-    public void OnQuitToMenuClicked() => SceneLoader.Instance.GoTo("Scene_LevelSelect");
-    public void OnCupClicked() => PlayBGM(bgmWin, loop: false);
+    public void OnRestartClicked()
+    {
+        Time.timeScale = 1f;
+        SceneLoader.Instance.GoToLevel(GameSettings.SelectedLevel);
+    }
+
+    public void OnExitToMenuClicked()
+    {
+        Time.timeScale = 1f;
+        SceneLoader.Instance.GoTo("Scene_LevelSelect");
+    }
+    public void ShowExitToMenuConfirmation(bool isShow) => SetActive(exitPanel, isShow);
+    public void ShowQuitGameConfirmation(bool isShow) => SetActive(quitPanel, isShow);
+    public void OnQuitGameClicked() => Application.Quit();
+    public void OnCupClicked() => BGMManager.Instance?.PlayWin();
     public void OnWinChanged()
     {
         if (CurrentState != GameState.Win) return;
         SceneLoader.Instance.GoTo("Scene_LevelSelect");
-    }
-
-    private void TriggerLose()
-    {
-        if (CurrentState != GameState.Playing) return;
-        StartCoroutine(LoseSequence());
-        //StartCoroutine(WinSequence());
-    }
-
-    private void TriggerWin()
-    {
-        if (CurrentState != GameState.Playing) return;
-        StartCoroutine(WinSequence());
     }
 
     private void EnterCardSelection()
@@ -125,24 +128,25 @@ public class GameFlowManager : Singleton<GameFlowManager>
         Vector3 target = camOriginalPos + new Vector3(camShiftRightX, 0f, 0f);
         cameraTransform.DOMove(target, camDuration).SetEase(camEase)
             .OnComplete(() => SetState(GameState.CardSelection));
+
         SetActive(selectionPanel, true);
         SetActive(startButton, true);
-        PlayBGM(bgmSelection);
+        BGMManager.Instance?.PlaySelection();
     }
 
     private IEnumerator BattleIntroSequence()
     {
         SetState(GameState.BattleIntro);
-
         SetActive(selectionPanel, false);
         SetActive(startButton, false);
 
         Vector3 target = camOriginalPos + new Vector3(camShiftLeftX, 0f, 0f);
         cameraTransform.DOMove(target, camDuration).SetEase(camEase);
-        FadeBGM(0f, bgmFadeDuration);
+
+        BGMManager.Instance?.FadeOut(bgmFadeDuration);
         yield return new WaitForSeconds(Mathf.Max(camDuration, bgmFadeDuration));
 
-        PlayBGM(bgmBattle, false);
+        BGMManager.Instance?.PlayBattleEarly();
         yield return new WaitForSeconds(0.3f);
 
         yield return ShowIntroImage(letsTxt);
@@ -156,6 +160,10 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         SetState(GameState.Playing);
         SetActive(hudRoot, true);
+
+        if (WaveManager.Instance != null)
+            WaveManager.Instance.OnWaveChanged += OnWaveChanged;
+
         WaveManager.Instance?.StartLevel();
         SunSpawner.Instance.StartSpawning();
     }
@@ -164,7 +172,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         SetState(GameState.Paused);
         Time.timeScale = 0f;
-        bgmSource?.Pause();
+        BGMManager.Instance?.Pause();
         SetActive(pausePanel, true);
     }
 
@@ -172,50 +180,60 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         SetState(GameState.Playing);
         Time.timeScale = 1f;
-        bgmSource?.UnPause();
+        BGMManager.Instance?.Resume();
         SetActive(pausePanel, false);
+    }
+
+    private void TriggerWin()
+    {
+        if (CurrentState != GameState.Playing) return;
+        StartCoroutine(WinSequence());
+    }
+
+    private void TriggerLose()
+    {
+        if (CurrentState != GameState.Playing) return;
+        StartCoroutine(LoseSequence());
     }
 
     private IEnumerator WinSequence()
     {
         SetState(GameState.Win);
-        //Time.timeScale = 0f;
-        bgmSource?.Stop();
-        SetActive(cupObject, true);
+        UnsubscribeWaveEvents();
 
+        BGMManager.Instance?.StopAll();
+
+        SetActive(cupObject, true);
         yield return null;
     }
 
     private IEnumerator LoseSequence()
     {
         SetState(GameState.Lose);
-        Time.timeScale = 0f;
+        UnsubscribeWaveEvents();
 
+        Time.timeScale = 0f;
         SetActive(loseOverlay, true);
-        StopBGM();
-        PlayBGM(bgmLoss, loop: false);
+
+        BGMManager.Instance?.StopAll();
+        BGMManager.Instance?.PlayLoss();
 
         yield return new WaitForSecondsRealtime(loseOverlayFadeDuration + 0.3f);
         SetActive(losePanel, true);
     }
 
-
-    private void PlayBGM(AudioClip clip, bool loop = true)
+    private void OnWaveChanged(float progress, int bigWaveIndex)
     {
-        if (clip == null || bgmSource == null) return;
-        bgmSource.clip = clip;
-        bgmSource.loop = loop;
-        bgmSource.volume = 1f;
-        bgmSource.Play();
+        if (CurrentState != GameState.Playing) return;
+        int totalWaves = WaveManager.Instance != null ? WaveManager.Instance.BigWaveCount : -1;
+        BGMManager.Instance?.OnWaveChanged(progress, bigWaveIndex, totalWaves);
     }
 
-    private void StopBGM() => bgmSource?.Stop();
-
-    private void FadeBGM(float target, float duration)
+    private void UnsubscribeWaveEvents()
     {
-        if (bgmSource == null) return;
+        if (WaveManager.Instance != null)
+            WaveManager.Instance.OnWaveChanged -= OnWaveChanged;
     }
-
 
     private IEnumerator ShowIntroImage(TextMeshProUGUI txt)
     {
@@ -235,7 +253,7 @@ public class GameFlowManager : Singleton<GameFlowManager>
     {
         CurrentState = s;
         OnStateChanged?.Invoke(s);
-        Debug.Log($"[GameFlowManager] set {s}");
+        Debug.Log($"[GameFlowManager] State: {s}");
     }
 
     private static void SetActive(GameObject go, bool active)

@@ -15,6 +15,7 @@ public class PlantManager : Singleton<PlantManager>
 
     [Header("Events")]
     [SerializeField] private SunCollectedEvent onSunCollected;
+    [SerializeField] private OnPlantPlacedEvent OnPlantPlaced;
 
     public GameObject GhostPlant => ghostPlant?.gameObject;
     public PlantType? CurrentPlantType => dragContext?.PlantType;
@@ -73,6 +74,7 @@ public class PlantManager : Singleton<PlantManager>
                 DestroyPlantAt(cell, result.GetFieldType());
             }
             ctx.SourceCell.ClearPlant(ctx.SourceFieldType);
+            OnPlantPlaced?.Raise();
         }
         else if (ctx.DragSource == DragSource.Deck)
         {
@@ -89,8 +91,10 @@ public class PlantManager : Singleton<PlantManager>
         }
 
         PlantBase plantToPlace;
+        bool isMoved = false; // Moving by Glove
         if (!isFusion && ctx.DragSource == DragSource.Cell)
         {
+            isMoved = true;
             plantToPlace = ctx.Plant;
         }
         else
@@ -101,7 +105,7 @@ public class PlantManager : Singleton<PlantManager>
         }
 
         plantToPlace.transform.position = cell.transform.position;
-        plantToPlace.SetupAsReal(cell, result.GetFieldType());
+        plantToPlace.SetupAsReal(cell, result.GetFieldType(), isMoved);
         cell.SetPlant(result.GetFieldType(), result, plantToPlace);
 
         EndDrag();

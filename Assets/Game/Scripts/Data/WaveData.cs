@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveData : ScriptableObject
 {
     public float prepareTime = 10f;
+    public List<ZombiePoolKey> previews;
     public List<BigWave> bigWaves;
 }
 

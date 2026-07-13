@@ -34,11 +34,11 @@ public class PlantNutBase : PlantBase
 
     protected override void OnPlaced()
     {
-        //currentStageIndex = 0;
-        //currentIdleIndex = 0;
-        //if (idleAnims == null || idleAnims.Length <= 0) return;
+        currentStageIndex = 0;
+        currentIdleIndex = 0;
+        if (idleAnims == null || idleAnims.Length <= 0) return;
 
-        //PlayAnim(idleAnims[currentIdleIndex]);
+        PlayAnim(idleAnims[currentIdleIndex], true);
     }
 
     public override void TakeDamage(ZombieBase zombie, int amount)

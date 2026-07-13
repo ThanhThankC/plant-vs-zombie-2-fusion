@@ -563,6 +563,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: ExitSetting
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 72
+        width: 67
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e491d02a50d0824db890e9fe4fd27db
+      internalID: 439041876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExitSetting_Pressed
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 72
+        width: 66
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab9de2e04652fb24d8bd7f0d3ba19801
+      internalID: 1798869572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -574,6 +616,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      ExitSetting: 439041876
+      ExitSetting_Pressed: 1798869572
       Glove_Drag: -74283588
       Glove_Normal: 1584069838
       Glove_Pressed: -2040143286

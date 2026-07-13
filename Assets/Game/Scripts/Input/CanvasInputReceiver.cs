@@ -54,6 +54,7 @@ public class CanvasInputReceiver : Singleton<CanvasInputReceiver>, IPointerClick
         Collider2D hit = Physics2D.OverlapPoint(GetMouseWorldPos(eventData), zoneLayer);
         Zone zone = hit?.GetComponent<Zone>();
 
+        if (zone != null && zone.Cell.CellType != CellType.Plantable) return;
         if (zoneHover != null && (zone != null && zone.Cell != zoneHover.Cell || zone == null))
         {
             if (isHovering)

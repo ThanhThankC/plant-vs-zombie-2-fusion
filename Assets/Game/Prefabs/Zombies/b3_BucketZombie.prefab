@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onReachedEnd: {fileID: 11400000, guid: fae811d539438574cb746bd1a1d04374, type: 2}
-  baseSpeedMultiplier: 4
+  baseSpeedMultiplier: 10
 --- !u!114 &1401167064437696096
 MonoBehaviour:
   m_ObjectHideFlags: 0

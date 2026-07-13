@@ -11,6 +11,7 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private float progressSize = 1.1f;
 
     public int BigWaveCount { get; private set; }
+    public WaveData WaveLevelData => waveDatas[GameSettings.SelectedLevel];
 
     public event System.Action<float, int> OnWaveChanged;
 

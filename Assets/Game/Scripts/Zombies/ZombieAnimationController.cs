@@ -74,6 +74,7 @@ public class ZombieAnimationController : MonoBehaviour
     public void PlayWalk() => SetAnimation(AnimEvents.ANIM_WALK, true);
     private void PlayAttack() => SetAnimation(AnimEvents.ANIM_EAT, true);
     public void PlayDie() => SetAnimation(AnimEvents.ANIM_DIE, false);
+    public void PlayIdle() => SetAnimation(AnimEvents.ANIM_IDLE, true);
 
     public void ResetAll()
     {

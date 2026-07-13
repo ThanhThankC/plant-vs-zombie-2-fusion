@@ -1,12 +1,10 @@
 using Spine;
 using UnityEngine;
 
-[RequireComponent(typeof(TargetingHelper))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class PotatoMine : PlantBase
 {
     [SerializeField] private int waitingTotal = 500;
-
     private BoxCollider2D collider2d;
     private int waitingIndex;
     private bool isRecovered;
@@ -35,11 +33,10 @@ public class PotatoMine : PlantBase
         skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_PLANT_IDLE, true);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (IsGhost || !isRecovered || isAttacking) return;
         if (!other.CompareTag("Zombie")) return;
-
         var zombie = other.GetComponent<ZombieBase>();
         if (zombie == null || zombie.CellTracker.Row != OccupiedCell.Row) return;
 
@@ -50,27 +47,28 @@ public class PotatoMine : PlantBase
     private void OnSpineComplete(TrackEntry trackEntry)
     {
         if (IsGhost) return;
+
         if (trackEntry.Animation.Name == AnimEvents.ANIM_RECOVER)
         {
-            skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
             isRecovered = true;
-            collider2d.isTrigger = true;
             CanBeEaten = false;
+            collider2d.isTrigger = true;
+            skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_IDLE, true);
+            return;
         }
 
         if (trackEntry.Animation.Name == AnimEvents.ANIM_PLANT_IDLE)
         {
+            if (isRecovered) return;
             waitingIndex++;
-            if (waitingIndex < waitingTotal || isRecovered) return;
-            
+            if (waitingIndex < waitingTotal) return;
             skeletonAnim.AnimationState.SetAnimation(0, AnimEvents.ANIM_RECOVER, false);
         }
     }
 
     private void OnSpineEvent(TrackEntry trackEntry, Spine.Event e)
     {
-        if (IsGhost) return;
-        if (!isAttacking) return;
+        if (IsGhost || !isAttacking) return;
 
         if (e.Data.Name == AnimEvents.EVENT_ATTACK)
         {
@@ -81,7 +79,6 @@ public class PotatoMine : PlantBase
         if (e.Data.Name == AnimEvents.EVENT_DIE)
         {
             Die();
-            return;
         }
     }
 }

@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gizmoShape: 0
   isShowGizmos: 1
-  range: 1.16
+  range: 1.43
   width: 0
   height: 0
   attackPoint: {fileID: 7029737979166460413}
