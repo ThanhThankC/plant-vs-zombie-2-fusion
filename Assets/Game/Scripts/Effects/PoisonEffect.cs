@@ -11,6 +11,8 @@ public class PoisonEffect : ITickableEffect
     private const int maxDamage = 30;
     private int damage;
 
+    public PoisonEffect () { }
+
     public PoisonEffect(int damagePerTick, float duration)
     {
         damage = damagePerTick;

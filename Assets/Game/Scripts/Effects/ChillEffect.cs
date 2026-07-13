@@ -2,6 +2,8 @@ public class ChillEffect : IEffect
 {
     public float Duration { get; private set; }
 
+    public ChillEffect() { }
+
     public ChillEffect(float duration)
     {
         Duration = duration;

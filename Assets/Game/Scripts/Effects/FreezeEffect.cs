@@ -3,6 +3,8 @@ public class FreezeEffect : IEffect
     public float Duration { get; private set; }
     public float ChillDuration { get; private set; }
 
+    public FreezeEffect() { }
+
     public FreezeEffect(float freezeDuration, float chillDuration)
     {
         Duration = freezeDuration;

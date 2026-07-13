@@ -2,6 +2,8 @@ public class ButterEffect : IEffect
 {
     public float Duration { get; private set; }
 
+    public ButterEffect() { }
+
     public ButterEffect(float duration)
     {
         Duration = duration;

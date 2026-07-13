@@ -8,6 +8,8 @@ public class BurnInfiniteEffect : ITickableEffect
 
     private int damage;
 
+    public BurnInfiniteEffect() { }
+
     public BurnInfiniteEffect(int damageDurn, float tickInterval)
     {
         damage = damageDurn;
